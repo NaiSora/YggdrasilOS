@@ -1,0 +1,22 @@
+name = "enshrouded"
+title = "Serveur Enshrouded"
+categorie = "jeux"
+description = "Un serveur dédié Enshrouded : le monde survit sans que ton jeu tourne."
+ports = ["15636-15637/udp"]
+lan_default = true
+notes = """
+En jeu : « Rejoindre » → recherche par IP : adresse de cette machine, port 15637.
+Mot de passe : ~/bifrost/enshrouded/.env (SERVER_PASSWORD).
+"""
+
+[[env]]
+name = "SERVER_NAME"
+option = "nom-serveur"
+description = "Nom du serveur"
+default = "Yggdrasil"
+ask = true
+
+[[env]]
+name = "SERVER_PASSWORD"
+description = "Mot de passe (généré)"
+kind = "secret"

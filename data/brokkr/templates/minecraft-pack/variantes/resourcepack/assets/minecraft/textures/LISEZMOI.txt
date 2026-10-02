@@ -1,0 +1,2 @@
+Dépose ici tes textures, avec les mêmes chemins que celles du jeu
+(ex. block/dirt.png pour la terre, en 16 × 16 pixels).

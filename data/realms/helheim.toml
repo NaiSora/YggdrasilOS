@@ -1,0 +1,48 @@
+name = "helheim"
+title = "Helheim"
+surnom = "le Royaume des morts"
+theme = "Récupération et sauvetage"
+rune = "ᛇ"
+rune_nom = "Eihwaz"
+rune_sens = "l'if : la mort et la renaissance"
+icon = "tools-rip-audio-cd"
+voyageurs = ["gardien"]
+description = """
+Le royaume de Hel, d'où l'on ramène ce qu'on croyait perdu : fichiers effacés,
+partitions disparues, disques mourants, clones complets avant qu'il soit trop tard.
+"""
+next_steps = """
+Fichiers effacés : « photorec » (ne restaure jamais sur le disque où tu cherches).
+Disque qui fatigue : « ygg materiel » donne sa santé SMART ; ddrescue en copie ce qui reste.
+"""
+
+[[logiciels]]
+id = "testdisk"
+nom = "TestDisk et PhotoRec"
+description = "Retrouver des fichiers effacés, réparer des partitions."
+apt = ["testdisk"]
+
+[[logiciels]]
+id = "ddrescue"
+nom = "GNU ddrescue"
+description = "Sauver le contenu d'un disque qui se meurt."
+apt = ["gddrescue"]
+
+[[logiciels]]
+id = "gparted"
+nom = "GParted"
+description = "Créer, redimensionner et réparer des partitions."
+apt = ["gparted"]
+
+[[logiciels]]
+id = "smartmontools"
+nom = "smartmontools"
+description = "La santé des disques (SMART)."
+apt = ["smartmontools"]
+
+[[logiciels]]
+id = "clonezilla"
+nom = "Clonezilla"
+description = "Cloner un disque entier, ou en faire une image."
+apt = ["clonezilla"]
+defaut = false

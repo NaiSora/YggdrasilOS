@@ -1,0 +1,14 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = "remove" ]; then
+    if [ -d /run/systemd/system ]; then
+        systemctl stop heimdall.service >/dev/null 2>&1 || true
+    fi
+    if command -v systemctl >/dev/null 2>&1; then
+        systemctl --global disable ratatoskr.timer muninn.timer >/dev/null 2>&1 || true
+    fi
+fi
+find /usr/lib/python3/dist-packages/yggdrasil -name __pycache__ -type d -prune -exec rm -rf {} + 2>/dev/null || true
+
+exit 0

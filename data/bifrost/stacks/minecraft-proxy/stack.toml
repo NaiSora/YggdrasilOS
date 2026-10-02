@@ -1,0 +1,29 @@
+name = "minecraft-proxy"
+title = "Proxy Minecraft (Velocity)"
+categorie = "jeux"
+instances = true
+description = """
+Une seule adresse pour plusieurs serveurs Minecraft (lobby, survie, créatif…) : Velocity
+envoie chaque joueur vers le bon monde, « /server » permet d'en changer.
+"""
+ports = ["25577/tcp"]
+lan_default = true
+console = ["docker", "attach", "<conteneur>"]
+notes = """
+Relie tes serveurs : bifrost reseau <nom> lobby survie creatif
+Derrière le proxy, les serveurs ne sont plus joignables directement : seul le proxy les voit.
+Console : bifrost console <nom>   (Ctrl+P puis Ctrl+Q pour en sortir sans l'arrêter)
+"""
+
+[[env]]
+name = "PORT"
+option = "port"
+description = "Port d'entrée des joueurs"
+default = "25577"
+kind = "port"
+
+[[env]]
+name = "MEMORY"
+option = "memoire"
+description = "Mémoire du proxy"
+default = "512M"

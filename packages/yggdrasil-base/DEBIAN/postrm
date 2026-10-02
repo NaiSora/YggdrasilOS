@@ -1,0 +1,32 @@
+#!/bin/sh
+set -e
+
+SAVE=/var/lib/yggdrasil-base
+
+case "$1" in
+    remove|abort-install|disappear)
+        dpkg-divert --package yggdrasil-base --remove --rename \
+            --divert /usr/lib/os-release.debian /usr/lib/os-release >/dev/null || true
+        # Bannières de connexion Debian d'origine
+        for f in issue issue.net; do
+            if [ -f "$SAVE/$f.debian" ] && grep -q '^Yggdrasil' "/etc/$f" 2>/dev/null; then
+                cp -p "$SAVE/$f.debian" "/etc/$f"
+            fi
+        done
+        if command -v deb-systemd-helper >/dev/null 2>&1; then
+            deb-systemd-helper mask yggdrasil-police-console.service >/dev/null || true
+        fi
+        ;;
+esac
+if [ "$1" = "purge" ]; then
+    rm -rf "$SAVE"
+    if command -v deb-systemd-helper >/dev/null 2>&1; then
+        deb-systemd-helper purge yggdrasil-police-console.service >/dev/null || true
+        deb-systemd-helper unmask yggdrasil-police-console.service >/dev/null || true
+    fi
+fi
+if [ -d /run/systemd/system ]; then
+    systemctl daemon-reload >/dev/null 2>&1 || true
+fi
+
+exit 0

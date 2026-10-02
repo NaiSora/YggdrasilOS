@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Centre Yggdrasil
+GenericName=Bienvenue et réglages
+Comment=Royaumes de logiciels, entretien, IA locale, homelab et modèles de projets
+Exec=yggdrasil-welcome
+Icon=yggdrasil
+Terminal=false
+Categories=System;Settings;
+Keywords=yggdrasil;bienvenue;royaumes;logiciels;mise à jour;homelab;

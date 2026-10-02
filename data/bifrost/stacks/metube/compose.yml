@@ -1,0 +1,16 @@
+# MeTube — déployé par bifrost (Yggdrasil)
+services:
+  metube:
+    image: ghcr.io/alexta69/metube:latest
+    container_name: metube
+    user: "${PUID}:${PGID}"
+    ports:
+      - "${BIND_ADDR}:${PORT}:8081"
+    volumes:
+      - "${DOSSIER}:/downloads"
+    restart: unless-stopped
+
+networks:
+  default:
+    name: bifrost
+    external: true

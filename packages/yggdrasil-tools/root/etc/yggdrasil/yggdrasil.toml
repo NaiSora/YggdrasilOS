@@ -1,0 +1,66 @@
+# Configuration système des outils Yggdrasil.
+# Chaque utilisateur peut surcharger ces valeurs dans ~/.config/yggdrasil/config.toml
+
+[general]
+# « voix » : chaque outil parle à sa façon (Mímir l'oracle, Heimdall le guetteur,
+# les Nornes, Ratatoskr l'écureuil, Brokkr le forgeron). « sobre » : rien que les faits.
+ton = "voix"
+
+[update]
+# Créer un instantané Norns (Timeshift) avant chaque « ygg update »
+snapshot_before = true
+# Mettre aussi à jour les applications Flatpak
+flatpak = true
+
+[mimir]
+# Adresse du serveur Ollama
+host = "http://127.0.0.1:11434"
+# Modèle utilisé ; vide = choix automatique selon la mémoire vive (qwen3:8b, 4b ou 1.7b)
+model = ""
+# Laisser les modèles « raisonneurs » réfléchir (plus lent, parfois plus juste)
+think = false
+temperature = 0.4
+# Nombre de lignes de journal envoyées par « mimir logs »
+context_lines = 200
+# Enregistrer les conversations en Markdown (compatible Obsidian)
+save_conversations = true
+vault = "~/Documents/Mimir"
+# Ton de Mímir : « oracle » (par défaut), « skalde » (franchement poétique) ou « sobre »
+ton = "oracle"
+
+[mimir.puits]
+# Le puits : ce que Mímir peut consulter pour répondre (documentation d'Yggdrasil,
+# et, si tu l'indiques, ton coffre de notes Markdown, par exemple Obsidian).
+# Rien n'est indexé tant que tu ne lances pas « mimir puits remplir ».
+coffre = ""
+# Modèle d'Ollama qui transforme les textes en vecteurs pour la recherche
+modele = "nomic-embed-text"
+# Nombre d'extraits joints à chaque question
+extraits = 4
+
+[bifrost]
+# Où sont déployés les services homelab
+home = "~/bifrost"
+
+[brokkr]
+# Où sont créés les nouveaux projets
+projects = "~/Projets"
+
+[norns]
+# Disque de sauvegarde par défaut (ex. "/media/moi/Sauvegardes")
+backup_target = ""
+# Nombre de sauvegardes du dossier personnel conservées
+keep = 7
+# Motifs supplémentaires à exclure des sauvegardes
+exclude = []
+
+[ratatoskr]
+# Rappeler une notification inchangée au bout de N heures
+remind_hours = 24
+
+[theme]
+# « nuit » (bleu nuit), « aube » (parchemin clair) ou « auto » : changé par « ygg theme »
+mode = "nuit"
+# En mode auto : heures de passage au thème clair, puis de retour au bleu nuit
+aube = "07:30"
+nuit = "20:00"

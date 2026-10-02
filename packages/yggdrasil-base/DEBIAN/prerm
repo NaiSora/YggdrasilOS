@@ -1,0 +1,19 @@
+#!/bin/sh
+set -e
+
+THEME=/usr/share/desktop-base/yggdrasil-theme
+
+if [ "$1" = "remove" ] || [ "$1" = "deconfigure" ]; then
+    update-alternatives --remove desktop-theme "$THEME" || true
+    update-alternatives --remove desktop-background "$THEME/wallpaper/contents/images/1920x1080.png" || true
+    update-alternatives --remove desktop-background.xml "$THEME/wallpaper/gnome-background.xml" || true
+    update-alternatives --remove desktop-lockscreen.xml "$THEME/lockscreen/gnome-background.xml" || true
+    update-alternatives --remove desktop-plasma5-wallpaper "$THEME/wallpaper" || true
+    update-alternatives --remove desktop-login-background "$THEME/login/background.svg" || true
+    update-alternatives --remove desktop-grub "$THEME/grub/grub-16x9.png" || true
+    if [ -x /usr/sbin/plymouth-set-default-theme ] && [ "$(plymouth-set-default-theme 2>/dev/null)" = "yggdrasil" ]; then
+        plymouth-set-default-theme --reset || true
+    fi
+fi
+
+exit 0

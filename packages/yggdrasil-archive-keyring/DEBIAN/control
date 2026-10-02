@@ -1,0 +1,10 @@
+Package: yggdrasil-archive-keyring
+Version: @VERSION@
+Architecture: all
+Maintainer: Projet Yggdrasil <yggdrasil@localhost>
+Section: admin
+Priority: important
+Description: clé de signature et adresse du dépôt APT d'Yggdrasil
+ La clé publique qui signe le dépôt d'Yggdrasil, et la source APT qui
+ l'utilise : ygg update apporte ainsi les nouvelles versions des outils
+ de l'arbre (ygg, mimir, heimdall…) comme celles de Debian.

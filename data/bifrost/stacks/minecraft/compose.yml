@@ -1,0 +1,57 @@
+# Serveur Minecraft « ${INSTANCE} » — déployé par bifrost (Yggdrasil)
+services:
+  minecraft:
+    image: itzg/minecraft-server:latest
+    container_name: "mc-${INSTANCE}"
+    ports:
+      - "${BIND_ADDR}:${PORT}:25565"
+      - "${BIND_ADDR}:${PORT_BEDROCK}:19132/udp"
+      - "${BIND_ADDR}:${PORT_CARTE}:8100"
+    environment:
+      EULA: "${EULA}"
+      TYPE: "${TYPE}"
+      VERSION: "${VERSION}"
+      MEMORY: "${MEMORY}"
+      MOTD: "${MOTD}"
+      DIFFICULTY: "${DIFFICULTY}"
+      MODE: "${MODE}"
+      MAX_PLAYERS: "${MAX_PLAYERS}"
+      ONLINE_MODE: "${ONLINE_MODE}"
+      MODRINTH_PROJECTS: "${MODRINTH_PROJECTS}"
+      MODRINTH_DOWNLOAD_DEPENDENCIES: "required"
+      MODRINTH_MODPACK: "${MODRINTH_MODPACK}"
+      CF_API_KEY: "${CF_API_KEY}"
+      CF_SLUG: "${CF_SLUG}"
+      TZ: "${TZ}"
+      UID: "${PUID}"
+      GID: "${PGID}"
+      ENABLE_RCON: "true"
+      RCON_PASSWORD: "${RCON_PASSWORD}"
+      USE_AIKAR_FLAGS: "true"
+    volumes:
+      - ./data:/data
+    tty: true
+    stdin_open: true
+    restart: unless-stopped
+  sauvegardes:
+    # Sauvegardes à chaud : save-off, save-all, copie, save-on — le serveur ne s'arrête pas
+    image: itzg/mc-backup:latest
+    container_name: "mc-${INSTANCE}-sauvegardes"
+    depends_on:
+      - minecraft
+    environment:
+      BACKUP_INTERVAL: "${BACKUP_INTERVAL}"
+      PRUNE_BACKUPS_DAYS: "${PRUNE_BACKUPS_DAYS}"
+      INITIAL_DELAY: "5m"
+      RCON_HOST: "mc-${INSTANCE}"
+      RCON_PASSWORD: "${RCON_PASSWORD}"
+      TZ: "${TZ}"
+    volumes:
+      - ./data:/data:ro
+      - ./sauvegardes:/backups
+    restart: unless-stopped
+
+networks:
+  default:
+    name: bifrost
+    external: true

@@ -1,0 +1,20 @@
+# Lavalink — déployé par bifrost (Yggdrasil)
+services:
+  lavalink:
+    image: ghcr.io/lavalink-devs/lavalink:4
+    container_name: lavalink
+    ports:
+      - "127.0.0.1:${PORT}:2333"
+    environment:
+      _JAVA_OPTIONS: "-Xmx${MEMORY}"
+      SERVER_PORT: "2333"
+      LAVALINK_SERVER_PASSWORD: "${LAVALINK_SERVER_PASSWORD}"
+    volumes:
+      - ./application.yml:/opt/Lavalink/application.yml:ro
+      - ./plugins:/opt/Lavalink/plugins
+    restart: unless-stopped
+
+networks:
+  default:
+    name: bifrost
+    external: true

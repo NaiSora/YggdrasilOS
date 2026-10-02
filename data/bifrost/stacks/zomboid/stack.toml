@@ -1,0 +1,27 @@
+name = "zomboid"
+title = "Serveur Project Zomboid"
+categorie = "jeux"
+description = "Un serveur dédié Project Zomboid pour survivre à plusieurs."
+ports = ["16261-16262/udp"]
+lan_default = true
+notes = """
+En jeu : « Rejoindre » → IP de cette machine, port 16261.
+Compte administrateur : admin, mot de passe dans ~/bifrost/zomboid/.env (ADMIN_PASSWORD).
+"""
+
+[[env]]
+name = "SERVER_NAME"
+option = "nom-serveur"
+description = "Nom du serveur"
+default = "yggdrasil"
+
+[[env]]
+name = "MAX_RAM"
+option = "memoire"
+description = "Mémoire du serveur"
+default = "4096m"
+
+[[env]]
+name = "ADMIN_PASSWORD"
+description = "Mot de passe administrateur (généré)"
+kind = "secret"

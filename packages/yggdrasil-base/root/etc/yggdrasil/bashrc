@@ -1,0 +1,103 @@
+# Réglages bash d'Yggdrasil — chargés par ~/.bash_aliases.
+# Tes propres alias vont dans ~/.bash_aliases, après la ligne qui charge ce fichier.
+
+case $- in
+    *i*) ;;
+    *) return ;;
+esac
+
+alias ll='ls -lh --group-directories-first'
+alias la='ls -lAh --group-directories-first'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias df='df -h'
+alias du='du -h'
+alias free='free -h'
+alias ip='ip -color=auto'
+alias maj='ygg update'
+alias infos='ygg info'
+
+# Invite : utilisateur@machine:dossier (branche git) ✘code
+# La branche est lue dans une variable : un nom de branche piégé ne peut rien exécuter.
+__ygg_prompt() {
+    local status=$?
+    __ygg_branch=$(git symbolic-ref --short HEAD 2>/dev/null || git rev-parse --short HEAD 2>/dev/null)
+    __ygg_status=""
+    [ "$status" -ne 0 ] && __ygg_status=" ${__ygg_cross}$status"
+    # 130 = Ctrl+C : une interruption n'est pas une erreur
+    if [ "$status" -ne 0 ] && [ "$status" -ne 130 ]; then __ygg_noter_echec "$status"; fi
+    return 0
+}
+
+# « mimir pourquoi » : la dernière commande qui a échoué est notée (code, heure, commande)
+# dans ~/.cache/yggdrasil/derniere-erreur — comme l'historique, elle reste chez toi.
+__ygg_noter_echec() {
+    local code=$1 ligne numero commande maintenant dossier=${XDG_CACHE_HOME:-$HOME/.cache}/yggdrasil
+    ligne=$(HISTTIMEFORMAT='' builtin history 1 2>/dev/null) || return 0
+    ligne=${ligne#"${ligne%%[![:space:]]*}"}
+    numero=${ligne%%[[:space:]]*}
+    commande=${ligne#"$numero"}
+    commande=${commande#"${commande%%[![:space:]]*}"}
+    # Entrée sur une ligne vide : $? est celui de la commande précédente, déjà notée
+    [ -n "$commande" ] && [ "$numero" != "${__ygg_derniere_notee:-}" ] || return 0
+    __ygg_derniere_notee=$numero
+    printf -v maintenant '%(%s)T' -1
+    mkdir -p "$dossier" 2>/dev/null \
+        && printf '%s\n%s\n%s\n' "$code" "$maintenant" "$commande" > "$dossier/derniere-erreur" 2>/dev/null
+    return 0
+}
+# Couleurs du logo : or, sauge (vraies teintes si le terminal les connaît, 16 couleurs sinon).
+# La console texte (TERM=linux) n'a pas les symboles Unicode : repli en ASCII.
+if [ "${TERM:-}" = "linux" ]; then
+    __ygg_arrow='>'; __ygg_cross='x'
+    __ygg_gold='\[\e[33m\]'; __ygg_sage='\[\e[32m\]'
+else
+    __ygg_arrow='✦'; __ygg_cross='✘'
+    case "${COLORTERM:-}" in
+        truecolor|24bit) __ygg_gold='\[\e[38;2;232;204;140m\]'; __ygg_sage='\[\e[38;2;121;172;153m\]' ;;
+        *) __ygg_gold='\[\e[38;5;222m\]'; __ygg_sage='\[\e[38;5;108m\]' ;;
+    esac
+fi
+PROMPT_COMMAND="__ygg_prompt${PROMPT_COMMAND:+;$PROMPT_COMMAND}"
+PS1="${__ygg_gold}"'\u@\h\[\e[0m\]:'"${__ygg_sage}"'\w\[\e[0m\]${__ygg_branch:+ \[\e[2m\](${__ygg_branch})\[\e[0m\]}\[\e[31m\]${__ygg_status}\[\e[0m\]\n'"${__ygg_gold}"'${__ygg_arrow}\[\e[0m\] '
+
+# L'arbre-monde et les infos du système à l'ouverture d'un terminal
+# (désactivable : export YGG_NO_FETCH=1 dans ~/.bash_aliases)
+if [ -z "${YGG_NO_FETCH:-}" ] && [ -z "${YGG_FETCH_DONE:-}" ] && command -v yggdrasil-fetch >/dev/null 2>&1; then
+    export YGG_FETCH_DONE=1
+    yggdrasil-fetch
+fi
+
+# Le présage de Mímir : une fois par jour, au premier terminal ouvert
+# (désactivable dans les réglages du Centre, ou : export YGG_NO_PRESAGE=1 dans ~/.bash_aliases)
+if [ -z "${YGG_NO_PRESAGE:-}" ] && [ ! -e "${XDG_CONFIG_HOME:-$HOME/.config}/yggdrasil/presage-desactive" ] \
+    && command -v mimir >/dev/null 2>&1; then
+    __ygg_marque=${XDG_CACHE_HOME:-$HOME/.cache}/yggdrasil/presage
+    printf -v __ygg_jour '%(%F)T' -1
+    if [ "$(cat "$__ygg_marque" 2>/dev/null)" != "$__ygg_jour" ]; then
+        mkdir -p "${__ygg_marque%/*}" 2>/dev/null && printf '%s\n' "$__ygg_jour" > "$__ygg_marque"
+        mimir presage --court 2>/dev/null
+    fi
+    unset __ygg_marque __ygg_jour
+fi
+
+# Démarré depuis le menu « revenir à un instantané » : le dire, avec de quoi le garder
+if [ -r "${YGG_MOUNTINFO:-/proc/self/mountinfo}" ]; then
+    while read -r _ _ _ __ygg_racine __ygg_point _; do
+        if [ "$__ygg_point" = / ]; then __ygg_sur=$__ygg_racine; fi  # le dernier montage sur / l'emporte
+    done < "${YGG_MOUNTINFO:-/proc/self/mountinfo}"
+    case ${__ygg_sur:-} in
+        /timeshift-btrfs/snapshots/*/@)
+            __ygg_sur=${__ygg_sur#/timeshift-btrfs/snapshots/}
+            __ygg_sur=${__ygg_sur%/@}
+            case $__ygg_sur in
+                [0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]_[0-9][0-9]-[0-9][0-9]-[0-9][0-9])
+                    __ygg_quand="du ${__ygg_sur:8:2}/${__ygg_sur:5:2}/${__ygg_sur:0:4} à ${__ygg_sur:11:2}:${__ygg_sur:14:2}" ;;
+                *) __ygg_quand="« $__ygg_sur »" ;;
+            esac
+            printf '\e[33m%s\e[0m Démarré sur l'\''instantané %s : ton système habituel est intact.\n' "$__ygg_arrow" "$__ygg_quand"
+            printf '  Pour revenir à cet instantané pour de bon : norns restore %s — sinon, redémarre simplement.\n' "$__ygg_sur"
+            ;;
+    esac
+    unset __ygg_racine __ygg_point __ygg_sur __ygg_quand
+fi

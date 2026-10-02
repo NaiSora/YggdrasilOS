@@ -1,0 +1,10 @@
+[Unit]
+Description={{name}} (forgé par Brokkr)
+
+[Service]
+ExecStart=%h/.local/bin/{{slug}}
+Restart=on-failure
+Environment=INTERVALLE=60
+
+[Install]
+WantedBy=default.target

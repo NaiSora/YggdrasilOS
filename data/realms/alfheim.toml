@@ -1,0 +1,65 @@
+name = "alfheim"
+title = "Alfheim"
+surnom = "la Lumière"
+theme = "Création et streaming"
+rune = "ᛊ"
+rune_nom = "Sowilo"
+rune_sens = "le soleil"
+icon = "applications-graphics"
+voyageurs = ["createur"]
+description = """
+Le royaume des elfes de lumière : diffuser en direct, monter des vidéos, peindre,
+dessiner, modeler en 3D, enregistrer du son.
+"""
+next_steps = """
+OBS : l'assistant de configuration automatique règle la qualité selon ta connexion.
+Parabolic : colle un lien, choisis vidéo ou musique, c'est tout.
+"""
+
+[[logiciels]]
+id = "obs"
+nom = "OBS Studio"
+description = "Enregistrer l'écran et diffuser en direct (Twitch, YouTube)."
+flatpak = ["com.obsproject.Studio"]
+
+[[logiciels]]
+id = "kdenlive"
+nom = "Kdenlive"
+description = "Montage vidéo."
+flatpak = ["org.kde.kdenlive"]
+
+[[logiciels]]
+id = "gimp"
+nom = "GIMP"
+description = "Retouche photo."
+flatpak = ["org.gimp.GIMP"]
+
+[[logiciels]]
+id = "krita"
+nom = "Krita"
+description = "Peinture et dessin numériques (tablette graphique)."
+flatpak = ["org.kde.krita"]
+
+[[logiciels]]
+id = "inkscape"
+nom = "Inkscape"
+description = "Dessin vectoriel : logos, affiches, illustrations."
+flatpak = ["org.inkscape.Inkscape"]
+
+[[logiciels]]
+id = "blender"
+nom = "Blender"
+description = "3D : modélisation, animation, rendu."
+flatpak = ["org.blender.Blender"]
+
+[[logiciels]]
+id = "audacity"
+nom = "Audacity"
+description = "Enregistrer et retoucher le son."
+flatpak = ["org.audacityteam.Audacity"]
+
+[[logiciels]]
+id = "parabolic"
+nom = "Parabolic"
+description = "Télécharger vidéos et musiques (yt-dlp), en quelques clics."
+flatpak = ["org.nickvision.tubeconverter"]

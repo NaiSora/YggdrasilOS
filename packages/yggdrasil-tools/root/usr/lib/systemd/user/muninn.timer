@@ -1,0 +1,11 @@
+[Unit]
+Description=Muninn : un souvenir par jour
+
+[Timer]
+OnStartupSec=5min
+OnCalendar=daily
+Persistent=true
+RandomizedDelaySec=30min
+
+[Install]
+WantedBy=timers.target

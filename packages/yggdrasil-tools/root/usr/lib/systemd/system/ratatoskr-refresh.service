@@ -1,0 +1,15 @@
+[Unit]
+Description=Ratatoskr : liste des paquets rafraîchie au démarrage
+Documentation=man:apt-get(8)
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/apt-get -q update -o DPkg::Lock::Timeout=120 -o Acquire::Retries=2
+Nice=10
+IOSchedulingClass=idle
+TimeoutStartSec=10min
+
+[Install]
+WantedBy=multi-user.target

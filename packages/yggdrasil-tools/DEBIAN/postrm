@@ -1,0 +1,24 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+    remove)
+        if command -v deb-systemd-helper >/dev/null 2>&1; then
+            deb-systemd-helper mask heimdall.service ratatoskr-refresh.service gjallarhorn.timer yggdrasil-instantanes-grub.timer >/dev/null || true
+        fi
+        ;;
+    purge)
+        if command -v deb-systemd-helper >/dev/null 2>&1; then
+            for unit in heimdall.service ratatoskr-refresh.service gjallarhorn.timer yggdrasil-instantanes-grub.timer; do
+                deb-systemd-helper purge "$unit" >/dev/null || true
+                deb-systemd-helper unmask "$unit" >/dev/null || true
+            done
+        fi
+        rm -rf /etc/heimdall /var/lib/yggdrasil
+        ;;
+esac
+if [ -d /run/systemd/system ]; then
+    systemctl daemon-reload >/dev/null 2>&1 || true
+fi
+
+exit 0

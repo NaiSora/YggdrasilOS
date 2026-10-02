@@ -1,0 +1,22 @@
+name = "bases"
+title = "Bases de données de développement"
+categorie = "dev"
+description = "PostgreSQL et Redis pour tes projets, et Adminer pour les explorer dans le navigateur."
+url = "http://localhost:${PORT}"
+web = { conteneur = "adminer", port = 8080 }
+notes = """
+PostgreSQL : localhost:5432, utilisateur ygg, mot de passe dans ~/bifrost/bases/.env
+Redis : localhost:6379.  Adminer : serveur « postgres », même utilisateur.
+"""
+
+[[env]]
+name = "PORT"
+option = "port"
+description = "Port d'Adminer"
+default = "8082"
+kind = "port"
+
+[[env]]
+name = "POSTGRES_PASSWORD"
+description = "Mot de passe PostgreSQL (généré)"
+kind = "secret"

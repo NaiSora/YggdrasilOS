@@ -1,0 +1,18 @@
+[Unit]
+Description=Police de la console, une fois l'écran de démarrage parti
+Documentation=man:setupcon(1)
+# Plymouth tient la console en mode graphique pendant le démarrage : le noyau y refuse tout
+# changement de police (KDFONTOP), et console-setup (sa règle udev, puis son service) passe
+# alors pour rien. La console gardait la police VGA du noyau (« — » y devient ■). On recharge
+# la police mise en cache par setupcon dès que Plymouth a rendu la main, avant la connexion.
+After=plymouth-quit-wait.service console-setup.service
+Before=getty@tty1.service
+ConditionPathExists=/etc/console-setup/cached_setup_font.sh
+
+[Service]
+Type=oneshot
+ExecStart=/etc/console-setup/cached_setup_font.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

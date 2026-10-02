@@ -1,0 +1,10 @@
+[Unit]
+Description=Yggdrasil : mettre à jour les instantanés du menu de démarrage chaque jour
+
+[Timer]
+OnBootSec=15min
+OnUnitActiveSec=1d
+RandomizedDelaySec=10min
+
+[Install]
+WantedBy=timers.target

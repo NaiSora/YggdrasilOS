@@ -1,0 +1,65 @@
+name = "asgard"
+title = "Ásgard"
+surnom = "la Citadelle"
+theme = "Sécurité et vie privée"
+rune = "ᛉ"
+rune_nom = "Algiz"
+rune_sens = "la protection"
+icon = "security-high"
+voyageurs = ["gardien"]
+description = """
+La forteresse des dieux : tes mots de passe dans un coffre, chaque connexion sortante
+soumise à ton accord, l'anonymat quand il le faut, et un antivirus pour les fichiers
+venus d'ailleurs.
+"""
+next_steps = """
+KeePassXC : crée ton coffre, puis active l'intégration au navigateur dans ses réglages.
+OpenSnitch : chaque programme qui veut sortir sur Internet te demandera la permission.
+Flatseal : retire aux applications Flatpak les accès dont elles n'ont pas besoin.
+« heimdall ports » montre ce que ta machine expose au réseau.
+"""
+
+[[logiciels]]
+id = "keepassxc"
+nom = "KeePassXC"
+description = "Coffre-fort de mots de passe, chiffré, hors ligne."
+apt = ["keepassxc"]
+
+[[logiciels]]
+id = "opensnitch"
+nom = "OpenSnitch"
+description = "Pare-feu applicatif : demande ton accord quand un programme veut sortir sur Internet."
+apt = ["opensnitch", "python3-opensnitch-ui"]
+
+[[logiciels]]
+id = "tor"
+nom = "Tor Browser"
+description = "Naviguer sans être suivi, par le réseau Tor."
+flatpak = ["org.torproject.torbrowser-launcher"]
+
+[[logiciels]]
+id = "clamav"
+nom = "ClamAV"
+description = "Antivirus à la demande, pour les fichiers et clés USB venus de Windows."
+apt = ["clamav", "clamtk"]
+
+[[logiciels]]
+id = "flatseal"
+nom = "Flatseal"
+description = "Régler les permissions de chaque application Flatpak."
+flatpak = ["com.github.tchx84.Flatseal"]
+
+[[logiciels]]
+id = "kleopatra"
+nom = "Kleopatra"
+description = "Chiffrer et signer fichiers et courriels (GPG)."
+apt = ["kleopatra"]
+defaut = false
+
+[[logiciels]]
+id = "wireshark"
+nom = "Wireshark et nmap"
+description = "Observer ce qui circule sur le réseau, inventorier machines et ports."
+apt = ["wireshark", "nmap"]
+groups = ["wireshark"]
+defaut = false

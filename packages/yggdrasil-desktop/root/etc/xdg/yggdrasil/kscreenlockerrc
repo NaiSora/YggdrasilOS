@@ -1,0 +1,6 @@
+[Greeter]
+WallpaperPlugin=org.kde.image
+
+[Greeter][Wallpaper][org.kde.image][General]
+Image=/usr/share/wallpapers/Yggdrasil/
+PreviewImage=/usr/share/wallpapers/Yggdrasil/

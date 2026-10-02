@@ -1,0 +1,32 @@
+/* {{name}} — forgé par Brokkr sur Yggdrasil. Couleurs de l'arbre, clair ou sombre selon le système. */
+:root {
+  --fond: #f7f4ec;
+  --texte: #1c2a36;
+  --discret: #5d6b75;
+  --accent: #b8913d;
+  --carte: #ffffff;
+  --bord: #e3dccb;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fond: #091c30;
+    --texte: #f2ead7;
+    --discret: #9db3aa;
+    --accent: #e8cc8c;
+    --carte: #0f2742;
+    --bord: #1d3a5a;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--fond); color: var(--texte); line-height: 1.6; }
+a { color: var(--accent); }
+header, main, footer { max-width: 60rem; margin: 0 auto; padding: 1.5rem; }
+header h1 { margin: 0; font-size: clamp(2rem, 6vw, 3.2rem); }
+.discret { color: var(--discret); }
+.cartes { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); }
+.carte { background: var(--carte); border: 1px solid var(--bord); border-radius: 0.8rem; padding: 1.2rem; }
+button, input { font: inherit; }
+button { background: var(--accent); color: var(--fond); border: 0; border-radius: 0.5rem; padding: 0.5rem 1rem; cursor: pointer; }
+input { background: var(--carte); color: var(--texte); border: 1px solid var(--bord); border-radius: 0.5rem; padding: 0.5rem; }
+footer { color: var(--discret); font-size: 0.9rem; }

@@ -1,0 +1,16 @@
+name = "ia-locale"
+title = "Application d'IA locale"
+language = "Python"
+description = """
+Une base pour tes propres assistants : un client Ollama (réponses en continu), un assistant
+avec mémoire de conversation et consigne système, une interface en ligne de commande, des
+tests avec un faux serveur. Aucune dépendance externe ; tout reste sur ta machine.
+"""
+requires = ["python3"]
+next_steps = """
+cd {{dir}}
+python3 -m venv .venv && . .venv/bin/activate
+pip install -e ".[dev]"
+{{slug}} --modele qwen3:8b      (Ollama : mimir install, ou ygg realm add vanaheim)
+pytest
+"""

@@ -1,0 +1,75 @@
+#!/bin/sh
+set -e
+
+THEME=/usr/share/desktop-base/yggdrasil-theme
+
+register_alternatives() {
+    # S'intègre au mécanisme de thèmes de desktop-base (priorités supérieures à Debian).
+    mkdir -p /usr/share/images/desktop-base /usr/share/wallpapers
+    update-alternatives --install /usr/share/desktop-base/active-theme \
+        desktop-theme "$THEME" 80
+    # La version 1.0 pointait vers un SVG : remplacé par un PNG (Qt n'affiche pas les masques)
+    update-alternatives --remove desktop-background "$THEME/wallpaper/contents/images/1920x1080.svg" >/dev/null 2>&1 || true
+    update-alternatives --install /usr/share/images/desktop-base/desktop-background \
+        desktop-background "$THEME/wallpaper/contents/images/1920x1080.png" 80
+    update-alternatives --install /usr/share/images/desktop-base/desktop-background.xml \
+        desktop-background.xml "$THEME/wallpaper/gnome-background.xml" 60
+    update-alternatives --install /usr/share/images/desktop-base/desktop-lockscreen.xml \
+        desktop-lockscreen.xml "$THEME/lockscreen/gnome-background.xml" 60
+    update-alternatives --install /usr/share/wallpapers/DebianTheme \
+        desktop-plasma5-wallpaper "$THEME/wallpaper" 60
+    update-alternatives --install /usr/share/images/desktop-base/login-background.svg \
+        desktop-login-background "$THEME/login/background.svg" 60
+    update-alternatives --install /usr/share/images/desktop-base/desktop-grub.png \
+        desktop-grub "$THEME/grub/grub-16x9.png" 60 \
+        --slave /usr/share/desktop-base/grub_background.sh desktop-grub.sh "$THEME/grub/grub_background.sh"
+}
+
+brand_issue() {
+    # /etc/issue appartient à base-files : on ne le remplace que s'il contient encore
+    # le texte Debian d'origine, après l'avoir sauvegardé (restauré par postrm).
+    install -d -m 755 /var/lib/yggdrasil-base
+    for f in issue issue.net; do
+        if [ -f "/etc/$f" ] && grep -q '^Debian' "/etc/$f"; then
+            cp -p "/etc/$f" "/var/lib/yggdrasil-base/$f.debian"
+            cp "/usr/share/yggdrasil/$f" "/etc/$f"
+        fi
+    done
+}
+
+case "$1" in
+    configure)
+        register_alternatives
+        brand_issue
+
+        # Seulement si plymouth est déjà configuré : sinon on modifierait son fichier
+        # /etc/plymouth/plymouthd.conf avant dpkg (question bloquante à l'installation).
+        # Dans l'image live, le hook 0100-yggdrasil-system applique le thème à la fin.
+        if [ -x /usr/sbin/plymouth-set-default-theme ] \
+            && [ "$(dpkg-query -W -f '${db:Status-Abbrev}' plymouth 2>/dev/null)" = "ii " ]; then
+            plymouth-set-default-theme yggdrasil || true
+        fi
+        # Le thème Plymouth est embarqué dans l'initramfs : on le régénère.
+        if command -v update-initramfs >/dev/null 2>&1 && ls /boot/initrd.img-* >/dev/null 2>&1; then
+            update-initramfs -u >/dev/null 2>&1 || true
+        fi
+        if [ -e /boot/grub/grub.cfg ] && command -v update-grub >/dev/null 2>&1; then
+            update-grub >/dev/null 2>&1 || true
+        fi
+        # La police de la console, rechargée quand Plymouth rend la main (comme dh_installsystemd :
+        # activée à la première installation, ensuite seulement si l'administrateur l'a laissée)
+        if command -v deb-systemd-helper >/dev/null 2>&1; then
+            deb-systemd-helper unmask yggdrasil-police-console.service >/dev/null || true
+            if deb-systemd-helper --quiet was-enabled yggdrasil-police-console.service; then
+                deb-systemd-helper enable yggdrasil-police-console.service >/dev/null || true
+            else
+                deb-systemd-helper update-state yggdrasil-police-console.service >/dev/null || true
+            fi
+        fi
+        if [ -d /run/systemd/system ]; then
+            systemctl daemon-reload >/dev/null 2>&1 || true
+        fi
+        ;;
+esac
+
+exit 0

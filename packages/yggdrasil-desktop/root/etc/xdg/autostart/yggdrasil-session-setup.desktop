@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Réglages de session Yggdrasil
+Comment=Avatar par défaut et réglages propres à la session live
+Exec=/usr/libexec/yggdrasil/session-setup
+Terminal=false
+NoDisplay=true
+X-KDE-autostart-phase=1
+X-GNOME-Autostart-Phase=Initialization
+X-GNOME-Autostart-enabled=true

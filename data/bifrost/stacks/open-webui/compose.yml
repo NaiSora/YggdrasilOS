@@ -1,0 +1,15 @@
+# Open WebUI — déployé par bifrost (Yggdrasil). Réseau de l'hôte : il parle à Ollama sur 127.0.0.1.
+services:
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: open-webui
+    network_mode: host
+    environment:
+      PORT: "${PORT}"
+      OLLAMA_BASE_URL: "http://127.0.0.1:11434"
+      WEBUI_SECRET_KEY: "${WEBUI_SECRET_KEY}"
+      TZ: "${TZ}"
+    volumes:
+      - ./data:/app/backend/data
+    restart: unless-stopped
+

@@ -1,0 +1,17 @@
+{
+    "KPackageStructure": "Plasma/LookAndFeel",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "Projet Yggdrasil"
+            }
+        ],
+        "Category": "",
+        "Description": "L'arbre-monde : nuit, or et sauge",
+        "Description[fr]": "L'arbre-monde : nuit, or et sauge",
+        "Id": "org.yggdrasil.desktop",
+        "Name": "Yggdrasil",
+        "Version": "@VERSION@"
+    },
+    "X-Plasma-APIVersion": "2"
+}

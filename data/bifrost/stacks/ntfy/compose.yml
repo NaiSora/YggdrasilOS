@@ -1,0 +1,20 @@
+# ntfy — déployé par bifrost (Yggdrasil)
+services:
+  ntfy:
+    image: binwiederhier/ntfy:latest
+    container_name: ntfy
+    command: serve
+    ports:
+      - "${BIND_ADDR}:${PORT}:80"
+    environment:
+      TZ: "${TZ}"
+      NTFY_BASE_URL: "http://localhost:${PORT}"
+      NTFY_CACHE_FILE: "/var/cache/ntfy/cache.db"
+    volumes:
+      - ./cache:/var/cache/ntfy
+    restart: unless-stopped
+
+networks:
+  default:
+    name: bifrost
+    external: true

@@ -1,0 +1,16 @@
+name = "n8n"
+title = "n8n (automatisations)"
+categorie = "dev"
+description = """
+Relie tes services entre eux sans coder : « live Twitch lancé → message sur Discord »,
+« nouveau fichier → résumé par Mímir »…
+"""
+url = "http://localhost:${PORT}"
+web = { conteneur = "n8n", port = 5678 }
+
+[[env]]
+name = "PORT"
+option = "port"
+description = "Port de l'interface"
+default = "5678"
+kind = "port"

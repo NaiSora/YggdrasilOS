@@ -1,0 +1,36 @@
+#!/bin/sh
+# Réglages de début de session d'Yggdrasil (lancé par /etc/xdg/autostart).
+# Ne modifie que ce qui est encore à la valeur par défaut : tes choix sont respectés.
+
+# Avatar : le logo Debian de desktop-base est remplacé par celui d'Yggdrasil,
+# sauf si tu as choisi ta propre image.
+AVATAR=/usr/share/pixmaps/yggdrasil.png
+if [ -r "$AVATAR" ]; then
+    if [ ! -e "$HOME/.face" ] || { [ -e /etc/skel/.face ] && cmp -s "$HOME/.face" /etc/skel/.face; }; then
+        rm -f "$HOME/.face"
+        cp "$AVATAR" "$HOME/.face"
+        ln -sf .face "$HOME/.face.icon"
+    fi
+fi
+
+# Session live : ni verrouillage, ni extinction de l'écran, ni mise en veille
+# (le mot de passe « live » n'est connu de personne).
+if grep -qw 'boot=live' /proc/cmdline 2>/dev/null && command -v kwriteconfig6 >/dev/null 2>&1; then
+    kwriteconfig6 --file kscreenlockerrc --group Daemon --key Autolock false
+    kwriteconfig6 --file kscreenlockerrc --group Daemon --key LockOnResume false
+    # Pas de portefeuille KWallet à créer dans une session éphémère
+    kwriteconfig6 --file kwalletrc --group Wallet --key Enabled false
+    for profile in AC Battery LowBattery; do
+        kwriteconfig6 --file powerdevilrc --group "$profile" --group Display --key DimDisplayWhenIdle false
+        kwriteconfig6 --file powerdevilrc --group "$profile" --group Display --key TurnOffDisplayWhenIdle false
+        kwriteconfig6 --file powerdevilrc --group "$profile" --group SuspendAndShutdown --key AutoSuspendAction 0
+    done
+    # Les services déjà lancés relisent leur configuration
+    if command -v qdbus6 >/dev/null 2>&1; then
+        qdbus6 org.freedesktop.ScreenSaver /ScreenSaver configure >/dev/null 2>&1 || true
+        qdbus6 org.kde.Solid.PowerManagement /org/kde/Solid/PowerManagement \
+            org.kde.Solid.PowerManagement.reparseConfiguration >/dev/null 2>&1 || true
+    fi
+fi
+
+exit 0

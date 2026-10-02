@@ -1,0 +1,99 @@
+#!/bin/sh
+# Traduit les menus de démarrage de l'ISO (GRUB pour l'UEFI, isolinux pour le BIOS).
+# S'exécute après leur génération par live-build, depuis le dossier binary/ de l'image.
+set -e
+
+# live-build lance les hooks binaires depuis binary/ ; on accepte aussi le dossier parent.
+[ -d binary/boot ] && cd binary
+
+GRUB=boot/grub/grub.cfg
+if [ -f "$GRUB" ]; then
+    echo "I: Yggdrasil — menu GRUB en français"
+    sed -i \
+        -e 's/"Live system (autodetect) (fail-safe mode)"/"Yggdrasil — mode sans échec (détection auto)"/' \
+        -e 's/"Live system (autodetect)"/"Yggdrasil — session live (détection auto)"/' \
+        -e 's/"Live system (\([^"]*\) fail-safe mode)"/"Yggdrasil — mode sans échec (\1)"/' \
+        -e 's/"Live system (\([^"]*\))"/"Démarrer Yggdrasil (session live, \1)"/' \
+        -e "s/'Utilities\.\.\.'/'Utilitaires…'/" \
+        -e 's/"UEFI Firmware Settings"/"Réglages du micrologiciel UEFI"/' \
+        -e "s/\"Verify integrity of the boot medium\"/\"Vérifier l'intégrité du support\"/" \
+        -e 's/"Memory Diagnostic Tool/"Test de la mémoire/' \
+        "$GRUB"
+    # L'installateur Debian (mode texte), dans le menu principal et ses options avancées.
+    # live-build écrit ces titres entre apostrophes ou entre guillemets selon les fichiers.
+    for f in "$GRUB" boot/grub/install_start.cfg boot/grub/install.cfg; do
+        [ -f "$f" ] || continue
+        sed -i \
+            -e "s/[\"']Start installer with speech synthesis[\"']/\"Installer Yggdrasil avec synthèse vocale\"/" \
+            -e "s/[\"']Start installer[\"']/\"Installer Yggdrasil (mode texte)\"/" \
+            -e "s/[\"']Graphical installer[\"']/\"Installer Yggdrasil (graphique)\"/" \
+            -e "s/[\"']Advanced install options \.\.\.[\"']/\"Options d'installation avancées…\"/" \
+            -e "s/[\"']Text installer with dark theme \.\.\.[\"']/\"Installateur texte, thème sombre…\"/" \
+            -e "s/[\"']Text installer \.\.\.[\"']/\"Installateur texte…\"/" \
+            -e "s/[\"']Install[\"']/\"Installer Yggdrasil\"/" \
+            -e "s/[\"']Expert install[\"']/\"Installation experte (toutes les questions)\"/" \
+            -e "s/[\"']Automated install[\"']/\"Installation automatisée (préréglée)\"/" \
+            -e "s/[\"']Rescue mode[\"']/\"Mode de secours\"/" \
+            "$f"
+    done
+    # Skíðblaðnir : sur une clé persistante, les changements sont gardés (partition « persistence »,
+    # chiffrée ou non). Ailleurs (DVD, machine virtuelle), cette entrée démarre comme la session live.
+    if ! grep -q " persistence " "$GRUB"; then
+        awk '
+            /^menuentry "Démarrer Yggdrasil/ && !fait { bloc = 1; copie = "" }
+            { print }
+            bloc { copie = copie $0 "\n" }
+            bloc && /^}/ {
+                bloc = 0; fait = 1
+                sub(/menuentry "[^"]*"/, "menuentry \"Yggdrasil — clé persistante (tes changements sont gardés)\"", copie)
+                sub(/--hotkey=l/, "--hotkey=p", copie)
+                sub(/ boot=live /, " boot=live persistence persistence-encryption=none,luks ", copie)
+                printf "%s", copie
+            }' "$GRUB" > "$GRUB.tmp"
+        mv "$GRUB.tmp" "$GRUB"
+    fi
+fi
+
+# isolinux n'affiche correctement que l'ASCII : pas d'accents ici.
+for f in isolinux/*.cfg; do
+    [ -f "$f" ] || continue
+    sed -i \
+        -e 's/menu label ^Live system (\(.*\) fail-safe mode)/menu label Yggdrasil - mode sans echec (\1)/' \
+        -e 's/menu label Live system (\(.*\) fail-safe mode)/menu label Yggdrasil - mode sans echec (\1)/' \
+        -e 's/menu label ^Live system (\(.*\))/menu label ^Demarrer Yggdrasil (session live, \1)/' \
+        -e 's/menu title Boot menu/menu title Menu de demarrage/' \
+        -e 's/menu label ^Utilities/menu label ^Utilitaires/' \
+        -e 's/menu title Utilities/menu title Utilitaires/' \
+        -e 's/menu label ^Back\.\./menu label ^Retour/' \
+        -e 's/menu label ^Hardware Detection Tool (HDT)/menu label Detection du ^materiel (HDT)/' \
+        -e 's/menu label ^Memory Diagnostic Tool/menu label Test de la ^memoire/' \
+        -e 's/menu label Start \^installer/menu label ^Installer Yggdrasil (mode texte)/' \
+        -e "s/menu label \^Advanced install options/menu label Options d'installation ^avancees/" \
+        -e "s/menu title Advanced install options/menu title Options d'installation avancees/" \
+        -e 's/menu label Text installer with dar\^k theme/menu label Installateur texte, theme ^sombre/' \
+        -e 's/menu title Text installer with dark theme/menu title Installateur texte, theme sombre/' \
+        -e 's/menu label \^Text installer/menu label Installateur ^texte/' \
+        -e 's/menu title Text installer/menu title Installateur texte/' \
+        -e 's/menu label \^Install$/menu label ^Installer Yggdrasil/' \
+        -e 's/menu label E\^xpert install/menu label Installation e^xperte/' \
+        -e 's/menu label \^Automated install/menu label Installation ^automatisee/' \
+        -e 's/menu label \^Rescue mode/menu label Mode de ^secours/' \
+        "$f"
+done
+# L'entrée « clé persistante » pour le BIOS ancien aussi (après l'entrée live)
+if [ -f isolinux/live.cfg ] && ! grep -q persistence isolinux/live.cfg; then
+    awk '
+        /^label live-/ && !fait { bloc = 1; copie = "" }
+        bloc && /^$/ {
+            bloc = 0; fait = 1; print
+            sub(/label live-[^\n]*/, "label live-persistence", copie)
+            sub(/menu label [^\n]*/, "menu label Yggdrasil - cle ^persistante", copie)
+            sub(/\tmenu default\n/, "", copie)
+            sub(/ boot=live /, " boot=live persistence persistence-encryption=none,luks ", copie)
+            printf "%s\n", copie
+            next
+        }
+        bloc { copie = copie $0 "\n" }
+        { print }' isolinux/live.cfg > isolinux/live.cfg.tmp
+    mv isolinux/live.cfg.tmp isolinux/live.cfg
+fi

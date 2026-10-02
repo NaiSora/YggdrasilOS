@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Bienvenue sur Yggdrasil
+Comment=Centre de bienvenue au démarrage de la session
+Exec=yggdrasil-welcome --autostart
+Icon=yggdrasil
+Terminal=false
+NoDisplay=true
+X-GNOME-Autostart-enabled=true
+X-GNOME-Autostart-Delay=3

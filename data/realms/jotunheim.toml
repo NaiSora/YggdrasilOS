@@ -1,0 +1,53 @@
+name = "jotunheim"
+title = "Jötunheim"
+surnom = "les Géants"
+theme = "Serveurs"
+rune = "ᚦ"
+rune_nom = "Thurisaz"
+rune_sens = "la force des géants"
+icon = "network-server"
+voyageurs = ["gardien"]
+description = """
+Le pays des géants : Docker pour les services de Bifröst, Cockpit pour administrer la
+machine depuis un navigateur, SSH pour t'y connecter, btop pour la surveiller.
+Le royaume t'ajoute au groupe docker.
+"""
+next_steps = """
+Déconnecte-toi puis reconnecte-toi : le groupe docker sera actif.
+« bifrost list » : serveurs Minecraft, Open WebUI, partage de fichiers… en une commande.
+Cockpit : http://localhost:9090 (« heimdall allow 9090 --from lan » pour le réseau local).
+"""
+
+[[logiciels]]
+id = "docker"
+nom = "Docker"
+description = "Les conteneurs, et Compose pour les services de Bifröst."
+apt = ["docker.io", "docker-compose"]
+groups = ["docker"]
+services = ["docker"]
+
+[[logiciels]]
+id = "cockpit"
+nom = "Cockpit"
+description = "Administrer la machine depuis un navigateur."
+apt = ["cockpit"]
+services = ["cockpit.socket"]
+
+[[logiciels]]
+id = "ssh"
+nom = "Serveur SSH"
+description = "Se connecter à la machine depuis le réseau local (ygg distance)."
+actions = ["ssh"]
+
+[[logiciels]]
+id = "btop"
+nom = "btop"
+description = "Surveiller processeur, mémoire, disques et réseau dans le terminal."
+apt = ["btop"]
+
+[[logiciels]]
+id = "wireguard"
+nom = "WireGuard"
+description = "Un tunnel pour rejoindre la maison de partout (ygg distance wireguard init)."
+apt = ["wireguard-tools", "qrencode"]
+defaut = false

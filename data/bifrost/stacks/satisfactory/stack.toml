@@ -1,0 +1,16 @@
+name = "satisfactory"
+title = "Serveur Satisfactory"
+categorie = "jeux"
+description = "Un serveur dédié Satisfactory (prévoir 12 à 16 Go de mémoire vive)."
+ports = ["7777/tcp+udp", "8888/tcp"]
+lan_default = true
+notes = """
+En jeu : « Gestionnaire de serveurs » → « Ajouter un serveur » → IP de cette machine, port 7777.
+Le premier joueur à se connecter en devient l'administrateur.
+"""
+
+[[env]]
+name = "MAXPLAYERS"
+option = "joueurs"
+description = "Joueurs au plus"
+default = "4"

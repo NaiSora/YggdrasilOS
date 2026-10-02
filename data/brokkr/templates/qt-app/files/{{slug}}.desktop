@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name={{name}}
+Comment=Un carnet de notes, forgé par Brokkr
+Exec={{slug}}
+Icon={{slug}}
+Categories=Utility;Qt;

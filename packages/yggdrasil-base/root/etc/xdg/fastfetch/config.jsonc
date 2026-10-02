@@ -1,0 +1,33 @@
+// Configuration fastfetch d'Yggdrasil (copie-la dans ~/.config/fastfetch/ pour la personnaliser).
+// L'arbre affiché dépend de la taille du terminal : voir yggdrasil-fetch --help.
+{
+    "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+    "logo": {
+        "source": "/usr/share/yggdrasil/arbre/compact.txt",
+        // or #E8CC8C, sauge #79AC99, étoile #FBE39B
+        "color": { "1": "38;2;232;204;140", "2": "38;2;121;172;153", "3": "1;38;2;251;227;155" },
+        "padding": { "top": 1, "right": 3 }
+    },
+    "display": {
+        "separator": "  ",
+        "color": { "keys": "38;2;232;204;140", "title": "38;2;121;172;153" }
+    },
+    "modules": [
+        "title",
+        "separator",
+        { "type": "os", "key": "Système" },
+        { "type": "kernel", "key": "Noyau" },
+        { "type": "uptime", "key": "Allumé depuis" },
+        { "type": "packages", "key": "Paquets" },
+        { "type": "shell", "key": "Shell" },
+        { "type": "de", "key": "Bureau" },
+        { "type": "cpu", "key": "Processeur" },
+        { "type": "gpu", "key": "Graphique" },
+        { "type": "memory", "key": "Mémoire" },
+        // Le disque du système seulement : une ligne courte, qui ne déborde pas sur l'arbre
+        { "type": "disk", "key": "Disque", "folders": "/" },
+        { "type": "localip", "key": "IP locale" },
+        "break",
+        "colors"
+    ]
+}

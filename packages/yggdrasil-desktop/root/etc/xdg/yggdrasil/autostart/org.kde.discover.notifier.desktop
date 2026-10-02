@@ -1,0 +1,6 @@
+[Desktop Entry]
+# Ratatoskr prévient déjà des mises à jour : pas de second messager.
+Type=Service
+Name=Discover
+Exec=/usr/lib/x86_64-linux-gnu/libexec/DiscoverNotifier
+Hidden=true

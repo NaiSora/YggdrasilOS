@@ -1,0 +1,64 @@
+# Yggdrasil — paquets du système (live et installé)
+
+## Paquets propres à Yggdrasil (construits par scripts/build-packages.sh)
+yggdrasil-base
+yggdrasil-tools
+yggdrasil-archive-keyring
+
+## Système de base
+sudo
+bash-completion
+locales
+console-setup
+keyboard-configuration
+tzdata
+man-db
+manpages-fr
+less
+nano
+vim
+htop
+btop
+fastfetch
+tmux
+curl
+wget
+git
+rsync
+zip
+unzip
+7zip
+zstd
+xz-utils
+ca-certificates
+gnupg
+pciutils
+usbutils
+lshw
+smartmontools
+nftables
+btrfs-progs
+# Chiffrement : système installé (Calamares) et clé persistante chiffrée (Skíðblaðnir)
+cryptsetup
+cryptsetup-initramfs
+timeshift
+flatpak
+zram-tools
+unattended-upgrades
+needrestart
+python3
+python3-gi
+gir1.2-gtk-3.0
+python3-venv
+pipx
+libnotify-bin
+dbus-user-session
+network-manager
+openssh-client
+plymouth
+
+## Micrologiciels et microcode
+firmware-linux-free
+firmware-misc-nonfree
+amd64-microcode
+intel-microcode

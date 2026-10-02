@@ -1,0 +1,13 @@
+Package: yggdrasil-serveur
+Version: @VERSION@
+Architecture: all
+Maintainer: Projet Yggdrasil <yggdrasil@localhost>
+Section: admin
+Priority: optional
+Depends: yggdrasil-base, yggdrasil-tools, openssh-server, docker.io, docker-compose, python3
+Recommends: needrestart, unattended-upgrades
+Description: édition serveur d'Yggdrasil
+ Yggdrasil sans bureau, pour héberger : SSH, Docker pour les services
+ Bifröst (serveurs Minecraft, open-webui, partage de fichiers…), Heimdall
+ en profil serveur (SSH ouvert, le reste fermé) et l'arbre-monde à la
+ console avant la connexion, avec l'adresse de la machine.

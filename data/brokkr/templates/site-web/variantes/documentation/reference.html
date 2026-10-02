@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Référence — {{name}}</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .doc { display: grid; grid-template-columns: 14rem 1fr; gap: 2rem; max-width: 70rem; margin: 0 auto; padding: 1.5rem; }
+    nav a { display: block; padding: 0.2rem 0; }
+    @media (max-width: 45rem) { .doc { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="doc">
+    <nav>
+      <strong>{{name}}</strong>
+      <input id="recherche" placeholder="Chercher…" aria-label="Chercher dans le sommaire">
+      <a href="index.html">Accueil</a>
+      <a href="guide.html">Guide</a>
+      <a href="reference.html">Référence</a>
+    </nav>
+    <main>
+      <h1>Référence</h1>
+      <p>Chaque option, chaque commande, en détail.</p>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

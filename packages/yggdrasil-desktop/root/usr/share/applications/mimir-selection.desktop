@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=Demander à Mímir
+GenericName=Expliquer le texte sélectionné
+Comment=Sélectionne un message d'erreur ou une commande n'importe où, puis Meta+Alt+M
+Exec=mimir selection --attendre
+Icon=yggdrasil
+Terminal=true
+NoDisplay=false
+Categories=Utility;
+Keywords=ia;expliquer;erreur;sélection;mimir;
+X-KDE-Shortcuts=Meta+Alt+M

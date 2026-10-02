@@ -1,0 +1,26 @@
+name = "lavalink"
+title = "Lavalink (musique pour bots Discord)"
+categorie = "dev"
+description = "Le serveur audio des bots Discord musicaux : ton bot Brokkr y joue YouTube, SoundCloud, Bandcamp…"
+notes = """
+Dans ton bot : hôte lavalink (même réseau Docker) ou localhost, port 2333,
+mot de passe dans ~/bifrost/lavalink/.env (LAVALINK_SERVER_PASSWORD).
+"""
+
+[[env]]
+name = "PORT"
+option = "port"
+description = "Port de Lavalink"
+default = "2333"
+kind = "port"
+
+[[env]]
+name = "MEMORY"
+option = "memoire"
+description = "Mémoire de Java"
+default = "512M"
+
+[[env]]
+name = "LAVALINK_SERVER_PASSWORD"
+description = "Mot de passe des bots (généré)"
+kind = "secret"

@@ -1,0 +1,9 @@
+[Unit]
+Description=Ratatoskr, l'écureuil messager d'Yggdrasil
+
+[Service]
+Type=oneshot
+# --attendre : laisse le réseau monter et la liste des paquets se rafraîchir
+ExecStart=/usr/bin/ratatoskr check --attendre
+Nice=10
+IOSchedulingClass=idle

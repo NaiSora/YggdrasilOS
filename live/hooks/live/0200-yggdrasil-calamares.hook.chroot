@@ -1,0 +1,70 @@
+#!/bin/sh
+# Adapte l'installateur Calamares (paquet calamares-settings-debian) à Yggdrasil.
+set -e
+
+CAL=/etc/calamares
+[ -f "$CAL/settings.conf" ] || { echo "W: Calamares absent, rien à faire"; exit 0; }
+
+echo "I: Yggdrasil — habillage de Calamares"
+sed -i 's/^branding: .*/branding: yggdrasil/' "$CAL/settings.conf"
+
+# Le shim signé de Debian cherche GRUB dans EFI/debian : on garde ce dossier
+# pour que le démarrage sécurisé fonctionne.
+if ! grep -q '^efiBootloaderId:' "$CAL/modules/bootloader.conf"; then
+    printf '\n# Yggdrasil : dossier EFI « debian » (compatibilité Secure Boot)\nefiBootloaderId: "debian"\n' \
+        >> "$CAL/modules/bootloader.conf"
+fi
+
+# btrfs (défaut d'Yggdrasil, voir partition.conf) : les sous-volumes attendus par
+# Timeshift (@ et @home), plus le cache et les journaux hors des instantanés.
+if ! grep -q '^btrfsSubvolumes:' "$CAL/modules/mount.conf"; then
+    cat >> "$CAL/modules/mount.conf" <<'EOF'
+
+# Yggdrasil : sous-volumes btrfs (Timeshift veut @ et @home à la racine du volume)
+btrfsSubvolumes:
+    - mountPoint: /
+      subvolume: /@
+    - mountPoint: /home
+      subvolume: /@home
+    - mountPoint: /var/cache
+      subvolume: /@cache
+    - mountPoint: /var/log
+      subvolume: /@log
+EOF
+fi
+
+# Chargeur UEFI aussi au chemin de secours (EFI/BOOT/BOOTX64.EFI) : certains
+# micrologiciels oublient les entrées de démarrage après une mise à jour.
+if ! grep -q '^installEFIFallback:' "$CAL/modules/bootloader.conf"; then
+    printf '\n# Yggdrasil : chargeur de secours EFI/BOOT/BOOTX64.EFI\ninstallEFIFallback: true\n' \
+        >> "$CAL/modules/bootloader.conf"
+fi
+
+# Paquets propres à la session live, retirés du système installé.
+cat > "$CAL/modules/packages.conf" <<'EOF'
+backend: apt
+
+operations:
+  - try_remove:
+      - 'live-boot'
+      - 'live-boot-doc'
+      - 'live-config'
+      - 'live-config-doc'
+      - 'live-config-systemd'
+      - 'live-tools'
+      - 'live-task-localisation'
+      - 'live-task-recommended'
+      - 'calamares-settings-debian'
+      - 'yggdrasil-calamares'
+      - 'calamares'
+EOF
+
+# Raccourci d'installation sur le bureau live
+DESKTOP=/usr/share/applications/calamares-install-debian.desktop
+if [ -f "$DESKTOP" ]; then
+    sed -i -e 's/^Name=.*/Name=Installer Yggdrasil/' \
+           -e 's/^GenericName=.*/GenericName=Installateur/' \
+           -e 's/^Comment=.*/Comment=Installer Yggdrasil sur cet ordinateur/' \
+           -e 's/^Icon=.*/Icon=yggdrasil/' \
+           -e '/^Name\[/d' -e '/^Comment\[/d' -e '/^GenericName\[/d' "$DESKTOP"
+fi

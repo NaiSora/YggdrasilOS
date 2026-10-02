@@ -1,0 +1,12 @@
+[Unit]
+Description=Thème Yggdrasil automatique : parchemin le jour, bleu nuit le soir
+PartOf=graphical-session.target
+
+[Timer]
+# Activée par « ygg theme auto ». Le service ne change rien si le thème est déjà le bon.
+OnStartupSec=20s
+OnCalendar=*:0/10
+AccuracySec=1min
+
+[Install]
+WantedBy=timers.target

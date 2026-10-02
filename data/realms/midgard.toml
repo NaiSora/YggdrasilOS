@@ -1,0 +1,66 @@
+name = "midgard"
+title = "Midgard"
+surnom = "le Quotidien"
+theme = "Bureautique, messageries et musique"
+rune = "ᛗ"
+rune_nom = "Mannaz"
+rune_sens = "l'humain"
+icon = "applications-office"
+voyageurs = ["joueur", "createur"]
+description = """
+Le monde des humains, au milieu de l'arbre : écrire, prendre des notes, écrire à tes
+proches, écouter de la musique. Tout ce qu'un ordinateur fait chaque jour.
+"""
+next_steps = """
+Thunderbird : ajoute ton compte de courriel, il trouve tout seul les réglages.
+Obsidian : un « coffre » de notes en Markdown ; Mímir sait le lire (mimir puits remplir).
+"""
+
+[[logiciels]]
+id = "libreoffice"
+nom = "LibreOffice"
+description = "Traitement de texte, tableur, présentations (compatibles Microsoft Office)."
+apt = ["libreoffice", "libreoffice-l10n-fr"]
+
+[[logiciels]]
+id = "thunderbird"
+nom = "Thunderbird"
+description = "Courriel, agenda et contacts."
+apt = ["thunderbird", "thunderbird-l10n-fr"]
+
+[[logiciels]]
+id = "obsidian"
+nom = "Obsidian"
+description = "Notes reliées entre elles, en Markdown, dans tes propres fichiers."
+flatpak = ["md.obsidian.Obsidian"]
+
+[[logiciels]]
+id = "discord"
+nom = "Discord"
+description = "Discussions écrites et vocales avec tes communautés."
+flatpak = ["com.discordapp.Discord"]
+
+[[logiciels]]
+id = "signal"
+nom = "Signal"
+description = "Messagerie chiffrée de bout en bout, reliée à ton téléphone."
+flatpak = ["org.signal.Signal"]
+
+[[logiciels]]
+id = "spotify"
+nom = "Spotify"
+description = "Musique et podcasts en streaming."
+flatpak = ["com.spotify.Client"]
+
+[[logiciels]]
+id = "vlc"
+nom = "VLC"
+description = "Lit toutes les vidéos et musiques."
+apt = ["vlc"]
+
+[[logiciels]]
+id = "flameshot"
+nom = "Flameshot"
+description = "Captures d'écran annotées (flèches, flous, textes)."
+apt = ["flameshot"]
+defaut = false

@@ -1,0 +1,26 @@
+name = "code-server"
+title = "code-server (coder dans le navigateur)"
+categorie = "dev"
+description = "VS Code dans le navigateur : code depuis une tablette ou un autre ordinateur, sur tes projets d'ici."
+url = "http://localhost:${PORT}"
+web = { conteneur = "code-server", port = 8443 }
+notes = "Mot de passe : ~/bifrost/code-server/.env (PASSWORD)."
+
+[[env]]
+name = "PORT"
+option = "port"
+description = "Port de l'interface"
+default = "8443"
+kind = "port"
+
+[[env]]
+name = "PROJETS"
+option = "projets"
+description = "Dossier des projets ouvert dans l'éditeur"
+default = "~/Projets"
+kind = "path"
+
+[[env]]
+name = "PASSWORD"
+description = "Mot de passe (généré)"
+kind = "secret"

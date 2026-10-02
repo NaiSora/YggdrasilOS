@@ -1,0 +1,9 @@
+# Dépôt embarqué dans l'ISO : Calamares y prend le chargeur UEFI (avec démarrage sécurisé)
+grub-efi
+grub-efi-amd64
+grub-efi-amd64-signed
+shim-signed
+mokutil
+cryptsetup
+cryptsetup-initramfs
+keyutils

@@ -1,0 +1,14 @@
+name = "script-bash"
+title = "Script bash propre"
+language = "Bash"
+description = """
+Un script bash qui ne se laisse pas surprendre : mode strict, options courtes et longues,
+aide intégrée, messages colorés, nettoyage à la sortie, validé par shellcheck, avec ses tests.
+"""
+requires = ["bash"]
+next_steps = """
+cd {{dir}}
+./{{slug}}.sh --help
+./tests/test.sh
+shellcheck {{slug}}.sh
+"""

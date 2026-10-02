@@ -1,0 +1,23 @@
+# Serveur Satisfactory — déployé par bifrost (Yggdrasil)
+services:
+  satisfactory:
+    image: wolveix/satisfactory-server:latest
+    container_name: satisfactory
+    ports:
+      - "${BIND_ADDR}:7777:7777/tcp"
+      - "${BIND_ADDR}:7777:7777/udp"
+      - "${BIND_ADDR}:8888:8888/tcp"
+    environment:
+      MAXPLAYERS: "${MAXPLAYERS}"
+      PGID: "${PGID}"
+      PUID: "${PUID}"
+      STEAMBETA: "false"
+      TZ: "${TZ}"
+    volumes:
+      - ./config:/config
+    restart: unless-stopped
+
+networks:
+  default:
+    name: bifrost
+    external: true

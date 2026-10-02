@@ -1,0 +1,26 @@
+# Réglages par défaut du bureau Plasma d'Yggdrasil. Les couleurs du jeu
+# « Yggdrasil » (/usr/share/color-schemes/Yggdrasil.colors) sont ajoutées à la
+# fin de ce fichier à la construction du paquet.
+
+[General]
+ColorScheme=Yggdrasil
+AccentColor=91,139,123
+accentColorFromWallpaper=false
+font=Noto Sans,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+menuFont=Noto Sans,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+smallestReadableFont=Noto Sans,8,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+toolBarFont=Noto Sans,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+fixed=JetBrains Mono,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+BrowserApplication=firefox-esr.desktop
+TerminalApplication=konsole
+TerminalService=org.kde.konsole.desktop
+
+[Icons]
+Theme=Yggdrasil
+
+[KDE]
+LookAndFeelPackage=org.yggdrasil.desktop
+widgetStyle=Breeze
+
+[WM]
+activeFont=Noto Sans,10,-1,5,600,0,0,0,0,0,0,0,0,0,0,1

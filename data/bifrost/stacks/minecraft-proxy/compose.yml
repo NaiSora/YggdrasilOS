@@ -1,0 +1,23 @@
+# Proxy Velocity « ${INSTANCE} » — déployé par bifrost (Yggdrasil)
+services:
+  velocity:
+    image: itzg/mc-proxy:latest
+    container_name: "mc-${INSTANCE}"
+    ports:
+      - "${BIND_ADDR}:${PORT}:25577"
+    environment:
+      TYPE: "VELOCITY"
+      MEMORY: "${MEMORY}"
+      UID: "${PUID}"
+      GID: "${PGID}"
+      TZ: "${TZ}"
+    volumes:
+      - ./data:/server
+    tty: true
+    stdin_open: true
+    restart: unless-stopped
+
+networks:
+  default:
+    name: bifrost
+    external: true

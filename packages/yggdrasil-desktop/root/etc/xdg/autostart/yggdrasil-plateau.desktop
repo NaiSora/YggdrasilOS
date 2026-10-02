@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Yggdrasil dans la barre système
+Comment=L'arbre veille : mises à jour, pare-feu, services, disque
+Exec=yggdrasil-welcome --plateau
+Icon=yggdrasil
+Terminal=false
+NoDisplay=true
+OnlyShowIn=KDE;
+X-KDE-autostart-phase=2
+X-GNOME-Autostart-Delay=20

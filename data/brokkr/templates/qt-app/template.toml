@@ -1,0 +1,16 @@
+name = "qt-app"
+title = "Application Qt (QML)"
+language = "Python"
+description = """
+Une application de bureau native pour Plasma : PySide6 et QML (Qt Quick Controls), la logique
+en Python testable sans fenêtre, un lanceur dans le menu, et « brokkr package » pour en faire
+un .deb qui s'installe comme le reste.
+"""
+requires = ["python3"]
+next_steps = """
+cd {{dir}}
+python3 -m venv --system-site-packages .venv && . .venv/bin/activate    (PySide6 de Debian)
+pip install -e ".[dev]"
+{{slug}}
+brokkr package        un .deb, avec lanceur et icône
+"""

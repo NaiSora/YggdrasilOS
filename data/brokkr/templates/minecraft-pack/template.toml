@@ -1,0 +1,22 @@
+name = "minecraft-pack"
+title = "Pack Minecraft"
+language = "Minecraft"
+description = """
+Un datapack (fonctions, recettes, chargé au lancement du monde) ou un resource pack
+(textures, langues), pour Minecraft Java 1.21.4. Prêt à déposer dans le monde ou le serveur.
+"""
+next_steps = """
+cd {{dir}}
+Voir le README pour l'installer (dans un monde, ou sur un serveur Bifröst).
+"""
+
+[[variante]]
+id = "datapack"
+nom = "Datapack"
+description = "fonctions load et tick, une recette personnalisée"
+defaut = true
+
+[[variante]]
+id = "resourcepack"
+nom = "Resource pack"
+description = "textures et traductions"

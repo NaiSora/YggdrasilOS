@@ -1,0 +1,10 @@
+name = "factorio"
+title = "Serveur Factorio"
+categorie = "jeux"
+description = "Un serveur Factorio : l'usine tourne, même quand tu n'es pas là."
+ports = ["34197/udp", "27015/tcp (RCON)"]
+lan_default = true
+notes = """
+En jeu : « Multijoueur » → « Se connecter à une adresse » → IP de cette machine.
+Réglages et sauvegardes : ~/bifrost/factorio/data
+"""

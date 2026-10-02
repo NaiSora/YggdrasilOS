@@ -1,0 +1,10 @@
+Package: yggdrasil-calamares
+Version: @VERSION@
+Architecture: all
+Maintainer: Projet Yggdrasil <yggdrasil@localhost>
+Section: admin
+Priority: optional
+Depends: calamares, calamares-settings-debian
+Description: habillage de l'installateur Calamares pour Yggdrasil
+ Logo, diaporama et réglages régionaux (français, Europe/Paris) de
+ l'installateur graphique utilisé depuis la clé USB live d'Yggdrasil.

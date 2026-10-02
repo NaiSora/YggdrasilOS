@@ -1,0 +1,20 @@
+Package: yggdrasil-tools
+Version: @VERSION@
+Architecture: all
+Maintainer: Projet Yggdrasil <yggdrasil@localhost>
+Section: admin
+Priority: optional
+Depends: python3 (>= 3.11), nftables, rsync, util-linux, iproute2, procps, sudo
+Recommends: timeshift, flatpak, libnotify-bin, curl, zstd, git, fastfetch, pciutils, smartmontools, lm-sensors, ieee-data,
+ power-profiles-daemon
+Suggests: docker.io, docker-compose, fail2ban, samba, wsdd2, openssh-server, wireguard-tools, qrencode
+Description: outils système d'Yggdrasil (ygg, mimir, heimdall, norns, bifrost, brokkr, ratatoskr)
+ ygg       : mises à jour, diagnostic, réparation, annulation, nettoyage (Níðhöggr),
+             matériel et pilotes, partage visible depuis Windows, accès à distance
+             (SSH, WireGuard), tâches planifiées, thème, comptes, « royaumes » ;
+ mimir     : assistant IA 100 % local (Ollama) ;
+ heimdall  : pare-feu nftables simple ;
+ norns     : instantanés système et sauvegardes du dossier personnel ;
+ bifrost   : services homelab Docker en une commande ;
+ brokkr    : modèles de projets (bots, plugins Minecraft, API…) ;
+ ratatoskr : notifications de mises à jour et de problèmes.

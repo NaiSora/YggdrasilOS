@@ -1,0 +1,26 @@
+# « Quel voyageur es-tu ? » : chaque profil pré-coche des royaumes au premier démarrage
+# (les royaumes déclarent eux-mêmes leurs voyageurs : champ « voyageurs »).
+
+[[voyageur]]
+id = "joueur"
+nom = "Joueur"
+description = "Steam, Minecraft, manettes : le feu de Muspelheim t'attend."
+icon = "applications-games"
+
+[[voyageur]]
+id = "createur"
+nom = "Créateur"
+description = "Vidéo, dessin, 3D, son, diffusion en direct : la lumière d'Alfheim."
+icon = "applications-graphics"
+
+[[voyageur]]
+id = "developpeur"
+nom = "Développeur"
+description = "Coder, versionner, l'IA locale : la forge de Nidavellir et la prescience de Vanaheim."
+icon = "applications-development"
+
+[[voyageur]]
+id = "gardien"
+nom = "Gardien de serveurs"
+description = "Serveurs, sécurité, sauvetage : les géants de Jötunheim et la citadelle d'Ásgard."
+icon = "network-server"

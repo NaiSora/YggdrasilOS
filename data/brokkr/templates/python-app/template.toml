@@ -1,0 +1,37 @@
+name = "python-app"
+title = "Application Python"
+language = "Python"
+description = """
+Projet Python moderne : pyproject.toml, code dans src/, tests pytest et ruff, empaquetable
+en .deb (brokkr package). Quatre formes : outil en ligne de commande, application graphique
+(Qt), service qui tourne en fond, automatisation planifiée.
+"""
+requires = ["python3"]
+next_steps = """
+cd {{dir}}
+python3 -m venv .venv && . .venv/bin/activate
+pip install -e ".[dev]"
+pytest
+Voir le README pour lancer cette forme ({{variante}}).
+"""
+
+[[variante]]
+id = "cli"
+nom = "Outil en ligne de commande"
+description = "une commande avec ses options (argparse)"
+defaut = true
+
+[[variante]]
+id = "gui"
+nom = "Application graphique"
+description = "une fenêtre Qt (PySide6), avec son lanceur dans le menu"
+
+[[variante]]
+id = "service"
+nom = "Service"
+description = "un programme qui tourne en fond (service systemd de l'utilisateur)"
+
+[[variante]]
+id = "automatisation"
+nom = "Automatisation"
+description = "une tâche lancée à heure fixe (ygg taches) : ici, ranger les Téléchargements"

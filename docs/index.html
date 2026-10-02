@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guide d'Yggdrasil</title>
+<style>
+  :root {
+    --bg: #f6f3ea; --fg: #1d2a24; --muted: #5c6b63; --accent: #9c7128; --card: #fff;
+    --border: #e3ddcf; --code: #efe9da;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #0b1512; --fg: #e8e3d3; --muted: #9fb0a6; --accent: #f2cf73; --card: #12201b;
+            --border: #24372f; --code: #17271f; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); line-height: 1.65;
+         font-family: "Noto Sans", system-ui, sans-serif; }
+  header { text-align: center; padding: 3rem 1rem 2rem; border-bottom: 1px solid var(--border); }
+  header img { width: 120px; height: 120px; }
+  header h1 { margin: .5rem 0 .2rem; letter-spacing: .15em; color: var(--accent); }
+  header p { margin: 0; color: var(--muted); }
+  nav { display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; justify-content: center; padding: 1rem;
+        border-bottom: 1px solid var(--border); position: sticky; top: 0; background: var(--bg); }
+  nav a { color: var(--muted); text-decoration: none; font-size: .95rem; }
+  nav a:hover { color: var(--accent); }
+  main { max-width: 56rem; margin: 0 auto; padding: 1rem 1.25rem 4rem; }
+  h2 { color: var(--accent); margin-top: 3rem; border-bottom: 1px solid var(--border); padding-bottom: .3rem; }
+  code, pre { font-family: "Fira Code", monospace; background: var(--code); border-radius: .3rem; }
+  code { padding: .1rem .35rem; font-size: .92em; }
+  pre { padding: .9rem 1rem; overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+  th, td { text-align: left; padding: .45rem .6rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; }
+  .note { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--accent);
+          padding: .8rem 1rem; border-radius: .4rem; }
+  footer { text-align: center; color: var(--muted); padding: 2rem; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+<header>
+  <img src="logo.svg" alt="">
+  <h1>YGGDRASIL</h1>
+  <p>Le guide de l'arbre-monde — distribution dérivée de Debian 13 « trixie »</p>
+</header>
+<nav>
+  <a href="#debuter">Débuter</a><a href="#ygg">ygg</a><a href="#royaumes">Royaumes</a>
+  <a href="#mimir">Mímir</a><a href="#heimdall">Heimdall</a><a href="#norns">Norns</a>
+  <a href="#bifrost">Bifröst</a><a href="#brokkr">Brokkr</a><a href="#ratatoskr">Ratatoskr</a>
+  <a href="#draupnir">Draupnir</a><a href="#skidbladnir">Skíðblaðnir</a><a href="#installer">Installer</a>
+  <a href="#faq">Questions</a>
+</nav>
+<main>
+
+<section id="debuter">
+<h2>Débuter</h2>
+<p>Yggdrasil, c'est Debian 13 — stable, libre, immense logithèque — avec un bureau KDE Plasma prêt à
+l'emploi en français et une famille d'outils maison. Leur règle commune : <strong>rien d'important ne
+s'exécute sans ta validation</strong>. Chaque outil affiche ce qu'il va faire, puis demande.</p>
+<table>
+  <tr><th>Je veux…</th><th>Commande</th></tr>
+  <tr><td>Tout mettre à jour</td><td><code>ygg update</code></td></tr>
+  <tr><td>Vérifier la santé du système</td><td><code>ygg doctor</code></td></tr>
+  <tr><td>Installer des jeux, des outils de dev…</td><td><code>ygg realm list</code> puis <code>ygg realm add muspelheim</code></td></tr>
+  <tr><td>Chercher un logiciel</td><td><code>ygg search obs</code></td></tr>
+  <tr><td>Discuter avec l'IA locale</td><td><code>mimir install</code> puis <code>mimir chat</code></td></tr>
+  <tr><td>Pouvoir revenir en arrière après une mise à jour</td><td><code>norns setup</code></td></tr>
+  <tr><td>Héberger un serveur Minecraft</td><td><code>ygg realm add jotunheim --seulement docker</code> puis <code>bifrost up minecraft --type paper</code></td></tr>
+  <tr><td>Démarrer un bot Discord</td><td><code>brokkr new discord-bot MonBot</code></td></tr>
+</table>
+<p>Toutes les commandes acceptent <code>--help</code>, <code>-n</code> (simulation : rien n'est modifié) et
+<code>-y</code> (valider automatiquement). La touche Tab complète les commandes et les noms.</p>
+<div class="note">Session live : l'utilisateur est <code>ygg</code> et son mot de passe <code>live</code>.
+Rien n'est conservé à l'extinction : utilise l'icône « Installer Yggdrasil » pour l'installer sur le disque.</div>
+</section>
+
+<section id="ygg">
+<h2>ygg — le gestionnaire système</h2>
+<table>
+  <tr><td><code>ygg info</code></td><td>Résumé de la machine (<code>--json</code> pour les scripts)</td></tr>
+  <tr><td><code>ygg update</code></td><td>Instantané de sécurité, puis paquets Debian et applications Flatpak</td></tr>
+  <tr><td><code>ygg install paquet</code></td><td>Installe un paquet Debian, ou une application Flathub si tu donnes son identifiant (<code>org.gimp.GIMP</code>)</td></tr>
+  <tr><td><code>ygg remove paquet</code></td><td>Désinstalle (<code>--purge</code> pour effacer aussi la configuration)</td></tr>
+  <tr><td><code>ygg search mot</code></td><td>Cherche dans Debian et sur Flathub</td></tr>
+  <tr><td><code>ygg doctor</code></td><td>Disque, mémoire, services en échec, mises à jour de sécurité, pare-feu, instantanés, horloge, températures, journal</td></tr>
+  <tr><td><code>ygg nettoyer</code></td><td>Níðhöggr, le dragon qui ronge les racines mortes : paquets inutiles, caches APT et Flatpak, vieux journaux, anciens noyaux, miniatures. <code>--analyse</code> montre d'abord ce qui serait libéré, <code>--corbeille</code> vide aussi la corbeille</td></tr>
+  <tr><td><code>ygg reparer</code></td><td>Installation interrompue, dépendances cassées, Flatpak ; <code>ygg reparer son</code>, <code>reseau</code>, <code>plasma</code> (<code>--reinitialiser</code> remet le tableau de bord d'origine), <code>grub</code></td></tr>
+  <tr><td><code>ygg annuler</code></td><td>Défait la dernière action notée dans la saga (installation, désinstallation, service activé, partage…) ; <code>--liste</code> montre ce qui peut l'être</td></tr>
+  <tr><td><code>ygg retour</code></td><td>Restaure un instantané système (Norns, Timeshift) quand une annulation ne suffit pas</td></tr>
+  <tr><td><code>ygg materiel</code></td><td>Processeur, mémoire, cartes graphiques, disques et leur santé SMART, températures, usure de la batterie</td></tr>
+  <tr><td><code>ygg pilotes</code></td><td>Ce qui manque à ton matériel (pilote NVIDIA, micrologiciels Wi-Fi, Bluetooth, réseau) ; <code>ygg pilotes installer</code> s'en charge</td></tr>
+  <tr><td><code>ygg energie</code></td><td>Profil <code>performance</code>, <code>equilibre</code> ou <code>economie</code></td></tr>
+  <tr><td><code>ygg demarrage</code></td><td>Durée du démarrage et services les plus lents ; <code>ygg demarrage delai 3</code> règle l'attente du menu GRUB</td></tr>
+  <tr><td><code>ygg noyaux</code></td><td>Noyaux installés ; <code>ygg noyaux nettoyer</code> retire les anciens (jamais celui en cours)</td></tr>
+  <tr><td><code>ygg partage ajouter ~/Public</code></td><td>Partage un dossier sur le réseau local : il apparaît dans « Réseau » sous Windows (Samba + wsdd2), avec mot de passe ; <code>--ecriture</code> pour autoriser les modifications</td></tr>
+  <tr><td><code>ygg distance</code></td><td>Accès à distance : <code>ssh activer</code> (réseau local, <code>--cles-seulement</code>), ou un tunnel <code>wireguard init</code> puis <code>wireguard client telephone</code> (QR code à scanner)</td></tr>
+  <tr><td><code>ygg taches</code></td><td>Tâches planifiées : <code>ygg taches ajouter sauvegarde "norns backup" --quand 21:00</code> (ou <code>quotidien</code>, <code>hebdomadaire</code>…)</td></tr>
+  <tr><td><code>ygg theme</code></td><td><code>nuit</code>, <code>aube</code> (clair), ou <code>auto</code> : parchemin le jour, bleu nuit le soir</td></tr>
+  <tr><td><code>ygg comptes</code></td><td>Comptes de la machine : <code>ajouter</code>, <code>admin NOM oui|non</code>, <code>retirer</code> (le dernier administrateur est protégé)</td></tr>
+  <tr><td><code>ygg miroir</code></td><td>Mesure les miroirs Debian et indique le plus rapide d'ici (<code>--appliquer</code> pour l'adopter)</td></tr>
+  <tr><td><code>ygg rapport</code></td><td>Rapport anonymisé (sans adresses, noms ni identifiants) à joindre à une demande d'aide</td></tr>
+  <tr><td><code>ygg saga</code></td><td>Tout ce que les outils d'Yggdrasil ont fait sur cette machine, et quand</td></tr>
+  <tr><td><code>ygg services</code></td><td>Liste les services actifs ; <code>ygg services restart nom</code>…</td></tr>
+</table>
+<p><code>ygg</code> seul, dans un terminal, ouvre un menu des gestes courants.
+Raccourcis : <code>ygg ai</code> = mimir, <code>ygg fw</code> = heimdall, <code>ygg snap</code> = norns,
+<code>ygg stack</code> = bifrost, <code>ygg new</code> = brokkr, <code>ygg notify</code> = ratatoskr.
+Les commandes ont aussi leur nom anglais (<code>repair</code>, <code>undo</code>, <code>share</code>, <code>remote</code>…).</p>
+</section>
+
+<section id="royaumes">
+<h2>Les neuf mondes</h2>
+<p>Les royaumes sont les neuf mondes de l'arbre, chacun avec sa rune. Chaque monde est un ensemble de
+logiciels <strong>à la carte</strong> : <code>ygg realm show nom</code> montre ce qui est coché par défaut (●)
+et ce qui est en option (○) ; un royaume configure aussi la machine quand il le faut (clé SSH, groupes,
+bibliothèques 32 bits). <code>ygg realm remove nom</code> ne retire que ce que le royaume avait lui-même ajouté.</p>
+<table>
+  <tr><th></th><th>Monde</th><th>Domaine</th><th>Contenu</th></tr>
+  <tr><td>ᛉ</td><td><code>asgard</code> — la Citadelle</td><td>Sécurité et vie privée</td><td>KeePassXC, OpenSnitch, Tor Browser, ClamAV, Flatseal ; en option Kleopatra, Wireshark et nmap</td></tr>
+  <tr><td>ᛗ</td><td><code>midgard</code> — le Quotidien</td><td>Bureautique, messageries, musique</td><td>LibreOffice, Thunderbird, Obsidian, Discord, Signal, Spotify, VLC ; en option Flameshot</td></tr>
+  <tr><td>ᚲ</td><td><code>nidavellir</code> — la Forge des nains</td><td>Développement</td><td>VSCodium, git et GitHub CLI, Python, Java 25 et Maven, Node.js, compilateurs ; ta clé SSH et ton identité git ; en option Android Studio, DBeaver</td></tr>
+  <tr><td>ᛈ</td><td><code>muspelheim</code> — le Feu</td><td>Jeu vidéo</td><td>Steam, Prism Launcher (Minecraft), Lutris, Heroic, ProtonUp-Qt, GameMode et MangoHud, manettes ; bibliothèques 32 bits</td></tr>
+  <tr><td>ᛊ</td><td><code>alfheim</code> — la Lumière</td><td>Création et streaming</td><td>OBS Studio, Kdenlive, GIMP, Krita, Inkscape, Blender, Audacity, Parabolic (yt-dlp)</td></tr>
+  <tr><td>ᚨ</td><td><code>vanaheim</code> — la Prescience</td><td>IA locale</td><td>Ollama et le modèle de Mímir, Alpaca, Jupyter, Buzz (Whisper) ; en option Speech Note</td></tr>
+  <tr><td>ᚦ</td><td><code>jotunheim</code> — les Géants</td><td>Serveurs</td><td>Docker (groupe docker), Cockpit, serveur SSH (réseau local), btop ; en option WireGuard</td></tr>
+  <tr><td>ᛁ</td><td><code>niflheim</code> — la Brume</td><td>Mondes isolés</td><td>Machines virtuelles (QEMU/KVM), Distrobox, Bottles (applications Windows)</td></tr>
+  <tr><td>ᛇ</td><td><code>helheim</code> — le Royaume des morts</td><td>Récupération</td><td>TestDisk et PhotoRec, ddrescue, GParted, smartmontools ; en option Clonezilla</td></tr>
+</table>
+<table>
+  <tr><td><code>ygg realm add muspelheim --sans heroic,lutris</code></td><td>sans certains logiciels (<code>--avec</code> pour ajouter une option, <code>--seulement</code>, ou <code>--choisir</code> pour cocher un par un)</td></tr>
+  <tr><td><code>ygg realm voyageur</code></td><td>« Quel voyageur es-tu ? » : joueur, créateur, développeur, gardien de serveurs → les mondes qui te correspondent</td></tr>
+  <tr><td><code>ygg realm arbre</code></td><td>l'arbre vivant : chaque monde installé allume une feuille d'or (et sa rune) sur ton fond d'écran ; <code>non</code> pour garder un fond fixe</td></tr>
+  <tr><td><code>ygg realm creer atelier</code></td><td>un royaume fait de ce que tu as installé toi-même, à partager avec <code>ygg realm exporter atelier -o atelier.toml</code> et <code>ygg realm importer</code></td></tr>
+</table>
+<p>À la première session d'un système installé, l'assistant <strong>« Bienvenue, voyageur »</strong> pose ces
+questions en cinq étapes (prénom, voyageur, mondes, gardiens), puis plante l'arbre dans un terminal visible.
+On le relance avec <code>yggdrasil-welcome --accueil</code>.</p>
+</section>
+
+<section id="mimir">
+<h2>Mímir — l'oracle qui reste chez toi</h2>
+<p>Dans le mythe, Mímir garde le puits de la sagesse sous une racine de l'arbre-monde ; Odin y donna un
+œil pour boire. Ici, il te répond d'abord par une phrase d'oracle, puis avec exactitude. Il utilise
+<a href="https://ollama.com">Ollama</a> : le modèle tourne sur ta machine, aucune donnée ne part en ligne.
+<code>mimir install</code> installe Ollama et choisit un modèle adapté à ta mémoire vive
+(qwen3 8B à partir de 16 Go, 4B à partir de 8 Go, 1.7B sinon).</p>
+<pre>mimir chat                         # consulter le puits (Meta+M ; /aide pour les commandes)
+mimir ask "comment monter un disque NTFS ?"
+journalctl -b -p err | mimir ask "explique ces erreurs"
+mimir pourquoi                     # la dernière commande qui a échoué dans ton terminal, expliquée
+mimir runes                        # les erreurs du jour dans les journaux du système
+mimir presage                      # l'état réel de ta machine en une phrase (aussi au 1er terminal du jour)
+mimir guide "mon wifi se coupe"    # résolution pas à pas, chaque commande validée par toi
+mimir selection                    # explique le texte sélectionné à l'écran (Meta+Alt+M)
+mimir explain "find . -name '*.log' -mtime +7 -delete"
+mimir suggest "trouver les 10 plus gros fichiers de mon dossier"
+mimir profil --prenom Astrid       # ce que Mímir sait de toi : lisible, modifiable, effaçable
+mimir puits remplir --coffre ~/Documents/Obsidian   # ce qu'il peut consulter (et citer)</pre>
+<p><strong>Trois tons</strong> : <code>oracle</code> (par défaut), <code>skalde</code> (franchement poétique)
+et <code>sobre</code> (rien que les faits) — <code>mimir --ton sobre</code>, ou <code>ton = "sobre"</code> dans
+la section <code>[mimir]</code> de <code>~/.config/yggdrasil/config.toml</code>. Les autres outils ont aussi
+leur voix (Heimdall le guetteur, les Nornes, Ratatoskr l'écureuil, Brokkr le forgeron) ; <code>ton = "sobre"</code>
+dans <code>[general]</code> coupe tout le décor.</p>
+<p><strong>Le programme décide, pas le modèle.</strong> Avant d'exécuter une commande proposée, Mímir évalue
+son risque : une commande destructrice (formatage, <code>rm -rf /</code>, script téléchargé puis exécuté…)
+exige que tu tapes « je comprends le risque ». Les journaux, sorties de commandes, extraits du puits et
+notes du profil sont transmis au modèle comme des <em>données</em>, jamais comme des consignes. Le puits ne se
+remplit que si tu le demandes (<code>mimir puits vider</code> efface tout). Les conversations sont enregistrées
+en Markdown dans <code>~/Documents/Mimir</code>, que tu peux ouvrir comme coffre Obsidian.</p>
+</section>
+
+<section id="heimdall">
+<h2>Heimdall — le pare-feu</h2>
+<p>Actif dès l'installation : tout ce qui entre est bloqué, sauf les réponses à tes propres connexions,
+le ping et la découverte réseau (mDNS).</p>
+<pre>heimdall status
+heimdall ports                       # qui écoute ? est-ce exposé ?
+heimdall allow minecraft --from lan  # réseau local seulement
+heimdall allow 8080/tcp
+heimdall deny minecraft
+heimdall profile server              # ouvre SSH ; « strict » ferme aussi ping et mDNS
+heimdall guard ssh                   # fail2ban contre la force brute
+heimdall log -f                      # voir les connexions refusées
+heimdall zone                        # le réseau du moment : maison ou public
+heimdall zone maison                 # ce Wi-Fi est de confiance
+heimdall fete terraria --heures 3    # LAN party : ports de jeu ouverts au réseau local, puis refermés
+heimdall voisins --scan              # qui est sur mon réseau ? (nom, fabricant)
+heimdall sortant                     # contrôler les connexions sortantes (OpenSnitch)</pre>
+<p><strong>Le pare-feu suit le réseau.</strong> Chez toi (zone <em>maison</em>), tes ouvertures s'appliquent ;
+sur un Wi-Fi inconnu, Heimdall bascule tout seul en zone <em>public</em> : rien n'entre, ni ping, ni découverte.
+Un câble Ethernet inconnu est considéré comme la maison.</p>
+<p><strong>Gjallarhorn</strong>, le cor de Heimdall, fait une ronde toutes les 10 minutes et sonne (par
+Ratatoskr) quand un nouveau service se met à l'écoute, quand quelqu'un s'acharne sur SSH, quand un appareil
+inconnu rejoint le réseau local ou quand un disque annonce une défaillance.</p>
+<p>Heimdall gère sa propre table nftables et ne touche pas aux règles de Docker ou de libvirt. Les ports publiés
+par Docker contournent la chaîne d'entrée : c'est pourquoi Bifröst les lie à <code>127.0.0.1</code> sauf si
+tu choisis de les exposer.</p>
+</section>
+
+<section id="norns">
+<h2>Norns — instantanés et sauvegardes</h2>
+<p>Les Nornes tissent passé, présent et avenir. Deux protections complémentaires :</p>
+<ul>
+  <li><strong>Instantanés système</strong> (Timeshift) : <code>norns setup</code> une fois, puis ils sont
+  automatiques, et <code>ygg update</code> en crée un avant chaque mise à jour. <code>norns restore</code>
+  revient en arrière (depuis la clé live si le système ne démarre plus).</li>
+  <li><strong>Sauvegardes du dossier personnel</strong> : <code>norns backup --to /media/toi/Disque</code>.
+  Chaque sauvegarde est un dossier complet et navigable ; les fichiers inchangés sont partagés (liens
+  durs), donc ne prennent pas de place en plus. <code>norns recover Documents/rapport.odt</code> récupère
+  un fichier à côté de l'original.</li>
+</ul>
+<p>Les trois Nornes ont chacune leur commande :</p>
+<table>
+  <tr><td><code>urd</code></td><td>le passé : la frise de tes sauvegardes ; <code>urd fichier CHEMIN</code> pour les versions
+  d'un fichier, <code>urd systeme</code> pour restaurer un instantané. Dans Dolphin : clic droit → <em>Versions
+  précédentes</em>, la version choisie est remise à côté de l'original.</td></tr>
+  <tr><td><code>verdandi</code></td><td>le présent : instantané, sauvegarde du dossier et copie distante, maintenant</td></tr>
+  <tr><td><code>skuld</code></td><td>l'avenir : <code>skuld sauvegarde quotidien</code>, <code>skuld distant hebdomadaire</code>,
+  <code>skuld verification mensuel</code></td></tr>
+</table>
+<pre>norns disque                          # sauvegarder dès que ce disque est branché (une fois par jour)
+norns distant init sftp:moi@nas:/sauvegardes   # copie chiffrée hors de chez toi (restic)
+norns distant sauvegarder | liste | restaurer Documents
+norns verifier                        # relire des fichiers sauvegardés : la restauration marchera-t-elle ?</pre>
+<p>Le mot de passe de la copie distante est dans <code>~/.config/yggdrasil/norns-distant.motdepasse</code> :
+garde-en une copie ailleurs, sans lui personne ne peut relire la sauvegarde.</p>
+</section>
+
+<section id="bifrost">
+<h2>Bifröst — tes services en une commande</h2>
+<p>Prérequis : <code>ygg realm add jotunheim --seulement docker</code>, puis reconnecte-toi. Rien n'est installé
+d'avance : chaque service arrive avec sa commande, n'écoute que sur ta machine par défaut, et ne s'ouvre au réseau
+local que si tu le demandes.</p>
+<table>
+  <tr><th>Domaine</th><th>Services</th></tr>
+  <tr><td>Serveurs de jeu</td><td><code>minecraft</code> (plusieurs côte à côte), <code>minecraft-proxy</code> (Velocity),
+  <code>playit</code> (jouer avec tes amis sans toucher à ta box), <code>valheim</code>, <code>terraria</code>,
+  <code>factorio</code>, <code>satisfactory</code>, <code>palworld</code>, <code>enshrouded</code>, <code>zomboid</code></td></tr>
+  <tr><td>IA</td><td><code>open-webui</code> (Mímir dans le navigateur), <code>searxng</code> (recherche privée),
+  <code>whisper</code> (sous-titres), <code>comfyui</code> (images)</td></tr>
+  <tr><td>Création</td><td><code>metube</code> (téléchargeur), <code>restreamer</code> (un live, plusieurs plateformes)</td></tr>
+  <tr><td>Développement</td><td><code>code-server</code>, <code>bases</code> (PostgreSQL, Redis, Adminer),
+  <code>lavalink</code> (musique des bots Discord), <code>n8n</code> (automatisations)</td></tr>
+  <tr><td>Partage</td><td><code>fileshare</code> (Syncthing ; <code>--windows</code> le rend visible sous Windows),
+  <code>ntfy</code> (notifications sur ton téléphone)</td></tr>
+  <tr><td>Réseau</td><td><code>portail</code> : <code>https://nom.localhost</code> pour chaque interface web</td></tr>
+</table>
+<p><strong>Minecraft, dans toutes ses saveurs.</strong> Vanilla, Paper, Spigot, Purpur, Folia, Forge, NeoForge, Fabric
+ou Quilt ; ou un modpack Modrinth ou CurseForge. Les mods et plugins viennent de Modrinth, dans la version compatible
+choisie automatiquement. Le monde est sauvegardé chaque jour sans couper le serveur.</p>
+<pre>bifrost up minecraft --nom survie --type fabric --version 1.21.4 --memoire 6G --mods lithium,sodium
+bifrost up minecraft --nom pack --modpack modrinth:cobblemon-fabric
+bifrost up minecraft --nom bedrock --type paper --bedrock --carte    # joueurs Bedrock (Geyser), carte BlueMap
+bifrost commande survie "whitelist add Astrid"
+bifrost mods survie ajouter terralith
+bifrost sauvegarder survie                 # à chaud : save-off, copie, save-on
+bifrost redemarrage survie 04:00           # chaque nuit
+bifrost discord survie https://discord.com/api/webhooks/…   # démarrages, arrivées, plantages
+bifrost up minecraft-proxy --nom hub && bifrost reseau hub survie pack   # une adresse, plusieurs mondes
+bifrost deploy ~/Projets/mon-bot           # héberger un projet Brokkr (relancé s'il plante)
+bifrost logs survie -f   |   bifrost remove survie --purge</pre>
+<p>Chaque service vit dans <code>~/bifrost/nom</code> : <code>compose.yml</code> (modifiable), <code>.env</code>
+(tes réglages, mots de passe générés) et les données.</p>
+</section>
+
+<section id="brokkr">
+<h2>Brokkr — la forge à projets</h2>
+<table>
+  <tr><th>Modèle</th><th>Contenu</th></tr>
+  <tr><td><code>discord-bot</code></td><td>discord.py 2 à modules : modération, niveaux, économie, tickets, musique
+  (Lavalink), annonces Twitch et YouTube, rôles-réactions, concours — choisis-les à la création</td></tr>
+  <tr><td><code>discord-bot-js</code></td><td>la même base en TypeScript (discord.js 14, vitest)</td></tr>
+  <tr><td><code>python-app</code></td><td>outil en ligne de commande, application graphique (Qt), service, automatisation</td></tr>
+  <tr><td><code>site-web</code></td><td>portfolio, blog, application web, documentation</td></tr>
+  <tr><td><code>ia-locale</code></td><td>un assistant à toi, branché sur Ollama (réponses en continu, mémoire)</td></tr>
+  <tr><td><code>qt-app</code></td><td>application de bureau PySide6 + QML, empaquetable en .deb</td></tr>
+  <tr><td><code>jeu</code></td><td>jeu 2D en Python (pygame-ce) ou projet Godot 4</td></tr>
+  <tr><td><code>minecraft-pack</code></td><td>datapack ou resource pack pour Java 1.21.4</td></tr>
+  <tr><td><code>script-bash</code></td><td>un script bash strict, avec options, aide et tests</td></tr>
+</table>
+<pre>brokkr                                  # l'assistant : quelques questions, le projet sur mesure
+brokkr new discord-bot MonBot --modules moderation,niveaux,musique
+brokkr new discord-bot MonBot --idee "un bot qui gère les tickets et les concours"   # Mímir choisit
+brokkr new python-app Outil --variante gui
+brokkr add docker | ci | tests | module tickets
+brokkr deploy                           # Bifröst l'héberge
+brokkr package                          # un .deb (avec lanceur pour les applications Qt)
+brokkr github                           # le dépôt GitHub, avec ta validation
+brokkr save MonModele                   # ton projet devient un modèle</pre>
+</section>
+
+<section id="ratatoskr">
+<h2>Ratatoskr — le messager</h2>
+<p>À l'ouverture de session puis toutes les 6 heures, Ratatoskr rassemble les nouvelles : mises à jour en
+attente, problèmes graves, et les alertes des autres gardiens (Gjallarhorn, les Nornes, Bifröst). Sa notification
+a des boutons — <em>Mettre à jour</em>, <em>Demander à Mímir</em>, <em>Plus tard</em> — et il ne te dérange jamais
+pendant une partie (GameMode), un enregistrement ou un direct (OBS), ni en mode « ne pas déranger » : il repasse
+plus tard. Après l'installation, il envoie un bilan de la machine. Il ne modifie jamais rien.</p>
+<pre>ratatoskr check --print       # ce qu'il dirait maintenant
+ratatoskr telephone ntfy      # prévenir aussi ton téléphone (canal privé ntfy, QR code)
+ratatoskr telephone non
+ratatoskr disable</pre>
+</section>
+
+<section id="corbeaux">
+<h2>Huginn, Muninn et Gleipnir</h2>
+<table>
+  <tr><td><code>huginn</code></td><td>la pensée : tes machines en direct (processeur, mémoire, disque, réseau, chaleur,
+  services) ; <code>huginn moi@serveur</code> en ajoute d'autres par SSH</td></tr>
+  <tr><td><code>muninn</code></td><td>la mémoire : ce qui a changé depuis hier (paquets, services, ports, noyau, disque) ;
+  <code>muninn depuis 2026-09-01</code></td></tr>
+  <tr><td><code>gleipnir</code></td><td>qui a accès à quoi : comptes et pouvoirs (le groupe docker vaut un administrateur),
+  SSH et ses clés, portes ouvertes, dossiers partagés, applications Flatpak aux accès trop larges</td></tr>
+</table>
+</section>
+
+<section id="draupnir">
+<h2>Draupnir — la graine de ta machine</h2>
+<p>L'anneau d'Odin en fait naître huit autres. Draupnir emporte ta machine dans un seul fichier, une
+<em>graine</em>, que tu replantes sur un autre ordinateur ou après une réinstallation :</p>
+<ul>
+  <li>tes royaumes et les logiciels que tu y as choisis, les paquets Debian et les applications Flatpak
+  que tu as ajoutés ;</li>
+  <li>tes réglages Yggdrasil, ceux du bureau (Plasma, Konsole, Dolphin, git), tes royaumes personnels et
+  tes modèles Brokkr ;</li>
+  <li>les règles de Heimdall et la configuration de tes services Bifröst — pas leurs données (un monde
+  Minecraft se sauvegarde avec <code>bifrost sauvegarder</code>).</li>
+</ul>
+<pre>draupnir                              # ce que la graine emporterait
+draupnir graine --chiffrer            # la forger (phrase de passe demandée)
+draupnir lire graine-yggdrasil-2026-10-02.tar.gz.gpg
+draupnir planter graine-yggdrasil-2026-10-02.tar.gz.gpg     # sur la nouvelle machine</pre>
+<p>Sans <code>--chiffrer</code>, les mots de passe restent dehors : ceux des services sont régénérés à la
+plantation. Tes clés SSH n'y entrent qu'avec <code>--chiffrer --secrets</code>. Les fichiers que la graine
+remplacerait sont gardés à côté (<code>.avant-draupnir</code>).</p>
+</section>
+
+<section id="skidbladnir">
+<h2>Skíðblaðnir — Yggdrasil dans la poche</h2>
+<p>Le navire de Freyr se replie dans une poche. Skíðblaðnir écrit Yggdrasil sur une clé USB avec un
+<strong>espace persistant</strong> : ce que tu installes et enregistres reste d'un démarrage à l'autre.</p>
+<pre>skidbladnir                                        # les clés branchées
+skidbladnir ecrire sdb                             # la session live en cours, toute la place en persistance
+skidbladnir ecrire sdb yggdrasil-1.0.0-amd64.iso --persistance 16G --chiffrer</pre>
+<p>Au démarrage sur la clé, choisis <em>« Yggdrasil — clé persistante »</em> (avec <code>--chiffrer</code>,
+la phrase de passe est demandée). Tout ce que contenait la clé est effacé : Skíðblaðnir demande de taper
+son nom avant d'écrire, et refuse de toucher un disque qui n'est pas amovible ou qui porte le système.</p>
+</section>
+
+<section id="installer">
+<h2>Installer, éditions et mises à jour</h2>
+<table>
+  <tr><td><strong>Édition bureau</strong></td><td>Plasma et tout ce qui précède. L'icône <em>Installer Yggdrasil</em>
+  lance Calamares : btrfs par défaut (instantanés immédiats), <em>Chiffrer le système</em> sur la page
+  « Effacer le disque » (LUKS2). La phrase secrète est demandée au démarrage, avec le clavier français :
+  /boot reste à part et en clair, car GRUB ne connaît que le QWERTY. Au menu de démarrage,
+  <em>Installer Yggdrasil (mode texte)</em> lance l'installateur Debian, préréglé en français.</td></tr>
+  <tr><td><strong>Édition serveur</strong></td><td>sans bureau : SSH, Docker pour Bifröst, Heimdall en profil serveur
+  (SSH ouvert, le reste fermé). La console montre l'arbre-monde, le nom et l'adresse de la machine avant la
+  connexion : <code>ssh ygg@adresse</code> depuis un autre ordinateur. Installation par l'installateur Debian
+  en mode texte.</td></tr>
+</table>
+<p><strong>Revenir à un instantané depuis le menu de démarrage.</strong> Sur btrfs, chaque instantané des Nornes
+(<code>norns snap</code>, et ceux de chaque <code>ygg update</code>) apparaît dans le sous-menu
+<em>« Yggdrasil — revenir à un instantané »</em> : tu démarres le système tel qu'il était, pour vérifier.
+Le terminal, <code>norns status</code> et <code>ygg doctor</code> rappellent alors sur quel instantané tu es, et
+<code>norns restore &lt;nom&gt;</code> l'adopte pour de bon ; sinon, un redémarrage normal retrouve le système habituel.
+Le menu lui-même est en français : Yggdrasil complète le catalogue de GRUB, qui laissait ses entrées en anglais.</p>
+<p><strong>Pilotes.</strong> <code>ygg doctor</code> (et la page Santé du Centre, bouton <em>Faire</em>) signale un pilote
+NVIDIA ou un micrologiciel manquant ; <code>ygg pilotes installer</code> s'en charge.</p>
+<p><strong>Mises à jour.</strong> <code>ygg update</code> met à jour Debian et les outils de l'arbre, venus du dépôt APT
+d'Yggdrasil. Ce dépôt est signé : APT refuse tout paquet que la clé d'Yggdrasil
+(<code>/usr/share/keyrings/yggdrasil-archive-keyring.gpg</code>) n'a pas signé.</p>
+</section>
+
+<section id="faq">
+<h2>Questions fréquentes</h2>
+<p><strong>Puis-je utiliser apt directement ?</strong> Bien sûr : Yggdrasil est une Debian. Les outils
+ne font qu'automatiser et sécuriser ce que tu ferais à la main.</p>
+<p><strong>Le démarrage sécurisé (Secure Boot) fonctionne-t-il ?</strong> Oui : Yggdrasil utilise le chargeur
+signé de Debian (l'entrée de démarrage UEFI s'appelle donc « debian »).</p>
+<p><strong>Où sont les réglages ?</strong> <code>/etc/yggdrasil/yggdrasil.toml</code> pour la machine,
+<code>~/.config/yggdrasil/config.toml</code> pour toi.</p>
+<p><strong>Comment revenir au bash Debian d'origine ?</strong> Supprime la première ligne de
+<code>~/.bash_aliases</code>.</p>
+</section>
+</main>
+<footer>Yggdrasil — l'arbre qui relie tes mondes. Construit sur Debian GNU/Linux.</footer>
+</body>
+</html>

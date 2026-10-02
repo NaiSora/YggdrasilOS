@@ -1,0 +1,22 @@
+# code-server — déployé par bifrost (Yggdrasil)
+services:
+  code-server:
+    image: lscr.io/linuxserver/code-server:latest
+    container_name: code-server
+    ports:
+      - "${BIND_ADDR}:${PORT}:8443"
+    environment:
+      PUID: "${PUID}"
+      PGID: "${PGID}"
+      TZ: "${TZ}"
+      PASSWORD: "${PASSWORD}"
+      DEFAULT_WORKSPACE: "/config/workspace"
+    volumes:
+      - ./config:/config
+      - "${PROJETS}:/config/workspace"
+    restart: unless-stopped
+
+networks:
+  default:
+    name: bifrost
+    external: true

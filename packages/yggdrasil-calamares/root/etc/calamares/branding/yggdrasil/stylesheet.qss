@@ -1,0 +1,106 @@
+/* Yggdrasil : l'installateur aux couleurs du logo (nuit, or, sauge, parchemin).
+   Calamares lit ce fichier dans le dossier de l'habillage (branding). */
+
+QWidget {
+    background-color: #0F2742;
+    color: #F2EAD7;
+}
+
+/* La colonne des étapes garde le bleu nuit de branding.desc */
+#sidebarApp, #sidebarApp QWidget, #sidebarMenuApp, #logoApp {
+    background-color: #091C30;
+}
+
+QLabel, QCheckBox, QRadioButton, QGroupBox {
+    background-color: transparent;
+    color: #F2EAD7;
+}
+
+QGroupBox {
+    border: 1px solid #2A4560;
+    border-radius: 6px;
+    margin-top: 12px;
+    padding-top: 6px;
+}
+
+QGroupBox::title {
+    color: #E8CC8C;
+    subcontrol-origin: margin;
+    left: 10px;
+}
+
+QPushButton {
+    background-color: #173656;
+    color: #F2EAD7;
+    border: 1px solid #5B8B7B;
+    border-radius: 5px;
+    padding: 5px 16px;
+}
+
+QPushButton:hover, QPushButton:focus {
+    border-color: #E8CC8C;
+}
+
+QPushButton:pressed {
+    background-color: #5B8B7B;
+}
+
+QPushButton:disabled {
+    color: #6B7F8E;
+    border-color: #2A4560;
+}
+
+QLineEdit, QComboBox, QSpinBox, QTextEdit, QPlainTextEdit,
+QListView, QTreeView, QTableView, QListWidget, QTreeWidget {
+    background-color: #0B2036;
+    color: #F2EAD7;
+    border: 1px solid #2A4560;
+    border-radius: 4px;
+    selection-background-color: #5B8B7B;
+    selection-color: #FBF7EE;
+}
+
+QLineEdit:focus, QComboBox:focus {
+    border-color: #E8CC8C;
+}
+
+QComboBox QAbstractItemView {
+    background-color: #0B2036;
+    color: #F2EAD7;
+    selection-background-color: #5B8B7B;
+}
+
+QHeaderView::section {
+    background-color: #173656;
+    color: #E8CC8C;
+    border: none;
+    padding: 4px;
+}
+
+QProgressBar {
+    background-color: #0B2036;
+    color: #F2EAD7;
+    border: 1px solid #2A4560;
+    border-radius: 4px;
+    text-align: center;
+}
+
+QProgressBar::chunk {
+    background-color: #E8CC8C;
+    border-radius: 3px;
+}
+
+QToolTip {
+    background-color: #0F2742;
+    color: #F2EAD7;
+    border: 1px solid #5B8B7B;
+}
+
+QScrollBar:vertical, QScrollBar:horizontal {
+    background-color: #0B2036;
+}
+
+QScrollBar::handle {
+    background-color: #2A4560;
+    border-radius: 4px;
+}

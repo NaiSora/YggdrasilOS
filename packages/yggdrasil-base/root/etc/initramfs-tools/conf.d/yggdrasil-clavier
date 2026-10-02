@@ -1,0 +1,3 @@
+# Yggdrasil : la disposition du clavier de la machine (française par défaut) dès
+# l'initramfs, pour taper la phrase secrète d'un disque chiffré avec les bonnes touches.
+KEYMAP=y

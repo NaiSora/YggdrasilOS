@@ -1,0 +1,49 @@
+#!/bin/sh
+# Réglages système d'Yggdrasil appliqués dans l'image.
+set -e
+
+echo "I: Yggdrasil — identité du système (/etc/os-release)"
+# live-build remplace /etc/os-release par une copie de celui de Debian (au bootstrap)
+# et la laisse en place : on rétablit le lien standard vers /usr/lib/os-release,
+# qui est celui d'Yggdrasil (paquet yggdrasil-base).
+if grep -q '^ID=yggdrasil' /usr/lib/os-release; then
+    rm -f /etc/os-release /etc/os-release.debootstrap
+    ln -s ../usr/lib/os-release /etc/os-release
+fi
+
+echo "I: Yggdrasil — langue française par défaut"
+sed -i 's/^# *\(fr_FR.UTF-8 UTF-8\)/\1/' /etc/locale.gen
+sed -i 's/^# *\(en_US.UTF-8 UTF-8\)/\1/' /etc/locale.gen
+locale-gen
+update-locale LANG=fr_FR.UTF-8
+
+echo "I: Yggdrasil — mémoire compressée (zram, zstd, 50 % de la RAM)"
+if [ -f /etc/default/zramswap ]; then
+    sed -i -e 's/^#\{0,1\} *ALGO=.*/ALGO=zstd/' -e 's/^#\{0,1\} *PERCENT=.*/PERCENT=50/' /etc/default/zramswap
+fi
+
+echo "I: Yggdrasil — Flathub"
+if command -v flatpak >/dev/null 2>&1; then
+    flatpak remote-add --system --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo \
+        || echo "W: Flathub injoignable : il sera ajouté au premier « ygg realm add »."
+fi
+
+echo "I: Yggdrasil — bureau"
+# Le Centre Yggdrasil accueille l'utilisateur : pas de second assistant de bienvenue.
+if dpkg-query -W -f '${Status}' plasma-welcome 2>/dev/null | grep -q installed; then
+    apt-get purge -y plasma-welcome
+fi
+
+echo "I: Yggdrasil — services"
+systemctl enable heimdall.service ratatoskr-refresh.service gjallarhorn.timer yggdrasil-instantanes-grub.timer || true
+systemctl --global enable ratatoskr.timer muninn.timer || true
+
+echo "I: Yggdrasil — thème de démarrage"
+if [ -x /usr/sbin/plymouth-set-default-theme ]; then
+    plymouth-set-default-theme yggdrasil
+    # Le thème est copié dans l'initramfs : on le régénère.
+    update-initramfs -u -k all
+fi
+
+# Le cache Python sera reconstruit à la demande.
+find /usr/lib/python3/dist-packages/yggdrasil -name __pycache__ -type d -prune -exec rm -rf {} + || true

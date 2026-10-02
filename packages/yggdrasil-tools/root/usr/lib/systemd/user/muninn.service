@@ -1,0 +1,8 @@
+[Unit]
+Description=Muninn garde le souvenir du jour
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/muninn noter
+Nice=15
+IOSchedulingClass=idle

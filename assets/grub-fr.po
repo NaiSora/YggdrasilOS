@@ -1,0 +1,159 @@
+# Traductions françaises des scripts de /etc/grub.d et de grub-mkconfig, que le catalogue
+# français de GRUB 2.12 (paquet grub-common) laisse en anglais : le menu affichait
+# « Advanced options for Yggdrasil GNU/Linux ». scripts/catalogue-grub.py les ajoute au
+# catalogue d'origine pour former /usr/share/locale/fr_FR/LC_MESSAGES/grub.mo (yggdrasil-base).
+#
+# Les msgid sont ceux que reçoit gettext : « \\n » y est un antislash suivi de n, que printf
+# changera en saut de ligne. ./build.sh test vérifie que chacun existe dans les scripts.
+# Reste en anglais « UEFI Firmware Settings », écrit en dur dans 30_uefi-firmware.
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+
+# 10_linux : le menu
+msgid "%s, with Linux %s"
+msgstr "%s, avec Linux %s"
+
+msgid "%s, with Linux %s (%s)"
+msgstr "%s, avec Linux %s (%s)"
+
+# Valeur par défaut de GRUB_RECOVERY_TITLE (grub-mkconfig), passée à gettext par 10_linux
+msgid "recovery mode"
+msgstr "mode de dépannage"
+
+msgid "Advanced options for %s"
+msgstr "Options avancées pour %s"
+
+msgid "Loading Linux %s ..."
+msgstr "Chargement de Linux %s..."
+
+msgid "Loading initial ramdisk ..."
+msgstr "Chargement du disque mémoire initial..."
+
+# 10_linux : messages de update-grub
+msgid "Found linux image: %s\\n"
+msgstr "Noyau Linux trouvé : %s\\n"
+
+msgid "Found initrd image: %s\\n"
+msgstr "Image initrd trouvée : %s\\n"
+
+msgid "Please don't use old title `%s' for GRUB_DEFAULT, use `%s' (for versions before 2.00) or `%s' (for 2.00 or later)"
+msgstr "N'utilisez plus l'ancien titre « %s » pour GRUB_DEFAULT, mais « %s » (versions antérieures à 2.00) ou « %s » (2.00 et suivantes)"
+
+# 20_linux_xen
+msgid "%s, with Xen %s and Linux %s"
+msgstr "%s, avec Xen %s et Linux %s"
+
+msgid "%s, with Xen %s and Linux %s (%s)"
+msgstr "%s, avec Xen %s et Linux %s (%s)"
+
+msgid "%s, with Xen hypervisor"
+msgstr "%s, avec l'hyperviseur Xen"
+
+msgid "Advanced options for %s (with Xen hypervisor)"
+msgstr "Options avancées pour %s (avec l'hyperviseur Xen)"
+
+msgid "Xen hypervisor, version %s"
+msgstr "Hyperviseur Xen, version %s"
+
+msgid "Loading Xen %s ..."
+msgstr "Chargement de Xen %s..."
+
+msgid "Loading XSM policy ..."
+msgstr "Chargement de la politique XSM..."
+
+msgid "%s (XSM enabled)"
+msgstr "%s (XSM activé)"
+
+# 30_os-prober : les autres systèmes (Windows…) au menu
+msgid "(on %s)"
+msgstr "(sur %s)"
+
+msgid "(32-bit)"
+msgstr "(32 bits)"
+
+msgid "(64-bit)"
+msgstr "(64 bits)"
+
+msgid "Found %s on %s\\n"
+msgstr "%s trouvé sur %s\\n"
+
+msgid "%s is not yet supported by grub-mkconfig.\\n"
+msgstr "%s n'est pas encore pris en charge par grub-mkconfig.\\n"
+
+msgid "os-prober will not be executed to detect other bootable partitions.\\nSystems on them will not be added to the GRUB boot configuration.\\nCheck GRUB_DISABLE_OS_PROBER documentation entry."
+msgstr "os-prober ne cherchera pas d'autres partitions amorçables.\\nLes systèmes qu'elles portent n'apparaîtront pas au menu de GRUB.\\nVoir GRUB_DISABLE_OS_PROBER dans la documentation."
+
+msgid "os-prober will be executed to detect other bootable partitions.\\nIts output will be used to detect bootable binaries on them and create new boot entries."
+msgstr "os-prober va chercher d'autres partitions amorçables.\\nChaque système trouvé aura son entrée au menu de démarrage."
+
+# 30_uefi-firmware
+msgid "Adding boot menu entry for UEFI Firmware Settings ...\\n"
+msgstr "Ajout de l'entrée des réglages du micrologiciel UEFI...\\n"
+
+# 00_header
+msgid "Found theme: %s\\n"
+msgstr "Thème trouvé : %s\\n"
+
+msgid "Found background: %s\\n"
+msgstr "Fond d'écran trouvé : %s\\n"
+
+msgid "Unsupported image format"
+msgstr "Format d'image non pris en charge"
+
+msgid "Requested serial terminal but GRUB_SERIAL_COMMAND is unspecified. Default parameters will be used."
+msgstr "Terminal série demandé, mais GRUB_SERIAL_COMMAND n'est pas défini : les réglages par défaut seront utilisés."
+
+msgid "Setting GRUB_TIMEOUT to a non-zero value when GRUB_HIDDEN_TIMEOUT is set is no longer supported."
+msgstr "Une valeur non nulle de GRUB_TIMEOUT n'est plus prise en charge quand GRUB_HIDDEN_TIMEOUT est défini."
+
+# grub-mkconfig (update-grub) et grub-mkconfig_lib
+msgid "Generating grub configuration file ..."
+msgstr "Création du fichier de configuration de GRUB..."
+
+msgid "done"
+msgstr "fait"
+
+msgid "Warning:"
+msgstr "Attention :"
+
+msgid "%s: Not found.\\n"
+msgstr "%s : introuvable.\\n"
+
+msgid "%s: You must run this as root\\n"
+msgstr "%s : à lancer en tant que root\\n"
+
+msgid "%s: option requires an argument -- `%s'\\n"
+msgstr "%s : l'option « %s » demande un argument\\n"
+
+msgid "Unrecognized option `%s'\\n"
+msgstr "Option inconnue : « %s »\\n"
+
+msgid "Usage: %s [OPTION]\\n"
+msgstr "Usage : %s [OPTION]\\n"
+
+msgid "Generate a grub config file"
+msgstr "Crée le fichier de configuration de GRUB"
+
+msgid "output generated config to FILE [default=stdout]"
+msgstr "écrit la configuration dans FICHIER [par défaut : la sortie standard]"
+
+msgid "print this message and exit"
+msgstr "affiche ce message et quitte"
+
+msgid "print the version information and exit"
+msgstr "affiche la version et quitte"
+
+msgid "Report bugs to <bug-grub@gnu.org>."
+msgstr "Signalez les bogues à <bug-grub@gnu.org>."
+
+msgid ""
+"Syntax errors are detected in generated GRUB config file.\n"
+"Ensure that there are no errors in /etc/default/grub\n"
+"and /etc/grub.d/* files or please file a bug report with\n"
+"%s file attached."
+msgstr ""
+"Le fichier de configuration de GRUB créé contient des erreurs de syntaxe.\n"
+"Vérifiez /etc/default/grub et les fichiers de /etc/grub.d,\n"
+"ou signalez le bogue en joignant le fichier\n"
+"%s."

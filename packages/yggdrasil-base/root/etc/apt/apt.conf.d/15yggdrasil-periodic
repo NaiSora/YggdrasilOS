@@ -1,0 +1,5 @@
+// Yggdrasil : rafraîchit la liste des paquets chaque jour (pour les notifications
+// de Ratatoskr) et installe automatiquement les mises à jour de sécurité Debian.
+APT::Periodic::Update-Package-Lists "1";
+APT::Periodic::Unattended-Upgrade "1";
+APT::Periodic::AutocleanInterval "7";

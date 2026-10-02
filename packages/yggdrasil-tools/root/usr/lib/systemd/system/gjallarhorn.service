@@ -1,0 +1,12 @@
+[Unit]
+Description=Gjallarhorn, le cor de Heimdall : une ronde de surveillance
+Documentation=file:///usr/share/doc/yggdrasil/index.html
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/heimdall gjallarhorn
+Nice=10
+IOSchedulingClass=idle
+ProtectHome=yes
+PrivateTmp=yes

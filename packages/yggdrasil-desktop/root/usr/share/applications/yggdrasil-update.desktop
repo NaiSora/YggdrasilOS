@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Mettre à jour Yggdrasil
+Comment=Paquets Debian et applications Flatpak, avec instantané de sécurité
+Exec=sh -c "ygg update; echo; echo 'Appuie sur Entrée pour fermer…'; read _"
+Icon=system-software-update
+Terminal=true
+Categories=System;
+Keywords=mise à jour;update;apt;flatpak;

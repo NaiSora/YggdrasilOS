@@ -1,0 +1,21 @@
+Package: yggdrasil-desktop
+Version: @VERSION@
+Architecture: all
+Maintainer: Projet Yggdrasil <yggdrasil@localhost>
+Section: kde
+Priority: optional
+Depends: yggdrasil-base (= @VERSION@), yggdrasil-tools (= @VERSION@),
+ python3-pyside6.qtcore, python3-pyside6.qtgui, python3-pyside6.qtqml, python3-pyside6.qtquick,
+ python3-pyside6.qtwidgets, qml6-module-org-kde-kirigami, qml6-module-qtquick-controls,
+ qml6-module-qtquick-layouts, qml6-module-qtquick-templates, qml6-module-qtquick-window,
+ qml6-module-qtqml-workerscript, qml6-module-qtquick-effects, qt6-svg-plugins, librsvg2-bin,
+ papirus-icon-theme, fonts-noto-core, fonts-jetbrains-mono, fonts-ebgaramond
+Recommends: plasma-desktop, sddm, konsole, breeze, breeze-cursor-theme, libkf6config-bin, qdbus-qt6, wl-clipboard, xclip,
+ qml6-module-org-kde-desktop
+Description: bureau KDE Plasma d'Yggdrasil et Hliðskjálf, le Centre
+ Thème complet du bureau Plasma aux couleurs du logo (nuit, or et sauge) :
+ apparence globale, jeu de couleurs, écran de démarrage de session animé
+ (l'arbre-monde pousse), écran de connexion SDDM, terminal Konsole, icônes
+ Papirus aux dossiers dorés et fonds d'écran. Fournit aussi l'application
+ « Centre Yggdrasil » qui donne accès en un clic aux royaumes, à l'entretien
+ du système, à l'IA locale, au homelab et aux modèles de projets.

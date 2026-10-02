@@ -1,0 +1,20 @@
+name = "playit"
+title = "Jouer avec tes amis (playit.gg)"
+categorie = "jeux"
+description = """
+Tes amis rejoignent ton serveur de jeu depuis chez eux, sans rien régler sur ta box :
+playit.gg relaie la connexion par un tunnel. Gratuit pour un usage personnel.
+"""
+host_network = true
+notes = """
+1. Crée un compte sur https://playit.gg, puis « Add agent » → Docker : copie la clé secrète.
+2. Donne-la ici (SECRET_KEY), puis sur playit.gg ajoute un tunnel « Minecraft Java » vers 127.0.0.1:25565.
+3. Tes amis utilisent l'adresse affichée par playit.gg.
+Alternative sans service tiers : ygg distance wireguard (tes amis rejoignent ton réseau).
+"""
+
+[[env]]
+name = "SECRET_KEY"
+description = "Clé secrète de l'agent playit.gg"
+default = ""
+ask = true

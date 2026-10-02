@@ -1,0 +1,12 @@
+[Unit]
+Description=Yggdrasil : les instantanés btrfs au menu de démarrage
+Documentation=file:///usr/share/doc/yggdrasil/index.html
+ConditionPathExists=/etc/timeshift/timeshift.json
+ConditionPathExists=/etc/grub.d/41_yggdrasil-instantanes
+
+[Service]
+Type=oneshot
+# Seulement en mode btrfs : les instantanés planifiés par Timeshift rejoignent le menu
+ExecCondition=/bin/grep -q "\"btrfs_mode\" *: *\"true\"" /etc/timeshift/timeshift.json
+ExecStart=/usr/sbin/update-grub
+Nice=10

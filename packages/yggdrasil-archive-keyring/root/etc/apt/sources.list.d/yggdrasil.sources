@@ -1,0 +1,9 @@
+# Dépôt d'Yggdrasil : les mises à jour des outils de l'arbre (ygg, mimir, heimdall…).
+# Signé par la clé de /usr/share/keyrings/yggdrasil-archive-keyring.gpg : APT refuse
+# tout paquet que cette clé n'a pas signé.
+Types: deb
+URIs: @DEPOT_URL@
+Suites: trixie
+Components: main
+Signed-By: /usr/share/keyrings/yggdrasil-archive-keyring.gpg
+Enabled: @DEPOT_ACTIF@

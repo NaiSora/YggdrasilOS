@@ -1,0 +1,8 @@
+name = "portail"
+title = "Le portail (HTTPS local)"
+categorie = "reseau"
+description = """
+Une adresse lisible et chiffrée pour chaque interface web : https://metube.localhost,
+https://n8n.localhost… Mis à jour par « bifrost portail ».
+"""
+notes = "Le navigateur demande, la première fois, d'accepter le certificat local de Caddy."

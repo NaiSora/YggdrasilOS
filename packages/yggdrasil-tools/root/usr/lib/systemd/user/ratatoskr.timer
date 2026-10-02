@@ -1,0 +1,14 @@
+[Unit]
+Description=Ratatoskr : premier passage à l'ouverture de session, puis toutes les 6 heures
+
+[Timer]
+# Premier passage peu après l'ouverture de session (le service attend le réseau)
+OnStartupSec=60s
+# Puis toutes les 6 heures. Un passage manqué pendant une veille ou un arrêt
+# est rattrapé au réveil ou au démarrage suivant.
+OnCalendar=*-*-* 00/6:00:00
+Persistent=true
+AccuracySec=30s
+
+[Install]
+WantedBy=timers.target

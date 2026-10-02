@@ -1,0 +1,8 @@
+#!/bin/sh
+# La liste des paquets livrés avec Yggdrasil : « ygg apps » montre ensuite ce que
+# l'utilisateur a ajouté lui-même. Dernier crochet : la liste est complète.
+set -e
+
+echo "I: Yggdrasil — liste des paquets de base"
+mkdir -p /var/lib/yggdrasil
+dpkg-query -W -f '${Package}\n' | sort -u > /var/lib/yggdrasil/paquets-de-base.txt

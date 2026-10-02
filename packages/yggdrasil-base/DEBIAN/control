@@ -1,0 +1,12 @@
+Package: yggdrasil-base
+Version: @VERSION@
+Architecture: all
+Maintainer: Projet Yggdrasil <yggdrasil@localhost>
+Section: misc
+Priority: optional
+Depends: base-files, dpkg (>= 1.19)
+Recommends: plymouth, desktop-base, fastfetch, grub-common
+Description: identité et réglages de base d'Yggdrasil
+ Nom du système (os-release), thèmes de démarrage GRUB et Plymouth, fonds
+ d'écran, bannière de connexion, logo pour fastfetch et réglages du shell
+ d'Yggdrasil, distribution dérivée de Debian.

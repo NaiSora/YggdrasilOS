@@ -1,0 +1,28 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+    configure)
+        # Première installation : Heimdall passe du profil poste de travail (posé par
+        # yggdrasil-tools) au profil serveur (SSH ouvert). Un profil choisi n'est pas touché.
+        if [ -z "$2" ]; then
+            python3 -c 'from yggdrasil import heimdall
+from yggdrasil.common import Runner
+cfg = heimdall.load_config()
+if cfg.profile == "desktop":
+    cfg.profile = "server"
+    heimdall.save_config(cfg, Runner())' || true
+        fi
+        # Le compte qui administre la machine pilote Docker sans sudo (Bifröst)
+        if getent group docker >/dev/null; then
+            for u in $(getent group sudo | cut -d: -f4 | tr ',' ' '); do
+                usermod -aG docker "$u" || true
+            done
+        fi
+        if [ -d /run/systemd/system ]; then
+            systemctl enable --now ssh.service docker.service >/dev/null 2>&1 || true
+        else
+            systemctl enable ssh.service docker.service >/dev/null 2>&1 || true
+        fi
+        ;;
+esac

@@ -1,0 +1,10 @@
+[Unit]
+Description=Bifröst : le serveur Minecraft %i raconte sa vie (Discord, plantages)
+
+[Service]
+ExecStart=/usr/bin/bifrost veille %i
+Restart=always
+RestartSec=30
+
+[Install]
+WantedBy=default.target

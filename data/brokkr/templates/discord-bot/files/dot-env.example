@@ -1,0 +1,25 @@
+# Jeton du bot : https://discord.com/developers/applications → ton application → Bot → Reset Token
+DISCORD_TOKEN=colle-ton-jeton-ici
+
+# Identifiant d'un serveur de test : les commandes slash y apparaissent immédiatement
+# (clic droit sur le serveur → Copier l'identifiant, avec le mode développeur activé)
+DEV_GUILD_ID=
+
+# 1 pour lire le contenu des messages (intent privilégié, à cocher aussi sur le portail)
+MESSAGE_CONTENT=0
+
+LOG_LEVEL=INFO
+DATABASE_PATH=data/{{slug}}.db
+
+# --- Modules (ignorés s'ils ne sont pas installés) ---
+# Tickets : rôle de l'équipe prévenue à chaque ticket
+TICKETS_ROLE_ID=
+# Musique : serveur Lavalink (bifrost up lavalink ; mot de passe dans ~/bifrost/lavalink/.env)
+LAVALINK_URI=http://localhost:2333
+LAVALINK_PASSWORD=
+# Annonces : salon où annoncer, chaînes YouTube (identifiants UC…) et Twitch (pseudos)
+ANNONCES_SALON_ID=
+YOUTUBE_CHAINES=
+TWITCH_CHAINES=
+TWITCH_CLIENT_ID=
+TWITCH_CLIENT_SECRET=

@@ -1,0 +1,6 @@
+#!/bin/sh
+# Bannière de connexion d'Yggdrasil (paquet yggdrasil-base)
+VERSION=""
+[ -r /etc/os-release ] && . /etc/os-release
+printf '\n\033[1;38;5;178m  Yggdrasil\033[0m \033[38;5;71m%s\033[0m\n' "$VERSION"
+printf '\033[2m    ygg info · ygg update · ygg doctor · mimir chat · heimdall status\033[0m\n\n'

@@ -1,0 +1,48 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+    configure)
+        python3 -m compileall -q /usr/lib/python3/dist-packages/yggdrasil >/dev/null 2>&1 || true
+
+        install -d -m 755 /var/lib/yggdrasil /etc/heimdall
+        # Pare-feu actif par défaut (profil poste de travail) à la première installation.
+        if [ ! -e /etc/heimdall/heimdall.json ]; then
+            cat > /etc/heimdall/heimdall.json <<'EOF'
+{
+  "enabled": true,
+  "profile": "desktop",
+  "log_drops": false,
+  "rules": []
+}
+EOF
+            chmod 644 /etc/heimdall/heimdall.json
+        fi
+
+        if command -v deb-systemd-helper >/dev/null 2>&1; then
+            # Comme dh_installsystemd : activé à la première installation, et ensuite
+            # seulement si l'administrateur ne l'a pas désactivé.
+            for unit in heimdall.service ratatoskr-refresh.service gjallarhorn.timer yggdrasil-instantanes-grub.timer; do
+                deb-systemd-helper unmask "$unit" >/dev/null || true
+                if deb-systemd-helper --quiet was-enabled "$unit"; then
+                    deb-systemd-helper enable "$unit" >/dev/null || true
+                else
+                    deb-systemd-helper update-state "$unit" >/dev/null || true
+                fi
+            done
+        fi
+        if command -v systemctl >/dev/null 2>&1; then
+            systemctl --global enable ratatoskr.timer muninn.timer >/dev/null 2>&1 || true
+        fi
+        if [ -d /run/systemd/system ]; then
+            systemctl daemon-reload >/dev/null 2>&1 || true
+            if [ -z "$2" ]; then
+                systemctl start heimdall.service >/dev/null 2>&1 || true
+            else
+                systemctl try-restart heimdall.service >/dev/null 2>&1 || true
+            fi
+        fi
+        ;;
+esac
+
+exit 0

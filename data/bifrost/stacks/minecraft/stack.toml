@@ -1,0 +1,152 @@
+name = "minecraft"
+title = "Serveur Minecraft"
+categorie = "jeux"
+instances = true
+description = """
+Un serveur Minecraft Java dans la saveur de ton choix : Vanilla, Paper, Spigot, Purpur, Forge,
+NeoForge, Fabric ou Quilt, ou un modpack Modrinth ou CurseForge. Mods et plugins depuis Modrinth,
+joueurs Bedrock avec Geyser, carte BlueMap, sauvegardes à chaud chaque jour.
+"""
+ports = ["25565/tcp (Java)", "19132/udp (Bedrock)", "8100/tcp (carte)"]
+lan_default = true
+console = ["docker", "exec", "-it", "<conteneur>", "rcon-cli"]
+web = { conteneur = "mc-<nom>", port = 8100 }
+notes = """
+Connexion : l'adresse IP de cette machine et le port ci-dessus (25565 pour le premier serveur).
+Console : bifrost console <nom>   ou une commande : bifrost commande <nom> "op Pseudo"
+Mods et plugins : bifrost mods <nom> ajouter lithium   (Modrinth, version compatible choisie seule)
+Sauvegardes : chaque jour dans ~/bifrost/<nom>/sauvegardes ; à la demande : bifrost sauvegarder <nom>
+Jouer avec des amis hors de chez toi : bifrost up playit (sans toucher à ta box), ou ygg distance wireguard.
+"""
+
+[eula]
+var = "EULA"
+url = "https://aka.ms/MinecraftEULA"
+text = """
+Pour faire tourner un serveur Minecraft, tu dois accepter le contrat de licence
+utilisateur final (EULA) de Mojang et Microsoft.
+"""
+
+[[env]]
+name = "TYPE"
+option = "type"
+description = "Saveur du serveur"
+default = "PAPER"
+kind = "choice"
+choices = ["VANILLA", "PAPER", "SPIGOT", "PURPUR", "FOLIA", "FORGE", "NEOFORGE", "FABRIC", "QUILT", "MODRINTH", "AUTO_CURSEFORGE"]
+ask = true
+
+[[env]]
+name = "VERSION"
+option = "version"
+description = "Version de Minecraft (LATEST ou un numéro, ex. 1.21.4)"
+default = "LATEST"
+ask = true
+
+[[env]]
+name = "MEMORY"
+option = "memoire"
+description = "Mémoire allouée au serveur"
+default = "4G"
+ask = true
+
+[[env]]
+name = "MOTD"
+option = "motd"
+description = "Message affiché dans la liste des serveurs"
+default = "Un serveur qui pousse sur Yggdrasil"
+
+[[env]]
+name = "DIFFICULTY"
+option = "difficulte"
+description = "Difficulté"
+default = "normal"
+kind = "choice"
+choices = ["peaceful", "easy", "normal", "hard"]
+
+[[env]]
+name = "MODE"
+option = "mode"
+description = "Mode de jeu"
+default = "survival"
+kind = "choice"
+choices = ["survival", "creative", "adventure"]
+
+[[env]]
+name = "MAX_PLAYERS"
+option = "joueurs"
+description = "Nombre de joueurs au plus"
+default = "20"
+
+[[env]]
+name = "PORT"
+option = "port"
+description = "Port des joueurs Java"
+default = "25565"
+kind = "port"
+
+[[env]]
+name = "PORT_BEDROCK"
+description = "Port des joueurs Bedrock (Geyser)"
+default = "19132"
+kind = "port"
+
+[[env]]
+name = "PORT_CARTE"
+description = "Port de la carte BlueMap"
+default = "8100"
+kind = "port"
+
+[[env]]
+name = "MODRINTH_PROJECTS"
+option = "mods"
+description = "Mods et plugins Modrinth (séparés par des virgules)"
+default = ""
+
+[[env]]
+name = "MODRINTH_MODPACK"
+option = "modpack-modrinth"
+description = "Modpack Modrinth"
+default = ""
+
+[[env]]
+name = "CF_SLUG"
+option = "modpack-curseforge"
+description = "Modpack CurseForge"
+default = ""
+
+[[env]]
+name = "CF_API_KEY"
+option = "cle-curseforge"
+description = "Clé d'API CurseForge (modpacks CurseForge seulement)"
+default = ""
+
+[[env]]
+name = "ONLINE_MODE"
+description = "Comptes Microsoft vérifiés (FALSE derrière un proxy Velocity)"
+default = "TRUE"
+
+[[env]]
+name = "RCON_PASSWORD"
+description = "Mot de passe de la console RCON (généré)"
+kind = "secret"
+
+[[env]]
+name = "BACKUP_INTERVAL"
+description = "Fréquence des sauvegardes à chaud"
+default = "24h"
+
+[[env]]
+name = "PRUNE_BACKUPS_DAYS"
+description = "Sauvegardes gardées (jours)"
+default = "7"
+
+[[env]]
+name = "DISCORD_WEBHOOK"
+description = "Annonces Discord (bifrost discord <nom> <webhook>)"
+default = ""
+
+[[env]]
+name = "EULA"
+description = "Acceptation de l'EULA Minecraft"
+default = "FALSE"

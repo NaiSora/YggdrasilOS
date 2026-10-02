@@ -1,0 +1,29 @@
+name = "valheim"
+title = "Serveur Valheim"
+categorie = "jeux"
+description = "Un serveur dédié Valheim : le monde viking reste en ligne même quand tu éteins ton jeu."
+ports = ["2456-2457/udp"]
+lan_default = true
+notes = """
+En jeu : « Rejoindre une partie » → « Ajouter un serveur » → adresse IP de cette machine:2456.
+Mot de passe du serveur : dans ~/bifrost/valheim/.env (SERVER_PASS).
+"""
+
+[[env]]
+name = "SERVER_NAME"
+option = "nom-serveur"
+description = "Nom du serveur"
+default = "Yggdrasil"
+ask = true
+
+[[env]]
+name = "WORLD_NAME"
+option = "monde"
+description = "Nom du monde"
+default = "Midgard"
+ask = true
+
+[[env]]
+name = "SERVER_PASS"
+description = "Mot de passe (5 caractères au moins, généré)"
+kind = "secret"

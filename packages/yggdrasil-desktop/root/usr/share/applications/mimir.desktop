@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Mímir
+GenericName=L'oracle, assistant IA local
+Comment=Consulter une IA qui vit entièrement sur ta machine
+Exec=mimir chat
+Icon=yggdrasil
+Terminal=true
+Categories=Utility;
+Keywords=ia;ai;assistant;ollama;chat;llm;oracle;mimir;
+X-KDE-Shortcuts=Meta+M

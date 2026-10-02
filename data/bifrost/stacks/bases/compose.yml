@@ -1,0 +1,32 @@
+# Bases de données de développement — déployées par bifrost (Yggdrasil)
+services:
+  postgres:
+    image: postgres:17
+    container_name: postgres
+    ports:
+      - "127.0.0.1:5432:5432"
+    environment:
+      POSTGRES_USER: "ygg"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+    restart: unless-stopped
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    ports:
+      - "127.0.0.1:6379:6379"
+    volumes:
+      - ./redis:/data
+    restart: unless-stopped
+  adminer:
+    image: adminer:latest
+    container_name: adminer
+    ports:
+      - "${BIND_ADDR}:${PORT}:8080"
+    restart: unless-stopped
+
+networks:
+  default:
+    name: bifrost
+    external: true

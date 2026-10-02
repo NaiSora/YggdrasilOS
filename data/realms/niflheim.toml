@@ -1,0 +1,39 @@
+name = "niflheim"
+title = "Niflheim"
+surnom = "la Brume"
+theme = "Mondes isolés"
+rune = "ᛁ"
+rune_nom = "Isa"
+rune_sens = "la glace"
+icon = "virtualbox"
+voyageurs = ["developpeur", "gardien"]
+description = """
+Le monde de la brume et de la glace : des mondes enfermés dans le tien. Machines
+virtuelles, autres distributions Linux en conteneur (Distrobox), et applications
+Windows dans des « bouteilles » isolées (Bottles).
+"""
+next_steps = """
+Gestionnaire de machines virtuelles : crée une VM depuis une image ISO.
+« distrobox create --image archlinux » : une Arch Linux à côté de ta Debian.
+Bottles : crée une bouteille « Gaming » ou « Application », puis lance le .exe dedans.
+Applications Android : Waydroid n'est pas dans Debian 13 (voir docs.waydro.id).
+"""
+
+[[logiciels]]
+id = "vm"
+nom = "Machines virtuelles"
+description = "QEMU/KVM et le gestionnaire de machines virtuelles."
+apt = ["virt-manager", "qemu-system-x86", "libvirt-daemon-system"]
+groups = ["libvirt"]
+
+[[logiciels]]
+id = "distrobox"
+nom = "Distrobox"
+description = "D'autres distributions Linux dans des conteneurs (Podman)."
+apt = ["distrobox", "podman"]
+
+[[logiciels]]
+id = "bottles"
+nom = "Bottles"
+description = "Applications Windows dans des bouteilles isolées."
+flatpak = ["com.usebottles.bottles"]

@@ -1,0 +1,15 @@
+name = "discord-bot-js"
+title = "Bot Discord (TypeScript)"
+language = "TypeScript"
+description = """
+Bot discord.js 14 en TypeScript : commandes slash chargées depuis src/commandes, déploiement
+des commandes, tests vitest, Docker. Pour qui préfère l'écosystème JavaScript.
+"""
+requires = ["node", "npm"]
+next_steps = """
+cd {{dir}}
+npm install
+cp .env.example .env    puis colle ton jeton et l'identifiant de l'application
+npm run deployer        (enregistre les commandes slash)
+npm run dev
+"""

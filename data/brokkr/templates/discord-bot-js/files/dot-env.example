@@ -1,0 +1,6 @@
+# https://discord.com/developers/applications → ton application
+DISCORD_TOKEN=colle-ton-jeton-ici
+# « Application ID » (page General Information)
+CLIENT_ID=
+# Serveur de test : les commandes y apparaissent immédiatement
+DEV_GUILD_ID=

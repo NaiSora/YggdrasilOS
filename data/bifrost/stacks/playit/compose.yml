@@ -1,0 +1,10 @@
+# Agent playit.gg — déployé par bifrost (Yggdrasil)
+services:
+  playit:
+    image: ghcr.io/playit-cloud/playit-agent:latest
+    container_name: playit
+    network_mode: host
+    environment:
+      SECRET_KEY: "${SECRET_KEY}"
+    restart: unless-stopped
+

@@ -1,0 +1,20 @@
+name = "metube"
+title = "MeTube (téléchargeur de vidéos)"
+categorie = "creation"
+description = "Colle un lien YouTube (ou d'un millier d'autres sites) : la vidéo ou la musique arrive dans ton dossier."
+url = "http://localhost:${PORT}"
+web = { conteneur = "metube", port = 8081 }
+
+[[env]]
+name = "PORT"
+option = "port"
+description = "Port de l'interface"
+default = "8081"
+kind = "port"
+
+[[env]]
+name = "DOSSIER"
+option = "dossier"
+description = "Où ranger les téléchargements"
+default = "~/Vidéos/MeTube"
+kind = "path"

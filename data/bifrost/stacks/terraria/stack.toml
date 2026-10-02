@@ -1,0 +1,26 @@
+name = "terraria"
+title = "Serveur Terraria"
+categorie = "jeux"
+description = "Un serveur Terraria : le monde est créé au premier lancement, et reste accessible à tes amis."
+ports = ["7777/tcp"]
+lan_default = true
+console = ["docker", "attach", "terraria"]
+notes = """
+En jeu : « Multijoueur » → « Rejoindre par IP » → adresse de cette machine, port 7777.
+Console : bifrost console terraria   (Ctrl+P puis Ctrl+Q pour en sortir sans arrêter le serveur)
+"""
+
+[[env]]
+name = "WORLD"
+option = "monde"
+description = "Nom du monde"
+default = "yggdrasil"
+ask = true
+
+[[env]]
+name = "TAILLE"
+option = "taille"
+description = "Taille du monde à créer (1 petit, 2 moyen, 3 grand)"
+default = "2"
+kind = "choice"
+choices = ["1", "2", "3"]

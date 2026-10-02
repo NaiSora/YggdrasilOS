@@ -1,0 +1,17 @@
+# ComfyUI — déployé par bifrost (Yggdrasil)
+services:
+  comfyui:
+    image: "yanwk/comfyui-boot:${VARIANTE}"
+    container_name: comfyui
+    ports:
+      - "${BIND_ADDR}:${PORT}:8188"
+    environment:
+      CLI_ARGS: ""
+    volumes:
+      - ./donnees:/root
+    restart: unless-stopped
+
+networks:
+  default:
+    name: bifrost
+    external: true

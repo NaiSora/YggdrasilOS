@@ -1,0 +1,5 @@
+[General]
+Name=Yggdrasil
+LogoPath=/usr/share/pixmaps/yggdrasil.png
+Version=@VERSION_SHORT@ « Midgard »
+Variant=basé sur Debian

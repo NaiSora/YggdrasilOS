@@ -1,0 +1,17 @@
+[Desktops]
+Number=4
+Rows=1
+Name_1=Ásgard
+Name_2=Midgard
+Name_3=Vanaheim
+Name_4=Alfheim
+
+[org.kde.kdecoration2]
+library=org.kde.kwin.aurorae
+theme=__aurorae__svg__Yggdrasil
+ButtonsOnLeft=
+ButtonsOnRight=IAX
+BorderSize=Normal
+
+[Plugins]
+blurEnabled=true

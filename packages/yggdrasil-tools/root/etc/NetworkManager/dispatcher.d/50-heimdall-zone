@@ -1,0 +1,10 @@
+#!/bin/sh
+# Heimdall : le pare-feu suit le réseau. Chez toi (zone « maison »), tes ouvertures
+# s'appliquent ; sur un Wi-Fi public inconnu (zone « public »), rien n'entre.
+# NetworkManager lance ce script à chaque changement : on ne regarde que « up ».
+[ "$2" = "up" ] || exit 0
+[ -n "${CONNECTION_UUID:-}" ] || exit 0
+[ -x /usr/bin/heimdall ] || exit 0
+/usr/bin/heimdall zone --auto "$CONNECTION_UUID" --nom "${CONNECTION_ID:-}" --interface "${DEVICE_IFACE:-$1}" \
+    >/dev/null 2>&1 || true
+exit 0

@@ -1,0 +1,21 @@
+# Serveur Enshrouded — déployé par bifrost (Yggdrasil)
+services:
+  enshrouded:
+    image: sknnr/enshrouded-dedicated-server:latest
+    container_name: enshrouded
+    ports:
+      - "${BIND_ADDR}:15636-15637:15636-15637/udp"
+    environment:
+      SERVER_NAME: "${SERVER_NAME}"
+      SERVER_PASSWORD: "${SERVER_PASSWORD}"
+      GAME_PORT: "15636"
+      QUERY_PORT: "15637"
+      SERVER_SLOTS: "16"
+    volumes:
+      - ./savegame:/home/steam/enshrouded/savegame
+    restart: unless-stopped
+
+networks:
+  default:
+    name: bifrost
+    external: true

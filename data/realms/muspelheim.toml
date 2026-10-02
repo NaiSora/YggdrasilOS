@@ -1,0 +1,64 @@
+name = "muspelheim"
+title = "Muspelheim"
+surnom = "le Feu"
+theme = "Jeu vidéo"
+rune = "ᛈ"
+rune_nom = "Perthro"
+rune_sens = "le jeu, la chance"
+icon = "applications-games"
+voyageurs = ["joueur"]
+actions = ["architecture-i386"]
+description = """
+Le royaume du feu : Steam et Proton pour les jeux Windows, Prism Launcher pour
+Minecraft, Lutris et Heroic pour le reste. Le royaume active GameMode et les
+bibliothèques 32 bits dont beaucoup de jeux ont encore besoin.
+"""
+next_steps = """
+Steam : Paramètres → Compatibilité → active Steam Play pour tous les jeux.
+Options de lancement d'un jeu : « gamemoderun mangohud %command% ».
+ProtonUp-Qt installe Proton-GE pour les jeux récalcitrants.
+Pour héberger un serveur Minecraft : « bifrost list ».
+"""
+
+[[logiciels]]
+id = "steam"
+nom = "Steam"
+description = "La grande boutique de jeux ; Proton y fait tourner les jeux Windows."
+flatpak = ["com.valvesoftware.Steam"]
+
+[[logiciels]]
+id = "prism"
+nom = "Prism Launcher"
+description = "Minecraft Java : versions, comptes et mods (Modrinth, CurseForge)."
+flatpak = ["org.prismlauncher.PrismLauncher"]
+
+[[logiciels]]
+id = "lutris"
+nom = "Lutris"
+description = "Jeux d'autres boutiques et émulateurs, réunis."
+flatpak = ["net.lutris.Lutris"]
+
+[[logiciels]]
+id = "heroic"
+nom = "Heroic"
+description = "Epic Games, GOG et Amazon Games."
+flatpak = ["com.heroicgameslauncher.hgl"]
+
+[[logiciels]]
+id = "protonup"
+nom = "ProtonUp-Qt"
+description = "Installe Proton-GE et Wine-GE."
+flatpak = ["net.davidotek.pupgui2"]
+
+[[logiciels]]
+id = "performances"
+nom = "GameMode et MangoHud"
+description = "Le processeur à fond pendant le jeu, et un compteur d'images par seconde."
+apt = ["gamemode", "mangohud"]
+groups = ["gamemode"]
+
+[[logiciels]]
+id = "manettes"
+nom = "Manettes et casques"
+description = "Règles qui donnent accès aux manettes Steam, PlayStation, Xbox et aux casques VR."
+apt = ["steam-devices"]

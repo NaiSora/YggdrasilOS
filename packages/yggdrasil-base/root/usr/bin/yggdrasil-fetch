@@ -1,0 +1,46 @@
+#!/bin/sh
+# yggdrasil-fetch — l'arbre-monde et les informations du système (fastfetch).
+#
+#   yggdrasil-fetch [--grand | --compact | --sans-arbre] [options de fastfetch…]
+#
+# Sans option, la taille de l'arbre suit celle du terminal : le grand arbre
+# quand il tient à côté des informations, le petit sinon, aucun s'il est trop
+# étroit. Lancé à l'ouverture de chaque terminal par /etc/yggdrasil/bashrc.
+set -u
+
+ARBRES=/usr/share/yggdrasil/arbre
+command -v fastfetch >/dev/null 2>&1 || exit 0
+
+taille=auto
+case "${1:-}" in
+    --grand) taille=grand; shift ;;
+    --compact) taille=compact; shift ;;
+    --sans-arbre) taille=aucun; shift ;;
+    -h|--help)
+        sed -n '2,9s/^# \{0,1\}//p' "$0"
+        exit 0
+        ;;
+esac
+
+if [ "$taille" = auto ]; then
+    colonnes=$(tput cols 2>/dev/null || echo 80)
+    lignes=$(tput lines 2>/dev/null || echo 24)
+    if [ "$colonnes" -ge 132 ] && [ "$lignes" -ge 49 ]; then
+        taille=grand
+    elif [ "$colonnes" -ge 86 ] && [ "$lignes" -ge 23 ]; then
+        taille=compact
+    else
+        taille=aucun
+    fi
+fi
+
+# La console texte n'a que 16 couleurs (jaune = or, vert = sauge, jaune vif = étoile)
+if [ "${TERM:-}" = linux ]; then
+    set -- --logo-color-1 33 --logo-color-2 32 --logo-color-3 93 "$@"
+fi
+
+case "$taille" in
+    grand) exec fastfetch --logo "$ARBRES/grand.txt" "$@" ;;
+    compact) exec fastfetch --logo "$ARBRES/compact.txt" "$@" ;;
+    *) exec fastfetch --logo none "$@" ;;
+esac

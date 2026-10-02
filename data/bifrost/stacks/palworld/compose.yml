@@ -1,0 +1,28 @@
+# Serveur Palworld — déployé par bifrost (Yggdrasil)
+services:
+  palworld:
+    image: thijsvanloef/palworld-server-docker:latest
+    container_name: palworld
+    ports:
+      - "${BIND_ADDR}:8211:8211/udp"
+      - "${BIND_ADDR}:27015:27015/udp"
+    environment:
+      PUID: "${PUID}"
+      PGID: "${PGID}"
+      PORT: "8211"
+      PLAYERS: "${PLAYERS}"
+      MULTITHREADING: "true"
+      COMMUNITY: "false"
+      SERVER_NAME: "${SERVER_NAME}"
+      SERVER_PASSWORD: "${SERVER_PASSWORD}"
+      ADMIN_PASSWORD: "${ADMIN_PASSWORD}"
+      TZ: "${TZ}"
+    volumes:
+      - ./palworld:/palworld
+    stop_grace_period: 1m
+    restart: unless-stopped
+
+networks:
+  default:
+    name: bifrost
+    external: true

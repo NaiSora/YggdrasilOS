@@ -1,0 +1,24 @@
+# Serveur Project Zomboid — déployé par bifrost (Yggdrasil)
+services:
+  zomboid:
+    image: renegademaster/zomboid-dedicated-server:latest
+    container_name: zomboid
+    ports:
+      - "${BIND_ADDR}:16261:16261/udp"
+      - "${BIND_ADDR}:16262:16262/udp"
+    environment:
+      ADMIN_USERNAME: "admin"
+      ADMIN_PASSWORD: "${ADMIN_PASSWORD}"
+      SERVER_NAME: "${SERVER_NAME}"
+      MAX_RAM: "${MAX_RAM}"
+      PUBLIC_SERVER: "false"
+      TZ: "${TZ}"
+    volumes:
+      - ./server:/home/steam/ZomboidDedicatedServer
+      - ./data:/home/steam/Zomboid
+    restart: unless-stopped
+
+networks:
+  default:
+    name: bifrost
+    external: true

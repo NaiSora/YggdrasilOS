@@ -1,0 +1,18 @@
+# Restreamer — déployé par bifrost (Yggdrasil)
+services:
+  restreamer:
+    image: datarhei/restreamer:latest
+    container_name: restreamer
+    ports:
+      - "${BIND_ADDR}:${PORT}:8080"
+      - "${BIND_ADDR}:${PORT_RTMP}:1935"
+      - "${BIND_ADDR}:6000:6000/udp"
+    volumes:
+      - ./config:/core/config
+      - ./data:/core/data
+    restart: unless-stopped
+
+networks:
+  default:
+    name: bifrost
+    external: true

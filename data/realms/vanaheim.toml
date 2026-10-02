@@ -1,0 +1,49 @@
+name = "vanaheim"
+title = "Vanaheim"
+surnom = "la Prescience"
+theme = "IA locale"
+rune = "ᚨ"
+rune_nom = "Ansuz"
+rune_sens = "la parole, la sagesse"
+icon = "yggdrasil"
+voyageurs = ["developpeur"]
+description = """
+Le royaume des Vanes, qui voient l'avenir : l'intelligence artificielle, sur ta machine
+et nulle part ailleurs. Ollama et le modèle de Mímir, une fenêtre pour discuter avec tes
+modèles, des carnets Jupyter, et la transcription de l'audio en texte.
+"""
+next_steps = """
+« mimir chat » pour consulter l'oracle ; Super+M l'appelle depuis n'importe où.
+Alpaca utilise le même Ollama : tes modèles y apparaissent directement.
+"""
+
+[[logiciels]]
+id = "mimir"
+nom = "Ollama et le modèle de Mímir"
+description = "Le moteur des modèles d'IA, et le modèle recommandé pour ta machine."
+actions = ["mimir"]
+
+[[logiciels]]
+id = "alpaca"
+nom = "Alpaca"
+description = "Discuter avec tes modèles dans une fenêtre."
+flatpak = ["com.jeffser.Alpaca"]
+
+[[logiciels]]
+id = "jupyter"
+nom = "Jupyter"
+description = "Carnets de calcul Python, avec NumPy, pandas et Matplotlib."
+apt = ["jupyter-notebook", "python3-numpy", "python3-pandas", "python3-matplotlib"]
+
+[[logiciels]]
+id = "buzz"
+nom = "Buzz"
+description = "Transcrire l'audio et la vidéo en texte (Whisper), hors ligne."
+flatpak = ["io.github.chidiwilliams.Buzz"]
+
+[[logiciels]]
+id = "speechnote"
+nom = "Speech Note"
+description = "Dictée vocale et lecture de texte, hors ligne."
+flatpak = ["net.mkiol.SpeechNote"]
+defaut = false

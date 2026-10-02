@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100" height="60" viewBox="0 0 100 60">
+  <!-- Fenêtre active : barre nuit, liseré d'or en haut -->
+  <g id="decoration-topleft">
+    <rect x="0" y="0" width="2" height="34" fill="#0B2036"/>
+    <rect x="0" y="0" width="2" height="1" fill="#E8CC8C" fill-opacity="0.45"/>
+  </g>
+  <g id="decoration-top">
+    <rect x="2" y="0" width="36" height="34" fill="#0B2036"/>
+    <rect x="2" y="0" width="36" height="1" fill="#E8CC8C" fill-opacity="0.45"/>
+  </g>
+  <g id="decoration-topright">
+    <rect x="38" y="0" width="2" height="34" fill="#0B2036"/>
+    <rect x="38" y="0" width="2" height="1" fill="#E8CC8C" fill-opacity="0.45"/>
+  </g>
+  <rect id="decoration-left" x="0" y="34" width="2" height="20" fill="#0B2036"/>
+  <rect id="decoration-center" x="2" y="34" width="36" height="20" fill="#0F2742"/>
+  <rect id="decoration-right" x="38" y="34" width="2" height="20" fill="#0B2036"/>
+  <rect id="decoration-bottomleft" x="0" y="54" width="2" height="2" fill="#0B2036"/>
+  <rect id="decoration-bottom" x="2" y="54" width="36" height="2" fill="#0B2036"/>
+  <rect id="decoration-bottomright" x="38" y="54" width="2" height="2" fill="#0B2036"/>
+
+  <!-- Fenêtre inactive : même nuit, liseré estompé -->
+  <g id="decoration-inactive-topleft">
+    <rect x="50" y="0" width="2" height="34" fill="#0B2036"/>
+    <rect x="50" y="0" width="2" height="1" fill="#E8CC8C" fill-opacity="0.15"/>
+  </g>
+  <g id="decoration-inactive-top">
+    <rect x="52" y="0" width="36" height="34" fill="#0B2036"/>
+    <rect x="52" y="0" width="36" height="1" fill="#E8CC8C" fill-opacity="0.15"/>
+  </g>
+  <g id="decoration-inactive-topright">
+    <rect x="88" y="0" width="2" height="34" fill="#0B2036"/>
+    <rect x="88" y="0" width="2" height="1" fill="#E8CC8C" fill-opacity="0.15"/>
+  </g>
+  <rect id="decoration-inactive-left" x="50" y="34" width="2" height="20" fill="#0B2036"/>
+  <rect id="decoration-inactive-center" x="52" y="34" width="36" height="20" fill="#0F2742"/>
+  <rect id="decoration-inactive-right" x="88" y="34" width="2" height="20" fill="#0B2036"/>
+  <rect id="decoration-inactive-bottomleft" x="50" y="54" width="2" height="2" fill="#0B2036"/>
+  <rect id="decoration-inactive-bottom" x="52" y="54" width="36" height="2" fill="#0B2036"/>
+  <rect id="decoration-inactive-bottomright" x="88" y="54" width="2" height="2" fill="#0B2036"/>
+</svg>

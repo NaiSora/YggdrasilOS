@@ -1,0 +1,17 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = "configure" ]; then
+    # La version 1.0 (bureau XFCE) détournait le fond d'écran de xfdesktop : on
+    # rend le fichier d'origine à son paquet.
+    if dpkg-divert --list /usr/share/backgrounds/xfce/xfce-x.svg | grep -q yggdrasil-desktop; then
+        rm -f /usr/share/backgrounds/xfce/xfce-x.svg
+        dpkg-divert --package yggdrasil-desktop --remove --rename \
+            --divert /usr/share/backgrounds/xfce/xfce-x.svg.xfce /usr/share/backgrounds/xfce/xfce-x.svg >/dev/null
+    fi
+    if command -v gtk-update-icon-cache >/dev/null 2>&1; then
+        gtk-update-icon-cache -q -f /usr/share/icons/Yggdrasil 2>/dev/null || true
+    fi
+fi
+
+exit 0

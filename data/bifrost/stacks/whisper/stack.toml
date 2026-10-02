@@ -1,0 +1,28 @@
+name = "whisper"
+title = "Whisper (sous-titres automatiques)"
+categorie = "ia"
+description = """
+Transcrit l'audio et la vidéo en texte, et produit des sous-titres (SRT, VTT) pour tes vidéos
+et tes lives. Le modèle Whisper tourne sur ta machine.
+"""
+url = "http://localhost:${PORT}/docs"
+web = { conteneur = "whisper", port = 9000 }
+notes = """
+Des sous-titres pour une vidéo : curl -F audio_file=@video.mp4 "http://localhost:9000/asr?output=srt" > video.srt
+Modèles : tiny, base, small (défaut), medium, large-v3 (plus juste, plus lent).
+"""
+
+[[env]]
+name = "PORT"
+option = "port"
+description = "Port du service"
+default = "9000"
+kind = "port"
+
+[[env]]
+name = "ASR_MODEL"
+option = "modele"
+description = "Modèle Whisper"
+default = "small"
+kind = "choice"
+choices = ["tiny", "base", "small", "medium", "large-v3"]

@@ -1,0 +1,29 @@
+name = "comfyui"
+title = "ComfyUI (images générées en local)"
+categorie = "ia"
+description = """
+Générer des images avec Stable Diffusion et ses cousins, par un éditeur de nœuds, sans rien
+envoyer en ligne. Bien plus rapide avec une carte graphique NVIDIA (variante cu126-slim).
+"""
+url = "http://localhost:${PORT}"
+web = { conteneur = "comfyui", port = 8188 }
+notes = """
+Les modèles se rangent dans ~/bifrost/comfyui/donnees/ComfyUI/models (checkpoints, loras…).
+Carte NVIDIA : bifrost up comfyui --variante cu126-slim, puis ajoute à compose.yml la réservation
+de GPU (le paquet nvidia-container-toolkit de NVIDIA est nécessaire).
+"""
+
+[[env]]
+name = "PORT"
+option = "port"
+description = "Port de l'interface"
+default = "8188"
+kind = "port"
+
+[[env]]
+name = "VARIANTE"
+option = "variante"
+description = "Image : cpu (partout) ou cu126-slim (NVIDIA)"
+default = "cpu"
+kind = "choice"
+choices = ["cpu", "cu126-slim"]

@@ -1,0 +1,37 @@
+---
+componentName:   yggdrasil
+welcomeStyleCalamares: false
+welcomeExpandingLogo: true
+windowExpanding: normal
+windowSize: 960px,640px
+windowPlacement: center
+
+strings:
+    productName:         Yggdrasil
+    shortProductName:    Yggdrasil
+    version:             @VERSION_SHORT@
+    shortVersion:        @VERSION_SHORT@
+    versionedName:       Yggdrasil @VERSION_SHORT@ « Midgard »
+    shortVersionedName:  Yggdrasil @VERSION_SHORT@
+    bootloaderEntryName: Yggdrasil
+    productUrl:          https://www.debian.org
+    supportUrl:          https://wiki.debian.org/fr/FrontPage
+    knownIssuesUrl:      https://www.debian.org/releases/trixie/errata
+    releaseNotesUrl:     https://www.debian.org/releases/trixie/releasenotes
+
+sidebar: widget
+navigation: widget
+
+images:
+    productLogo:         "logo.png"
+    productIcon:         "logo.png"
+    productWelcome:      "welcome.png"
+
+slideshow:               "show.qml"
+slideshowAPI: 2
+
+style:
+   SidebarBackground:        "#091C30"
+   SidebarText:              "#9DB3AA"
+   SidebarTextCurrent:       "#E8CC8C"
+   SidebarBackgroundCurrent: "#0F2742"

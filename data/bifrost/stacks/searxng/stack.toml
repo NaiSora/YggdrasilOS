@@ -1,0 +1,21 @@
+name = "searxng"
+title = "SearXNG (recherche privée)"
+categorie = "ia"
+description = """
+Un moteur de recherche qui interroge les autres sans te pister. Mímir peut s'en servir pour
+chercher sur le web : ce qu'il y lit reste une donnée, jamais un ordre.
+"""
+url = "http://localhost:${PORT}"
+web = { conteneur = "searxng", port = 8080 }
+
+[[env]]
+name = "PORT"
+option = "port"
+description = "Port de l'interface"
+default = "8888"
+kind = "port"
+
+[[env]]
+name = "SEARXNG_SECRET"
+description = "Clé secrète (générée)"
+kind = "secret"

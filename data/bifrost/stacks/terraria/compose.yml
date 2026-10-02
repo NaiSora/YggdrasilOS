@@ -1,0 +1,18 @@
+# Serveur Terraria — déployé par bifrost (Yggdrasil)
+services:
+  terraria:
+    image: ryshe/terraria:latest
+    container_name: terraria
+    ports:
+      - "${BIND_ADDR}:7777:7777"
+    command: ["-world", "/root/.local/share/Terraria/Worlds/${WORLD}.wld", "-autocreate", "${TAILLE}"]
+    volumes:
+      - ./mondes:/root/.local/share/Terraria/Worlds
+    tty: true
+    stdin_open: true
+    restart: unless-stopped
+
+networks:
+  default:
+    name: bifrost
+    external: true

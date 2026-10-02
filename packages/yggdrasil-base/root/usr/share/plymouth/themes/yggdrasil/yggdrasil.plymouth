@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=Yggdrasil
+Description=Thème de démarrage d'Yggdrasil : l'arbre-monde s'éveille
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/yggdrasil
+ScriptFile=/usr/share/plymouth/themes/yggdrasil/yggdrasil.script

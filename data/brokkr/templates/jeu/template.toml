@@ -1,0 +1,22 @@
+name = "jeu"
+title = "Jeu 2D"
+language = "Python / Godot"
+description = """
+Un premier jeu 2D : un personnage qui se déplace et ramasse des étoiles. Deux formes :
+Python avec pygame-ce (la logique testée à part), ou un projet Godot 4 (GDScript).
+"""
+next_steps = """
+cd {{dir}}
+Voir le README pour lancer le jeu ({{variante}}).
+"""
+
+[[variante]]
+id = "pygame"
+nom = "Python (pygame-ce)"
+description = "une boucle de jeu, la logique séparée et testée"
+defaut = true
+
+[[variante]]
+id = "godot"
+nom = "Godot 4"
+description = "un projet à ouvrir dans l'éditeur Godot (flatpak org.godotengine.Godot)"

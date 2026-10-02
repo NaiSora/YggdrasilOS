@@ -1,0 +1,18 @@
+# Le portail (Caddy) — déployé par bifrost (Yggdrasil)
+services:
+  portail:
+    image: caddy:2
+    container_name: portail
+    ports:
+      - "127.0.0.1:80:80"
+      - "127.0.0.1:443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./donnees:/data
+      - ./config:/config
+    restart: unless-stopped
+
+networks:
+  default:
+    name: bifrost
+    external: true

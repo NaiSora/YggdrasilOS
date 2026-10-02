@@ -1,0 +1,33 @@
+name = "palworld"
+title = "Serveur Palworld"
+categorie = "jeux"
+description = "Un serveur dédié Palworld pour toi et tes amis."
+ports = ["8211/udp", "27015/udp"]
+lan_default = true
+notes = """
+En jeu : « Rejoindre une partie multijoueur » → IP de cette machine:8211.
+Mots de passe (joueurs et administration) : ~/bifrost/palworld/.env
+"""
+
+[[env]]
+name = "SERVER_NAME"
+option = "nom-serveur"
+description = "Nom du serveur"
+default = "Yggdrasil"
+ask = true
+
+[[env]]
+name = "PLAYERS"
+option = "joueurs"
+description = "Joueurs au plus"
+default = "16"
+
+[[env]]
+name = "SERVER_PASSWORD"
+description = "Mot de passe des joueurs (généré)"
+kind = "secret"
+
+[[env]]
+name = "ADMIN_PASSWORD"
+description = "Mot de passe d'administration (généré)"
+kind = "secret"

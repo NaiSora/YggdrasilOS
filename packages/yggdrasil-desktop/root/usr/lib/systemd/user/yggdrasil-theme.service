@@ -1,0 +1,7 @@
+[Unit]
+Description=Applique le thème Yggdrasil de l'heure (ygg theme auto)
+PartOf=graphical-session.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/ygg theme --appliquer

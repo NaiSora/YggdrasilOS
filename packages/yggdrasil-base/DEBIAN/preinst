@@ -1,0 +1,12 @@
+#!/bin/sh
+set -e
+
+# Yggdrasil remplace l'identité Debian sans écraser le fichier de base-files :
+# l'original est mis de côté par dpkg-divert (/usr/lib/os-release.debian).
+# (Les fichiers de configuration comme /etc/issue ne se détournent pas : voir postinst.)
+if [ "$1" = "install" ] || [ "$1" = "upgrade" ]; then
+    dpkg-divert --package yggdrasil-base --add --rename \
+        --divert /usr/lib/os-release.debian /usr/lib/os-release >/dev/null
+fi
+
+exit 0

@@ -1,0 +1,26 @@
+name = "restreamer"
+title = "Restreamer (multidiffusion)"
+categorie = "creation"
+description = """
+Diffuse depuis OBS une seule fois : Restreamer relaie ton live vers Twitch, YouTube, Kick…
+en même temps.
+"""
+url = "http://localhost:${PORT}"
+web = { conteneur = "restreamer", port = 8080 }
+notes = """
+Dans OBS : Paramètres → Stream → Personnalisé, serveur rtmp://localhost/live, clé donnée par Restreamer.
+Puis, dans Restreamer, ajoute une « Publication » par plateforme.
+"""
+
+[[env]]
+name = "PORT"
+option = "port"
+description = "Port de l'interface"
+default = "8180"
+kind = "port"
+
+[[env]]
+name = "PORT_RTMP"
+description = "Port RTMP (OBS)"
+default = "1935"
+kind = "port"

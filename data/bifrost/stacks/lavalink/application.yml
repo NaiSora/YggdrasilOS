@@ -1,0 +1,19 @@
+# Lavalink pour Yggdrasil (le mot de passe vient de l'environnement)
+server:
+  port: 2333
+  address: 0.0.0.0
+lavalink:
+  plugins:
+    - dependency: "dev.lavalink.youtube:youtube-plugin:1.18.2"
+      snapshot: false
+  server:
+    sources:
+      youtube: false
+      soundcloud: true
+      bandcamp: true
+      twitch: true
+      vimeo: true
+      http: true
+plugins:
+  youtube:
+    enabled: true

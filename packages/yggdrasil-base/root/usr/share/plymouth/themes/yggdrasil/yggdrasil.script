@@ -1,0 +1,119 @@
+# Thème Plymouth d'Yggdrasil : l'arbre-monde pousse (l'anneau se trace, les
+# racines et la ramure grandissent, l'étoile s'allume), puis l'étoile respire
+# jusqu'à la fin du démarrage. Fil de progression doré, invite du mot de passe
+# (disque chiffré) et messages.
+
+Window.SetBackgroundTopColor(0.035, 0.110, 0.188);
+Window.SetBackgroundBottomColor(0.035, 0.110, 0.188);
+
+screen_w = Window.GetWidth();
+screen_h = Window.GetHeight();
+screen_x = Window.GetX();
+screen_y = Window.GetY();
+
+frames = 48;
+i = 0;
+while (i < frames) {
+    frame[i] = Image("arbre-" + i + ".png");
+    i = i + 1;
+}
+size = frame[0].GetWidth();
+
+tree.sprite = Sprite(frame[0]);
+tree.x = screen_x + screen_w / 2 - size / 2;
+tree.y = screen_y + screen_h / 2 - size / 2 - screen_h / 16;
+tree.sprite.SetPosition(tree.x, tree.y, 10);
+
+halo.sprite = Sprite(Image("halo.png"));
+halo.sprite.SetPosition(tree.x, tree.y, 11);
+halo.sprite.SetOpacity(0);
+
+title.image = Image("title.png");
+title.sprite = Sprite(title.image);
+title.y = tree.y + size + 12;
+title.sprite.SetPosition(screen_x + screen_w / 2 - title.image.GetWidth() / 2, title.y, 10);
+title.sprite.SetOpacity(0);
+
+bar.bg_image = Image("progress-bg.png");
+bar.fg_image = Image("progress-fg.png");
+bar.x = screen_x + screen_w / 2 - bar.bg_image.GetWidth() / 2;
+bar.y = title.y + title.image.GetHeight() + 22;
+bar.bg = Sprite(bar.bg_image);
+bar.bg.SetPosition(bar.x, bar.y, 10);
+bar.fg = Sprite();
+bar.fg.SetPosition(bar.x, bar.y, 11);
+
+fun progress_callback(duration, progress) {
+    width = Math.Int(bar.fg_image.GetWidth() * progress);
+    if (width < 1)
+        width = 1;
+    bar.fg.SetImage(bar.fg_image.Scale(width, bar.fg_image.GetHeight()));
+}
+Plymouth.SetBootProgressFunction(progress_callback);
+
+# ~50 rafraîchissements par seconde : une image toutes les deux, puis la respiration
+tick = 0;
+fun refresh_callback() {
+    tick = tick + 1;
+    index = Math.Int(tick / 2);
+    if (index < frames) {
+        tree.sprite.SetImage(frame[index]);
+        if (index > frames * 0.6)
+            title.sprite.SetOpacity((index - frames * 0.6) / (frames * 0.4));
+    }
+    else {
+        title.sprite.SetOpacity(1);
+        halo.sprite.SetOpacity(0.35 - 0.35 * Math.Cos((tick - 2 * frames) / 20));
+    }
+}
+Plymouth.SetRefreshFunction(refresh_callback);
+
+prompt.sprite = Sprite();
+bullets.sprite = Sprite();
+# cryptsetup demande en anglais (« Please unlock disk… ») : un titre français au-dessus
+demande.sprite = Sprite();
+demande.image = Image.Text("Phrase secrète du disque chiffré", 0.91, 0.80, 0.55);
+
+fun display_password_callback(prompt_text, bullet_count) {
+    demande.sprite.SetImage(demande.image);
+    demande.sprite.SetPosition(screen_x + screen_w / 2 - demande.image.GetWidth() / 2, bar.y + 26, 20);
+    demande.sprite.SetOpacity(1);
+    prompt.image = Image.Text(prompt_text, 0.62, 0.70, 0.67);
+    prompt.sprite.SetImage(prompt.image);
+    prompt.sprite.SetPosition(screen_x + screen_w / 2 - prompt.image.GetWidth() / 2, bar.y + 52, 20);
+    stars = "";
+    i = 0;
+    while (i < bullet_count) {
+        stars = stars + "*";
+        i = i + 1;
+    }
+    if (stars == "")
+        stars = " ";
+    bullets.image = Image.Text(stars, 0.91, 0.80, 0.55);
+    bullets.sprite.SetImage(bullets.image);
+    bullets.sprite.SetPosition(screen_x + screen_w / 2 - bullets.image.GetWidth() / 2, bar.y + 80, 20);
+    prompt.sprite.SetOpacity(1);
+    bullets.sprite.SetOpacity(1);
+}
+Plymouth.SetDisplayPasswordFunction(display_password_callback);
+
+fun display_normal_callback() {
+    prompt.sprite.SetOpacity(0);
+    bullets.sprite.SetOpacity(0);
+    demande.sprite.SetOpacity(0);
+}
+Plymouth.SetDisplayNormalFunction(display_normal_callback);
+
+message.sprite = Sprite();
+fun message_callback(text) {
+    message.image = Image.Text(text, 0.62, 0.70, 0.67);
+    message.sprite.SetImage(message.image);
+    message.sprite.SetPosition(screen_x + screen_w / 2 - message.image.GetWidth() / 2, screen_y + screen_h - 60, 20);
+}
+Plymouth.SetMessageFunction(message_callback);
+
+fun quit_callback() {
+    tree.sprite.SetImage(frame[frames - 1]);
+    title.sprite.SetOpacity(1);
+}
+Plymouth.SetQuitFunction(quit_callback);

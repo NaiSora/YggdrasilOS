@@ -1,0 +1,26 @@
+name = "open-webui"
+title = "Open WebUI (Mímir dans le navigateur)"
+categorie = "ia"
+description = """
+Une interface de discussion dans le navigateur, branchée sur les modèles de Mímir (Ollama) :
+historique, documents, plusieurs modèles côte à côte. Rien ne sort de ta machine.
+"""
+url = "http://localhost:${PORT}"
+host_network = true
+heimdall_service = "open-webui"
+notes = """
+Il faut Ollama et un modèle : mimir install (ou ygg realm add vanaheim).
+Le premier compte créé dans Open WebUI en devient l'administrateur.
+"""
+
+[[env]]
+name = "PORT"
+option = "port"
+description = "Port de l'interface"
+default = "3000"
+kind = "port"
+
+[[env]]
+name = "WEBUI_SECRET_KEY"
+description = "Clé de session (générée)"
+kind = "secret"

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Service
+MimeType=all/allfiles;
+Actions=versions;
+
+[Desktop Action versions]
+Name=Versions précédentes
+Icon=view-history
+Exec=norns versions --gui %f

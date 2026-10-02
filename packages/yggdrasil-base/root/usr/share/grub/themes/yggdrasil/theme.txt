@@ -1,0 +1,50 @@
+# Thème GRUB d'Yggdrasil : ciel nuit, l'arbre-monde et son nom en haut,
+# menu au centre (sélection : liseré d'or), aide en bas.
+title-text: ""
+desktop-image: "background.png"
+desktop-color: "#091C30"
+terminal-font: "DejaVu Sans Mono Regular 14"
+terminal-left: "10%"
+terminal-top: "10%"
+terminal-width: "80%"
+terminal-height: "80%"
+
++ boot_menu {
+    left = 32%
+    top = 52%
+    width = 36%
+    height = 30%
+    item_font = "DejaVu Sans Regular 16"
+    item_color = "#9DB3AA"
+    selected_item_font = "DejaVu Sans Bold 16"
+    selected_item_color = "#F2EAD7"
+    selected_item_pixmap_style = "select_*.png"
+    item_height = 40
+    item_padding = 18
+    item_spacing = 6
+    icon_width = 0
+    icon_height = 0
+    item_icon_space = 0
+    scrollbar = false
+}
+
++ label {
+    id = "__timeout__"
+    top = 85%
+    left = 0
+    width = 100%
+    align = "center"
+    color = "#E8CC8C"
+    font = "DejaVu Sans Regular 14"
+    text = "Démarrage automatique dans %d s"
+}
+
++ label {
+    top = 91%
+    left = 0
+    width = 100%
+    align = "center"
+    color = "#5E7A72"
+    font = "DejaVu Sans Regular 12"
+    text = "↑ ↓ choisir    Entrée démarrer    e modifier    c console"
+}

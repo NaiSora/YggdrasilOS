@@ -1,0 +1,67 @@
+name = "discord-bot"
+title = "Bot Discord à modules"
+language = "Python"
+description = """
+Bot discord.py 2.x : commandes slash, modules chargés automatiquement, base SQLite,
+configuration .env, tests et Docker. À la création, choisis tes modules : modération,
+niveaux, économie, tickets, musique, annonces Twitch et YouTube, rôles-réactions, concours.
+"""
+requires = ["python3"]
+next_steps = """
+cd {{dir}}
+python3 -m venv .venv && . .venv/bin/activate
+pip install -r requirements.txt     (et -r requirements-musique.txt avec la musique)
+cp .env.example .env    puis colle ton jeton Discord dedans
+python bot.py
+Hébergé par Bifröst, relancé s'il plante : brokkr deploy
+"""
+
+[[module]]
+id = "moderation"
+nom = "Modération"
+description = "/bannir, /expulser, /exclure, /purger, avertissements gardés en base"
+defaut = true
+mots = ["modér", "ban", "kick", "avertiss", "sanction", "spam"]
+
+[[module]]
+id = "niveaux"
+nom = "Niveaux"
+description = "de l'expérience à chaque message, /niveau et /classement"
+defaut = true
+mots = ["niveau", "xp", "expérience", "classement", "actif"]
+
+[[module]]
+id = "economie"
+nom = "Économie"
+description = "une monnaie : /solde, /quotidien, /payer, /fortunes"
+mots = ["économie", "economie", "monnaie", "argent", "pièce", "banque", "coins"]
+
+[[module]]
+id = "tickets"
+nom = "Tickets"
+description = "/ticket ouvre un fil privé avec l'équipe, /fermer le referme"
+mots = ["ticket", "support", "assistance"]
+
+[[module]]
+id = "musique"
+nom = "Musique"
+description = "/jouer, /pause, /suivant, /file, /stop en vocal (Lavalink : bifrost up lavalink)"
+mots = ["musique", "music", "chanson", "vocal", "radio"]
+
+[[module]]
+id = "annonces"
+nom = "Annonces"
+description = "les lives Twitch et les nouvelles vidéos YouTube annoncés dans un salon"
+mots = ["twitch", "youtube", "live", "stream", "annonce", "vidéo"]
+
+[[module]]
+id = "roles"
+nom = "Rôles-réactions"
+description = "réagir à un message pour obtenir (ou rendre) un rôle"
+mots = ["rôle", "role", "réaction"]
+
+[[module]]
+id = "concours"
+nom = "Concours"
+description = "/concours : on réagit 🎉, un gagnant est tiré au sort à la fin"
+mots = ["concours", "giveaway", "tirage", "gagnant", "cadeau"]

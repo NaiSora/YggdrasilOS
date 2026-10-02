@@ -1,0 +1,18 @@
+# Whisper — déployé par bifrost (Yggdrasil)
+services:
+  whisper:
+    image: onerahmet/openai-whisper-asr-webservice:latest
+    container_name: whisper
+    ports:
+      - "${BIND_ADDR}:${PORT}:9000"
+    environment:
+      ASR_MODEL: "${ASR_MODEL}"
+      ASR_ENGINE: "faster_whisper"
+    volumes:
+      - ./cache:/root/.cache
+    restart: unless-stopped
+
+networks:
+  default:
+    name: bifrost
+    external: true

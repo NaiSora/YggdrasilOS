@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name={{name}}
+Comment=Forgé par Brokkr sur Yggdrasil
+Exec={{slug}}
+Icon={{slug}}
+Categories=Utility;

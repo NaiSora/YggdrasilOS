@@ -1,0 +1,6 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["CCC", "C C"],
+  "key": {"C": "minecraft:leather"},
+  "result": {"id": "minecraft:saddle", "count": 1}
+}

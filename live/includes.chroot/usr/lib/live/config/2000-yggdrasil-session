@@ -1,0 +1,60 @@
+#!/bin/sh
+# live-config : réglages du compte de la session live d'Yggdrasil, écrits avant
+# l'ouverture de session (Plasma les lit dès son démarrage).
+#   - ni verrouillage, ni extinction de l'écran, ni mise en veille : le mot de
+#     passe « live » n'est connu de personne et une démonstration ne doit pas s'éteindre ;
+#   - pas de portefeuille KWallet à créer dans une session éphémère.
+# Ce script n'existe que dans l'image live : le système installé garde les
+# réglages normaux (verrouillage et économies d'énergie).
+
+# shellcheck disable=SC1091
+. /usr/lib/live/config.sh
+
+Init ()
+{
+	if component_was_executed "yggdrasil-session"
+	then
+		exit 0
+	fi
+	printf " yggdrasil-session"
+}
+
+Config ()
+{
+	_USER="${LIVE_USERNAME:-ygg}"
+	_HOME="/home/${_USER}"
+	[ -d "${_HOME}" ] || exit 0
+	mkdir -p "${_HOME}/.config"
+
+	cat > "${_HOME}/.config/kscreenlockerrc" << EOF
+[Daemon]
+Autolock=false
+LockOnResume=false
+EOF
+
+	: > "${_HOME}/.config/powerdevilrc"
+	for _PROFILE in AC Battery LowBattery
+	do
+		cat >> "${_HOME}/.config/powerdevilrc" << EOF
+[${_PROFILE}][Display]
+DimDisplayWhenIdle=false
+TurnOffDisplayWhenIdle=false
+
+[${_PROFILE}][SuspendAndShutdown]
+AutoSuspendAction=0
+
+EOF
+	done
+
+	cat > "${_HOME}/.config/kwalletrc" << EOF
+[Wallet]
+Enabled=false
+First Use=false
+EOF
+
+	chown -R "${_USER}:${_USER}" "${_HOME}/.config"
+	touch /var/lib/live/config/yggdrasil-session
+}
+
+Init
+Config

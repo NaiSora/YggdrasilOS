@@ -1,0 +1,27 @@
+# Serveur Valheim — déployé par bifrost (Yggdrasil)
+services:
+  valheim:
+    image: lloesche/valheim-server:latest
+    container_name: valheim
+    cap_add:
+      - SYS_NICE
+    ports:
+      - "${BIND_ADDR}:2456-2457:2456-2457/udp"
+    environment:
+      SERVER_NAME: "${SERVER_NAME}"
+      WORLD_NAME: "${WORLD_NAME}"
+      SERVER_PASS: "${SERVER_PASS}"
+      SERVER_PUBLIC: "false"
+      TZ: "${TZ}"
+      PUID: "${PUID}"
+      PGID: "${PGID}"
+    volumes:
+      - ./config:/config
+      - ./data:/opt/valheim
+    stop_grace_period: 2m
+    restart: unless-stopped
+
+networks:
+  default:
+    name: bifrost
+    external: true

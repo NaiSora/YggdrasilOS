@@ -1,0 +1,23 @@
+# Fileshare (Syncthing) — déployé par bifrost (Yggdrasil)
+services:
+  fileshare:
+    image: syncthing/syncthing:latest
+    container_name: fileshare
+    hostname: yggdrasil-fileshare
+    ports:
+      - "127.0.0.1:${PORT}:8384"
+      - "${BIND_ADDR}:22000:22000/tcp"
+      - "${BIND_ADDR}:22000:22000/udp"
+      - "${BIND_ADDR}:21027:21027/udp"
+    environment:
+      PUID: "${PUID}"
+      PGID: "${PGID}"
+    volumes:
+      - ./config:/var/syncthing/config
+      - "${DOSSIER}:/var/syncthing/Partage"
+    restart: unless-stopped
+
+networks:
+  default:
+    name: bifrost
+    external: true

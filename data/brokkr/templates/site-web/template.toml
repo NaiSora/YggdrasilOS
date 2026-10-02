@@ -1,0 +1,35 @@
+name = "site-web"
+title = "Site web"
+language = "HTML/CSS/JS"
+description = """
+Site sans framework, responsive, thème clair et sombre automatique, prêt à publier.
+Quatre formes : portfolio, blog, application web (données gardées dans le navigateur),
+documentation.
+"""
+requires = ["python3"]
+next_steps = """
+cd {{dir}}
+python3 -m http.server 8080
+puis ouvre http://localhost:8080
+"""
+
+[[variante]]
+id = "portfolio"
+nom = "Portfolio"
+description = "une page : présentation, projets, contact"
+defaut = true
+
+[[variante]]
+id = "blog"
+nom = "Blog"
+description = "une liste d'articles et une page par article"
+
+[[variante]]
+id = "appli"
+nom = "Application web"
+description = "une liste de tâches qui se souvient (localStorage)"
+
+[[variante]]
+id = "documentation"
+nom = "Documentation"
+description = "des pages reliées par un sommaire, avec recherche"

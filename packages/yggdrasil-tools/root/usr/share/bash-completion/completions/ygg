@@ -1,0 +1,172 @@
+# Complétion bash des outils Yggdrasil (ygg, mimir, heimdall, norns, bifrost, brokkr, ratatoskr)
+
+_ygg_names() {
+    # Liste les fichiers (sans extension) ou dossiers d'un répertoire de données
+    local dir=$1 ext=$2 f
+    for f in "$dir"/*"$ext"; do
+        [ -e "$f" ] || continue
+        f=${f##*/}
+        printf '%s\n' "${f%"$ext"}"
+    done
+}
+
+_ygg_tool_cmds() {
+    case $1 in
+        ygg) echo "info update install remove search realm doctor reparer annuler retour nettoyer materiel pilotes energie demarrage noyaux partage distance taches theme comptes miroir rapport services saga version welcome ai fw snap stack new notify" ;;
+        mimir) echo "status models install pull chat ask pourquoi runes presage guide selection explain suggest logs doctor profil puits" ;;
+        heimdall) echo "status enable disable allow deny profile ports services guard log apply render zone fete voisins sortant" ;;
+        norns) echo "status setup snap list delete restore backup backups recover versions disque distant verifier" ;;
+        urd) echo "fichier dossier systeme" ;;
+        skuld) echo "sauvegarde distant verification" ;;
+        verdandi) echo "" ;;
+        muninn) echo "noter depuis" ;;
+        huginn) echo "--une-fois --json --intervalle" ;;
+        gleipnir) echo "--json" ;;
+        bifrost) echo "list info up start down restart logs ps update remove console commande open mods sauvegarder redemarrage discord reseau deploy portail" ;;
+        brokkr) echo "list assistant show new add deploy package github save" ;;
+        ratatoskr) echo "check bilan telephone enable disable status" ;;
+        draupnir) echo "apercu graine lire planter" ;;
+        skidbladnir) echo "liste ecrire" ;;
+    esac
+}
+
+_ygg_alias_target() {
+    case $1 in
+        ai|mimir) echo mimir ;;
+        fw|firewall|heimdall) echo heimdall ;;
+        snap|backup|norns) echo norns ;;
+        stack|bifrost) echo bifrost ;;
+        new|brokkr) echo brokkr ;;
+        notify|ratatoskr) echo ratatoskr ;;
+    esac
+}
+
+_ygg_complete() {
+    local cur tool sub pos target
+    cur=${COMP_WORDS[COMP_CWORD]}
+    tool=${COMP_WORDS[0]##*/}
+    pos=1
+    # « ygg ai … » se complète comme « mimir … »
+    if [ "$tool" = "ygg" ] && [ "$COMP_CWORD" -ge 2 ]; then
+        target=$(_ygg_alias_target "${COMP_WORDS[1]}")
+        if [ -n "$target" ]; then
+            tool=$target
+            pos=2
+        fi
+    fi
+    if [ "$COMP_CWORD" -eq "$pos" ]; then
+        mapfile -t COMPREPLY < <(compgen -W "$(_ygg_tool_cmds "$tool")" -- "$cur")
+        return
+    fi
+    sub=${COMP_WORDS[$pos]}
+    local data=/usr/share/yggdrasil
+    case "$tool $sub" in
+        "ygg realm"|"ygg royaume"|"ygg royaumes")
+            if [ "$COMP_CWORD" -eq $((pos + 1)) ]; then
+                mapfile -t COMPREPLY < <(compgen -W "list show add remove voyageur arbre creer exporter importer" -- "$cur")
+            elif [[ $cur == -* ]]; then
+                mapfile -t COMPREPLY < <(compgen -W "--avec --sans --seulement --choisir --purge" -- "$cur")
+            elif [ "${COMP_WORDS[$((pos + 1))]}" = "importer" ]; then
+                mapfile -t COMPREPLY < <(compgen -f -- "$cur")
+            elif [ "${COMP_WORDS[$((pos + 1))]}" = "arbre" ]; then
+                mapfile -t COMPREPLY < <(compgen -W "oui non" -- "$cur")
+            else
+                mapfile -t COMPREPLY < <(compgen -W "$(_ygg_names "$data/realms" .toml; _ygg_names "$HOME/.local/share/yggdrasil/realms" .toml)" -- "$cur")
+            fi
+            ;;
+        "ygg services")
+            mapfile -t COMPREPLY < <(compgen -W "list status start stop restart enable disable" -- "$cur")
+            ;;
+        "ygg reparer")
+            mapfile -t COMPREPLY < <(compgen -W "systeme plasma son reseau grub tout --reinitialiser" -- "$cur")
+            ;;
+        "ygg energie")
+            mapfile -t COMPREPLY < <(compgen -W "performance equilibre economie" -- "$cur")
+            ;;
+        "ygg theme")
+            mapfile -t COMPREPLY < <(compgen -W "nuit aube auto --aube --nuit" -- "$cur")
+            ;;
+        "ygg pilotes") mapfile -t COMPREPLY < <(compgen -W "installer" -- "$cur") ;;
+        "ygg noyaux") mapfile -t COMPREPLY < <(compgen -W "nettoyer --garder" -- "$cur") ;;
+        "ygg demarrage") mapfile -t COMPREPLY < <(compgen -W "delai" -- "$cur") ;;
+        "ygg nettoyer") mapfile -t COMPREPLY < <(compgen -W "--analyse --corbeille" -- "$cur") ;;
+        "ygg miroir") mapfile -t COMPREPLY < <(compgen -W "--appliquer" -- "$cur") ;;
+        "ygg partage")
+            if [ "$COMP_CWORD" -eq $((pos + 1)) ]; then
+                mapfile -t COMPREPLY < <(compgen -W "etat ajouter retirer" -- "$cur")
+            elif [ "${COMP_WORDS[$((pos + 1))]}" = "ajouter" ]; then
+                mapfile -t COMPREPLY < <(compgen -d -- "$cur")
+            fi
+            ;;
+        "ygg distance")
+            if [ "$COMP_CWORD" -eq $((pos + 1)) ]; then
+                mapfile -t COMPREPLY < <(compgen -W "ssh wireguard" -- "$cur")
+            elif [ "${COMP_WORDS[$((pos + 1))]}" = "ssh" ]; then
+                mapfile -t COMPREPLY < <(compgen -W "etat activer desactiver --cles-seulement --internet" -- "$cur")
+            else
+                mapfile -t COMPREPLY < <(compgen -W "etat init client --hote --port" -- "$cur")
+            fi
+            ;;
+        "ygg taches")
+            if [ "$COMP_CWORD" -eq $((pos + 1)) ]; then
+                mapfile -t COMPREPLY < <(compgen -W "liste ajouter retirer lancer journal" -- "$cur")
+            elif [ "$COMP_CWORD" -eq $((pos + 2)) ]; then
+                mapfile -t COMPREPLY < <(compgen -W "$(_ygg_names "$HOME/.config/systemd/user" .timer | sed -n 's/^ygg-tache-//p')" -- "$cur")
+            else
+                mapfile -t COMPREPLY < <(compgen -W "--quand quotidien horaire hebdomadaire mensuel au-demarrage" -- "$cur")
+            fi
+            ;;
+        "ygg comptes")
+            if [ "$COMP_CWORD" -eq $((pos + 1)) ]; then
+                mapfile -t COMPREPLY < <(compgen -W "liste ajouter admin retirer" -- "$cur")
+            else
+                mapfile -t COMPREPLY < <(compgen -u -- "$cur")
+            fi
+            ;;
+        "bifrost deploy")
+            mapfile -t COMPREPLY < <(compgen -d -- "$cur")
+            ;;
+        "bifrost "*)
+            mapfile -t COMPREPLY < <(compgen -W "$(_ygg_names "$data/bifrost/stacks" ""; _ygg_names "$HOME/bifrost" "")" -- "$cur")
+            ;;
+        "brokkr new"|"brokkr show")
+            if [ "$COMP_CWORD" -eq $((pos + 1)) ]; then
+                mapfile -t COMPREPLY < <(compgen -W "$(_ygg_names "$data/brokkr/templates" "")" -- "$cur")
+            fi
+            ;;
+        "draupnir graine")
+            if [[ $cur == -* ]]; then
+                mapfile -t COMPREPLY < <(compgen -W "--chiffrer --secrets --avec --mot-de-passe" -- "$cur")
+            else
+                mapfile -t COMPREPLY < <(compgen -f -- "$cur")
+            fi
+            ;;
+        "draupnir lire"|"draupnir planter")
+            if [[ $cur == -* ]]; then
+                mapfile -t COMPREPLY < <(compgen -W "--demarrer --mot-de-passe --yes --dry-run" -- "$cur")
+            else
+                mapfile -t COMPREPLY < <(compgen -f -- "$cur")
+            fi
+            ;;
+        "skidbladnir ecrire")
+            if [[ $cur == -* ]]; then
+                mapfile -t COMPREPLY < <(compgen -W "--persistance --chiffrer --mot-de-passe --yes --dry-run" -- "$cur")
+            elif [ "$COMP_CWORD" -eq $((pos + 1)) ]; then
+                mapfile -t COMPREPLY < <(compgen -W "$(lsblk -dn -o NAME,TRAN 2>/dev/null | awk '$2 == "usb" {print $1}')" -- "$cur")
+            else
+                mapfile -t COMPREPLY < <(compgen -f -X '!*.iso' -- "$cur"; compgen -d -- "$cur")
+            fi
+            ;;
+        "heimdall allow"|"heimdall deny")
+            mapfile -t COMPREPLY < <(compgen -W "ssh http https minecraft velocity jellyfin homeassistant ollama syncthing samba kdeconnect dns wireguard --from --proto lan any" -- "$cur")
+            ;;
+        "heimdall profile"|"heimdall enable")
+            mapfile -t COMPREPLY < <(compgen -W "desktop server strict --profile" -- "$cur")
+            ;;
+        "norns backup"|"norns backups"|"norns recover")
+            mapfile -t COMPREPLY < <(compgen -d -- "$cur")
+            ;;
+    esac
+}
+
+complete -F _ygg_complete ygg mimir heimdall norns bifrost brokkr ratatoskr urd verdandi skuld huginn muninn gleipnir draupnir skidbladnir

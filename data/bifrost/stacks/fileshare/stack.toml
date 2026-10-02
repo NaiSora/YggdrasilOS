@@ -1,0 +1,28 @@
+name = "fileshare"
+title = "Fileshare (dossiers synchronisés)"
+categorie = "partage"
+description = """
+Tes fichiers synchronisés entre tes appareils (Syncthing), sans nuage : ordinateur, téléphone,
+autre PC. Avec --windows, le dossier est aussi visible dans « Réseau » sous Windows.
+"""
+url = "http://localhost:${PORT}"
+windows_partage = "DOSSIER"
+web = { conteneur = "fileshare", port = 8384 }
+notes = """
+Sur ton téléphone : application Syncthing, puis « Ajouter un appareil » avec l'identifiant affiché
+dans l'interface (Actions → Afficher l'ID).
+"""
+
+[[env]]
+name = "PORT"
+option = "port"
+description = "Port de l'interface"
+default = "8384"
+kind = "port"
+
+[[env]]
+name = "DOSSIER"
+option = "dossier"
+description = "Dossier partagé"
+default = "~/Partage"
+kind = "path"

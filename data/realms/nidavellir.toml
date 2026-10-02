@@ -1,0 +1,70 @@
+name = "nidavellir"
+title = "Nidavellir"
+surnom = "la Forge des nains"
+theme = "Développement"
+rune = "ᚲ"
+rune_nom = "Kenaz"
+rune_sens = "la torche, le savoir-faire"
+icon = "applications-development"
+voyageurs = ["developpeur"]
+actions = ["cle-ssh", "identite-git"]
+description = """
+Sous la montagne, les nains forgent Mjöllnir et Gungnir : ici, ton atelier de code.
+Éditeur, git, Python, Java 25, Node.js. Le royaume prépare aussi ta clé SSH et ton
+identité git, pour que ton premier « git push » fonctionne.
+"""
+next_steps = """
+Ta clé publique SSH est dans ~/.ssh/id_ed25519.pub : ajoute-la sur GitHub (Settings → SSH keys).
+« gh auth login » relie la ligne de commande à ton compte GitHub.
+« brokkr new » forge un projet prêt à coder (bot Discord, application Python, site web…).
+"""
+
+[[logiciels]]
+id = "vscodium"
+nom = "VSCodium"
+description = "Visual Studio Code, sans la télémétrie de Microsoft."
+flatpak = ["com.vscodium.codium"]
+
+[[logiciels]]
+id = "git"
+nom = "git et GitHub CLI"
+description = "Versionner ton code, et piloter GitHub depuis le terminal."
+apt = ["git", "gh"]
+
+[[logiciels]]
+id = "python"
+nom = "Python"
+description = "Environnements virtuels, pip, pipx et en-têtes de compilation."
+apt = ["python3-venv", "python3-pip", "python3-dev", "pipx"]
+
+[[logiciels]]
+id = "java"
+nom = "Java 25 et Maven"
+description = "Pour les plugins Minecraft et les projets Java."
+apt = ["openjdk-25-jdk", "maven"]
+
+[[logiciels]]
+id = "node"
+nom = "Node.js"
+description = "JavaScript côté serveur, et npm."
+apt = ["nodejs", "npm"]
+
+[[logiciels]]
+id = "compilateurs"
+nom = "Compilateurs C et C++"
+description = "gcc, g++, make : de quoi construire ce qui se compile."
+apt = ["build-essential"]
+
+[[logiciels]]
+id = "android"
+nom = "Android Studio"
+description = "Applications Android (et Flutter, à ajouter depuis Android Studio)."
+flatpak = ["com.google.AndroidStudio"]
+defaut = false
+
+[[logiciels]]
+id = "dbeaver"
+nom = "DBeaver"
+description = "Explorer et interroger les bases de données."
+flatpak = ["io.dbeaver.DBeaverCommunity"]
+defaut = false

@@ -1,0 +1,20 @@
+name = "ntfy"
+title = "ntfy (notifications sur ton téléphone)"
+categorie = "partage"
+description = """
+Ton propre serveur de notifications : Ratatoskr, Bifröst et tes scripts préviennent ton
+téléphone sans passer par un service extérieur.
+"""
+url = "http://localhost:${PORT}"
+web = { conteneur = "ntfy", port = 80 }
+notes = """
+Relie Ratatoskr : ratatoskr telephone http://<IP de cette machine>:<port>/ygg-<un nom secret>
+Sur le téléphone : application ntfy, serveur = l'adresse de cette machine (réseau local, ou WireGuard).
+"""
+
+[[env]]
+name = "PORT"
+option = "port"
+description = "Port du serveur"
+default = "8090"
+kind = "port"

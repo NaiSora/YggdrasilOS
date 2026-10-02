@@ -1,0 +1,8 @@
+[Unit]
+Description=Les Nornes : sauvegarde au branchement du disque %i
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/norns auto %i
+Nice=10
+IOSchedulingClass=idle

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Diagnostic du système
+Comment=Vérifier la santé d'Yggdrasil (disque, services, mises à jour, pare-feu…)
+Exec=sh -c "ygg doctor; echo; echo 'Appuie sur Entrée pour fermer…'; read _"
+Icon=utilities-system-monitor
+Terminal=true
+Categories=System;Monitor;
+Keywords=diagnostic;santé;doctor;problème;

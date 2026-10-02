@@ -1,0 +1,20 @@
+# Serveur Factorio — déployé par bifrost (Yggdrasil)
+services:
+  factorio:
+    image: factoriotools/factorio:stable
+    container_name: factorio
+    ports:
+      - "${BIND_ADDR}:34197:34197/udp"
+      - "${BIND_ADDR}:27015:27015/tcp"
+    environment:
+      GENERATE_NEW_SAVE: "true"
+      SAVE_NAME: "yggdrasil"
+      TZ: "${TZ}"
+    volumes:
+      - ./data:/factorio
+    restart: unless-stopped
+
+networks:
+  default:
+    name: bifrost
+    external: true
