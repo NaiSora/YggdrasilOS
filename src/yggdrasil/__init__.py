@@ -1,5 +1,5 @@
 """Yggdrasil — outils système de la distribution Yggdrasil (dérivée de Debian)."""
 
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 CODENAME = "Midgard"
 DEBIAN_BASE = "trixie"

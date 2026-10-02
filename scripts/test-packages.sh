@@ -75,7 +75,7 @@ has() {
     out=$("$@" 2>&1) || true
     [[ "$out" == *"$expected"* ]] || { printf '%s\n' "$out" >&2; fail "« $expected » absent de : $*"; }
 }
-has "Yggdrasil 1.0.0" ygg version
+has "Yggdrasil $(tr -d ' \r\n' < /src/VERSION)" ygg version
 has "Yggdrasil" ygg info
 has "Muspelheim" ygg realm list
 has "ᛈ" ygg realm list
@@ -185,13 +185,25 @@ if draupnir lire /tmp/ma-graine.gpg </dev/null >/dev/null 2>&1; then fail "grain
 has "les clés à bord" skidbladnir
 has "aucun disque" skidbladnir ecrire sdz /etc/hostname -y
 apt-get install -y -qq --no-install-recommends /debs/yggdrasil-archive-keyring_*.deb >/dev/null
-grep -qx "Enabled: no" /etc/apt/sources.list.d/yggdrasil.sources || fail "dépôt Yggdrasil actif sans adresse"
-apt-get update -q 2>&1 | grep -q "yggdrasil" && fail "apt update touche un dépôt désactivé"
+SOURCE=/etc/apt/sources.list.d/yggdrasil.sources
+DEPOT_URL=$(sed -n 's/^DEPOT_URL=//p' /src/depot.conf | tr -d ' \r"')
+if [ -n "$DEPOT_URL" ]; then
+    grep -qx "Enabled: yes" "$SOURCE" || fail "dépôt Yggdrasil désactivé malgré son adresse"
+    grep -qx "URIs: $DEPOT_URL" "$SOURCE" || fail "adresse du dépôt Yggdrasil"
+    # Une fois le site publié (YGG_DEPOT_EN_LIGNE=1) : APT lit le vrai dépôt et vérifie sa signature
+    if [ "${YGG_DEPOT_EN_LIGNE:-0}" = 1 ]; then
+        apt-get update -q > /tmp/apt-depot.log 2>&1 || { cat /tmp/apt-depot.log >&2; fail "apt update sur le dépôt en ligne"; }
+        apt-cache policy yggdrasil-tools | grep -q "${DEPOT_URL#https://}" || fail "yggdrasil-tools absent du dépôt en ligne"
+    fi
+else
+    grep -qx "Enabled: no" "$SOURCE" || fail "dépôt Yggdrasil actif sans adresse"
+    apt-get update -q 2>&1 | grep -q "yggdrasil" && fail "apt update touche un dépôt désactivé"
+fi
 apt-get install -y -qq /debs/yggdrasil-serveur_*.deb >/dev/null
 grep -q '"profile": "server"' /etc/heimdall/heimdall.json || fail "Heimdall pas en profil serveur"
 grep -q "édition serveur" /etc/issue.d/yggdrasil-arbre.issue || fail "arbre de la console"
 grep -q 'adresse \\4' /etc/issue.d/yggdrasil-arbre.issue || fail "adresse de la machine à la console"
-ok "graine chiffrée forgée, lue et replantée (simulation), clés listées, dépôt désactivé sans adresse, édition serveur"
+ok "graine chiffrée forgée, lue et replantée (simulation), clés listées, source APT d'Yggdrasil$([ "${YGG_DEPOT_EN_LIGNE:-0}" = 1 ] && echo " lue en ligne"), édition serveur"
 
 step "Réglages de session"
 mkdir -p /tmp/home-test

@@ -14,7 +14,8 @@ de la nuit, de l'or et de la sauge, et une famille d'outils qui ne font jamais r
 [![KDE Plasma 6.3](https://img.shields.io/badge/KDE_Plasma-6.3-79AC99?logo=kdeplasma&logoColor=white&labelColor=091C30)](https://kde.org/plasma-desktop/)
 [![Français](https://img.shields.io/badge/langue-fran%C3%A7ais-5B8B7B?labelColor=091C30)](#)
 
-[**Télécharger**](https://github.com/NaiSora/YggdrasilOS/releases/latest) ·
+[**Le site**](https://naisora.github.io/YggdrasilOS/) ·
+[Télécharger](https://naisora.github.io/YggdrasilOS/#telecharger) ·
 [Installer](#installer) ·
 [Premiers pas](#premiers-pas) ·
 [Les outils](#les-outils-de-larbre) ·
@@ -79,27 +80,32 @@ documentation Debian s'appliquent tels quels. Par-dessus, Yggdrasil ajoute ce qu
 
 ## Télécharger
 
-Les images sont dans les [**releases**](https://github.com/NaiSora/YggdrasilOS/releases/latest).
+Les images sont sur [**le site**](https://naisora.github.io/YggdrasilOS/#telecharger), qui les prend dans les
+[releases](https://github.com/NaiSora/YggdrasilOS/releases/latest) ; ses [nouveautés](https://naisora.github.io/YggdrasilOS/notes.html)
+racontent chaque version.
 
 | Édition | Pour qui | Fichiers |
 |---|---|---|
-| **Bureau** | Un PC de tous les jours : bureau Plasma, session live, installateur graphique | `yggdrasil-1.0.0-amd64.iso.001` et `.002` (≈ 3,3 Go en tout) |
-| **Serveur** | Une machine sans écran : console, SSH, Docker pour les services de Bifröst | `yggdrasil-serveur-1.0.0-amd64.iso` (≈ 1,8 Go) |
+| **Bureau** | Un PC de tous les jours : bureau Plasma, session live, installateur graphique | `yggdrasil-1.0.1-amd64.iso.001` et `.002` (≈ 3,3 Go en tout) |
+| **Serveur** | Une machine sans écran : console, SSH, Docker pour les services de Bifröst | `yggdrasil-serveur-1.0.1-amd64.iso` (≈ 1,8 Go) |
 
 GitHub limite chaque fichier à 2 Go : l'ISO bureau est donc livrée **en deux morceaux**, à recoller
 une fois téléchargés (dans le dossier des téléchargements).
 
 ```powershell
 # Windows (PowerShell ou invite de commandes)
-cmd /c copy /b yggdrasil-1.0.0-amd64.iso.001 + yggdrasil-1.0.0-amd64.iso.002 yggdrasil-1.0.0-amd64.iso
-Get-FileHash yggdrasil-1.0.0-amd64.iso      # à comparer avec SHA256SUMS
+cmd /c copy /b yggdrasil-1.0.1-amd64.iso.001 + yggdrasil-1.0.1-amd64.iso.002 yggdrasil-1.0.1-amd64.iso
+Get-FileHash yggdrasil-1.0.1-amd64.iso      # à comparer avec SHA256SUMS
 ```
 
 ```bash
 # Linux ou macOS
-cat yggdrasil-1.0.0-amd64.iso.001 yggdrasil-1.0.0-amd64.iso.002 > yggdrasil-1.0.0-amd64.iso
+cat yggdrasil-1.0.1-amd64.iso.001 yggdrasil-1.0.1-amd64.iso.002 > yggdrasil-1.0.1-amd64.iso
 sha256sum -c SHA256SUMS --ignore-missing
 ```
+
+Chaque release joint aussi les **sources** des paquets Debian contenus dans les images (archives
+`…-sources.tar.001`, `.002`…), aux versions exactes, comme le demande la GPL.
 
 **Configuration conseillée** : un PC 64 bits (x86-64), UEFI (Secure Boot compris) ou BIOS.
 
@@ -112,7 +118,7 @@ sha256sum -c SHA256SUMS --ignore-missing
 
 1. **Écris l'ISO sur une clé USB** (8 Go ou plus ; elle sera effacée).
    Sous Windows : [Rufus](https://rufus.ie) en **mode DD** (Rufus le propose pour cette image hybride) ou
-   [balenaEtcher](https://etcher.balena.io). Sous Linux : `sudo dd if=yggdrasil-1.0.0-amd64.iso of=/dev/sdX bs=4M status=progress oflag=sync`.
+   [balenaEtcher](https://etcher.balena.io). Sous Linux : `sudo dd if=yggdrasil-1.0.1-amd64.iso of=/dev/sdX bs=4M status=progress oflag=sync`.
    Depuis Yggdrasil, `skidbladnir ecrire sdX --persistance 16G` en fait une clé qui garde tes fichiers.
 2. **Démarre sur la clé** : touche du menu de démarrage au lancement du PC (souvent F12, F8, F11 ou Échap).
    Le menu propose la session live, l'installateur en mode texte, et un mode sans échec.
@@ -163,7 +169,7 @@ est hors ligne, dans le Centre (*Le guide d'Yggdrasil*) ou dans [docs/index.html
 | **Applications** | Firefox ESR, LibreOffice, VLC, Dolphin, Kate, Okular, Gwenview, Discover (Debian et Flathub), gestionnaire de partitions, impression, Bluetooth, PipeWire, zram |
 | **Installateurs** | Calamares en français : btrfs (sous-volumes @, @home, @cache, @log), chiffrement LUKS2 au clavier français, Secure Boot, double démarrage avec Windows ; et l'installateur Debian en mode texte, dans les deux éditions |
 | **Retour dans le temps** | Un instantané avant chaque mise à jour ; sur btrfs, chacun apparaît au menu de démarrage, et le terminal te rappelle sur lequel tu as démarré |
-| **Mises à jour** | `ygg update` met à jour Debian (et les Flatpak) après un instantané ; la clé du dépôt APT **signé** d'Yggdrasil est déjà en place pour les outils de l'arbre, dont le dépôt s'active dès qu'il est publié (`depot.conf`) |
+| **Mises à jour** | `ygg update` met à jour Debian, les Flatpak et les outils de l'arbre après un instantané ; les outils viennent du [dépôt APT **signé** d'Yggdrasil](https://naisora.github.io/YggdrasilOS/depot/), hébergé avec le site |
 | **Partage** | Dossiers partagés visibles depuis Windows (`ygg partage ajouter ~/Public`), accès à distance par SSH ou WireGuard (QR code pour le téléphone) |
 | **Clé de poche** | Skíðblaðnir écrit Yggdrasil sur une clé USB qui garde tes fichiers et tes logiciels d'un démarrage à l'autre, chiffrée si tu veux |
 
@@ -233,14 +239,20 @@ Tout se construit dans un conteneur Debian : il suffit de **Docker** (Docker Des
 Sous Linux : `./build.sh`, `./build.sh serveur`, `./build.sh test`, `./build.sh paquets`,
 `./build.sh boot bureau-install`… L'ISO sort dans `out/`, avec sa somme SHA-256 et la liste de ses paquets.
 
-**Le dépôt APT.** `out/depot/` se publie tel quel sur n'importe quel serveur web ; mets son adresse dans
-`depot.conf` avant de construire l'ISO, et les machines installées suivront les mises à jour des outils.
+Pour une publication, `YGG_SOURCES=true ./build.sh` (ou `.\build.ps1 -Sources`) joint les sources des
+paquets Debian de l'image, en morceaux de moins de 2 Gio.
+
+**Le site et le dépôt APT.** `site/` contient les pages du site ; `scripts/build-site.sh` l'assemble avec
+le guide, les captures et le dépôt APT signé (`out/depot/`, fait par chaque construction), puis
+`scripts/publier-site.sh` le publie sur la branche `gh-pages`, servie par GitHub Pages. L'adresse du
+dépôt est dans `depot.conf` : les machines installées y prennent les mises à jour des outils.
 La clé qui le signe est créée au premier build dans `out/cles/` : garde-la précieusement, sans elle les
 machines déjà installées refuseraient les paquets signés d'une autre clé.
 
 **Les tests.** `scripts/test.sh` lance 255 tests Python, shellcheck sur tous les scripts, les règles du
 pare-feu chargées pour de vrai, la construction et le contenu des paquets, le dépôt signé, les instantanés
-au menu de démarrage sur un vrai volume btrfs, le catalogue français de GRUB et le rendu du Centre.
+au menu de démarrage sur un vrai volume btrfs, le catalogue français de GRUB, le rendu du Centre et le
+site (liens, images, polices, syntaxe du script).
 `scripts/test-packages.sh` installe les paquets dans un Debian vierge, exerce chaque commande puis les
 désinstalle. `scripts/test-iso.sh` démarre les ISO dans QEMU, captures d'écran à l'appui : sessions live,
 installation automatique du serveur, installation chiffrée par Calamares puis retour sur un instantané,
@@ -253,6 +265,7 @@ packages/        les paquets .deb : yggdrasil-base, -tools, -desktop, -calamares
 live/            la configuration live-build : listes de paquets, hooks, menus de démarrage
 assets/          le logo et l'identité visuelle, l'arbre ASCII, les traductions de GRUB
 docs/            le guide hors ligne et les captures d'écran
+site/            le site (GitHub Pages) : pages, style, script, polices
 scripts/         construction et tests
 docker/          l'environnement de construction
 ```

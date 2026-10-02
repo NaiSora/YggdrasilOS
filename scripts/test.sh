@@ -132,7 +132,14 @@ ok "$(find "$WORK/debs" -name '*.deb' | wc -l) paquets construits et vérifiés"
 
 check_file yggdrasil-archive-keyring usr/share/keyrings/yggdrasil-archive-keyring.gpg
 dpkg-deb -x "$WORK"/debs/yggdrasil-archive-keyring_*.deb "$WORK/cle"
-grep -qx "Enabled: no" "$WORK/cle/etc/apt/sources.list.d/yggdrasil.sources"  # depot.conf vide
+# La source APT suit depot.conf : active à son adresse, ou désactivée s'il est vide
+DEPOT_URL=$(sed -n 's/^DEPOT_URL=//p' depot.conf | tr -d ' \r"')
+if [ -n "$DEPOT_URL" ]; then
+    grep -qx "Enabled: yes" "$WORK/cle/etc/apt/sources.list.d/yggdrasil.sources"
+    grep -qx "URIs: $DEPOT_URL" "$WORK/cle/etc/apt/sources.list.d/yggdrasil.sources"
+else
+    grep -qx "Enabled: no" "$WORK/cle/etc/apt/sources.list.d/yggdrasil.sources"
+fi
 
 step "6. Dépôt APT signé"
 bash scripts/build-repo.sh "$WORK/debs" "$WORK/depot" | tail -2
@@ -256,5 +263,14 @@ if [ -d "$OUT" ] && [ -w "$OUT" ]; then
     mkdir -p "$OUT/rendus/centre" && cp "$WORK"/centre/*.png "$OUT/rendus/centre/"
 fi
 ok "les $(find "$WORK/centre" -name '*.png' | wc -l) écrans du Centre et de l'assistant se chargent sans erreur QML"
+
+step "10. Le site (GitHub Pages)"
+# Assemblé avec le dépôt signé de l'étape 6 : liens, images, polices, syntaxe d'app.js
+YGG_DEPOT="$WORK/depot" bash scripts/build-site.sh "$WORK/site" > /dev/null
+QT_QPA_PLATFORM=offscreen python3 scripts/verifier-site.py "$WORK/site"
+[ -f "$WORK/site/.nojekyll" ] && [ -f "$WORK/site/depot/dists/trixie/InRelease" ]
+DEPOT_URL=$(sed -n 's/^DEPOT_URL=//p' depot.conf | tr -d ' \r"')
+if [ -n "$DEPOT_URL" ]; then grep -q "$DEPOT_URL" "$WORK/site/depot/index.html"; fi
+ok "site assemblé : pages, guide, captures, polices et dépôt APT signé"
 
 step "Tous les tests sont passés"

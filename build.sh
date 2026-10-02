@@ -12,6 +12,7 @@
 #   ./build.sh cle        Skíðblaðnir : écrit l'ISO sur une clé virtuelle (loop) avec persistance
 #   YGG_CLEAN=1 ./build.sh   repart de zéro
 #   YGG_RESUME=1 ./build.sh  reprend une construction interrompue
+#   YGG_SOURCES=true ./build.sh   joint les sources des paquets Debian (pour une publication)
 set -euo pipefail
 
 # Tout est dans une fonction, lue en entier avant de s'exécuter : modifier ce fichier
@@ -52,6 +53,7 @@ main() {
               [ "$TARGET" = serveur ] && EDITION=serveur
               docker run "${COMMON[@]}" --privileged -e "MIRROR=${MIRROR:-http://deb.debian.org/debian/}" \
                   -e "YGG_CLEAN=${YGG_CLEAN:-0}" -e "YGG_RESUME=${YGG_RESUME:-0}" -e "YGG_EDITION=$EDITION" -e YGG_SRC=/src \
+                  -e "YGG_SOURCES=${YGG_SOURCES:-false}" \
                   "$IMAGE" bash -c "$COPIE" /src/scripts/build-iso.sh /build /out ;;
         *) echo "cible inconnue : $TARGET (iso, serveur, debs, paquets, test, boot, cle, depot)" >&2; exit 1 ;;
     esac

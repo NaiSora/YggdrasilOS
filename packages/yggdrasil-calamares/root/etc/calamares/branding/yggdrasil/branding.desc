@@ -14,10 +14,10 @@ strings:
     versionedName:       Yggdrasil @VERSION_SHORT@ « Midgard »
     shortVersionedName:  Yggdrasil @VERSION_SHORT@
     bootloaderEntryName: Yggdrasil
-    productUrl:          https://www.debian.org
-    supportUrl:          https://wiki.debian.org/fr/FrontPage
-    knownIssuesUrl:      https://www.debian.org/releases/trixie/errata
-    releaseNotesUrl:     https://www.debian.org/releases/trixie/releasenotes
+    productUrl:          https://naisora.github.io/YggdrasilOS/
+    supportUrl:          https://github.com/NaiSora/YggdrasilOS/issues
+    knownIssuesUrl:      https://naisora.github.io/YggdrasilOS/notes.html
+    releaseNotesUrl:     https://naisora.github.io/YggdrasilOS/notes.html
 
 sidebar: widget
 navigation: widget

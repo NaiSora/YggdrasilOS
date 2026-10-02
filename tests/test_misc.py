@@ -1,3 +1,6 @@
+from pathlib import Path
+
+import yggdrasil
 from yggdrasil import ratatoskr, sysinfo, ygg
 
 
@@ -80,8 +83,11 @@ def test_ygg_cli_parsing_and_split():
 
 
 def test_ygg_version_and_delegation(capsys):
+    # Le fichier VERSION (ISO, paquets) et le module Python avancent ensemble
+    version = (Path(__file__).resolve().parent.parent / "VERSION").read_text().strip()
+    assert yggdrasil.__version__ == version
     assert ygg.main(["version"]) == 0
-    assert "Yggdrasil 1.0.0" in capsys.readouterr().out
+    assert f"Yggdrasil {version}" in capsys.readouterr().out
     assert ygg.main(["new", "list"]) == 0
     assert "discord-bot" in capsys.readouterr().out
     assert ygg.main(["stack", "info", "valheim"]) == 0

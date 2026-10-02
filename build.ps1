@@ -17,12 +17,14 @@
     .\build.ps1 -Target cle     # Skíðblaðnir : écrit l'ISO sur une clé virtuelle avec persistance
     .\build.ps1 -Clean          # repart de zéro (vide le cache)
     .\build.ps1 -Resume         # reprend une construction interrompue là où elle s'est arrêtée
+    .\build.ps1 -Sources        # joint les sources des paquets Debian (pour une publication)
 #>
 param(
     [ValidateSet("iso", "serveur", "debs", "paquets", "test", "boot", "cle", "depot")]
     [string]$Target = "iso",
     [switch]$Clean,
     [switch]$Resume,
+    [switch]$Sources,
     [string]$Mirror = "http://deb.debian.org/debian/",
     # -Target boot : live (défaut), serveur-live, serveur-install, cle
     [string[]]$Scenarios = @()
@@ -82,8 +84,9 @@ switch ($Target) {
         Step "ISO Yggdrasil (édition $edition)"
         $envClean = if ($Clean) { "1" } else { "0" }
         $envResume = if ($Resume) { "1" } else { "0" }
+        $envSources = if ($Sources) { "true" } else { "false" }
         docker run @common --privileged -e "MIRROR=$Mirror" -e "YGG_CLEAN=$envClean" -e "YGG_RESUME=$envResume" `
-            -e "YGG_EDITION=$edition" $Image bash /src/scripts/build-iso.sh /build /out
+            -e "YGG_EDITION=$edition" -e "YGG_SOURCES=$envSources" $Image bash /src/scripts/build-iso.sh /build /out
     }
 }
 if ($LASTEXITCODE -ne 0) { throw "échec (code $LASTEXITCODE)" }

@@ -112,7 +112,7 @@ EOF
 
     echo "» Édition serveur : le système installé"
     shots - "$SHOTS" --uefi --memory 4096 --disque "$DIR/vm/serveur.qcow2" --efivars "$DIR/vm/serveur-vars.fd" \
-        --script "wait:30,shot:serveur-installe-01-grub,wait:180,shot:serveur-installe-02-console,type:ygg,key:ret,wait:3,type:graine,key:ret,wait:60,shot:serveur-installe-03-session,type:clear,key:ret,type:systemctl is-active ssh docker heimdall yggdrasil-police-console; dpkg -s live-boot 2>&1 | head -1; groups; heimdall status | head -4,key:ret,wait:40,shot:serveur-installe-04-services"
+        --script "wait:30,shot:serveur-installe-01-grub,wait:180,shot:serveur-installe-02-console,type:ygg,key:ret,wait:3,type:graine,key:ret,wait:60,shot:serveur-installe-03-session,type:clear,key:ret,type:systemctl is-active ssh docker heimdall yggdrasil-police-console; dpkg -s live-boot 2>&1 | head -1; groups; heimdall status | head -4,key:ret,wait:40,shot:serveur-installe-04-services,type:clear,key:ret,type:sudo apt-get update -q 2>&1 | tail -3 ; apt-cache policy yggdrasil-tools | head -6,key:ret,wait:5,type:graine,key:ret,wait:90,shot:serveur-installe-05-depot"
 }
 
 bureau_install() {
