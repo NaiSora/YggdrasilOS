@@ -4,6 +4,7 @@ Architecture: all
 Maintainer: Projet Yggdrasil <yggdrasil@localhost>
 Section: admin
 Priority: important
+Depends: ca-certificates
 Description: clé de signature et adresse du dépôt APT d'Yggdrasil
  La clé publique qui signe le dépôt d'Yggdrasil, et la source APT qui
  l'utilise : ygg update apporte ainsi les nouvelles versions des outils

@@ -40,6 +40,12 @@ die() { printf '\033[1;31m✘ %s\033[0m\n' "$*" >&2; exit 1; }
 
 [ "$(id -u)" -eq 0 ] || die "live-build doit tourner en root (ou dans le conteneur --privileged)."
 command -v lb >/dev/null || die "live-build est absent (apt install live-build)."
+# Le dépôt d'Yggdrasil (depot.conf) est actif dans l'image : APT le lit pendant la construction,
+# comme un miroir Debian. Il doit donc répondre ; sinon, le dire clairement plutôt qu'en erreur APT.
+DEPOT_URL=$(sed -n 's/^DEPOT_URL=//p' "$REPO/depot.conf" 2>/dev/null | tr -d ' \r"')
+if [ -n "$DEPOT_URL" ] && ! curl -fsS -o /dev/null --max-time 30 "${DEPOT_URL%/}/dists/trixie/InRelease"; then
+    die "le dépôt APT de depot.conf ne répond pas (${DEPOT_URL%/}/dists/trixie/InRelease) : publie-le d'abord (./build.sh depot, puis scripts/publier-site.sh), ou vide DEPOT_URL pour une image sans mises à jour d'Yggdrasil"
+fi
 
 mkdir -p "$WORK" "$OUT"
 # Un espace live-build par édition : chacune garde son cache et peut reprendre
