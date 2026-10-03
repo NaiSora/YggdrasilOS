@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yggdrasil — l'arbre qui relie tes mondes</title>
+<meta name="description" content="Yggdrasil, la distribution Linux en français fondée sur Debian 13 : bureau KDE Plasma, mondes à la carte, retour en arrière, IA locale, rien sans ton accord.">
+<meta name="theme-color" content="#091c30">
+<!-- build-site.sh ajoute l'adresse canonique, l'aperçu de partage et les icônes -->
+<link rel="preconnect" href="https://api.github.com" crossorigin>
+<link rel="preload" href="img/logo.svg" as="image" fetchpriority="high">
+<link rel="stylesheet" href="style.css">
+<script src="app.js" defer></script>
+<link rel="canonical" href="https://naisora.github.io/YggdrasilOS/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Yggdrasil">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:url" content="https://naisora.github.io/YggdrasilOS/">
+<meta property="og:title" content="Yggdrasil — l'arbre qui relie tes mondes">
+<meta property="og:description" content="Yggdrasil, la distribution Linux en français fondée sur Debian 13 : bureau KDE Plasma, mondes à la carte, retour en arrière, IA locale, rien sans ton accord.">
+<meta property="og:image" content="https://naisora.github.io/YggdrasilOS/img/partage.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta property="og:image:alt" content="Le logo d'Yggdrasil, l'arbre-monde d'or dans son anneau, et sa devise : l'arbre qui relie tes mondes">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+</head>
+<body>
+<header class="entete">
+  <div class="barre">
+    <a class="marque" href="./"><img src="img/logo.svg" alt="" width="36" height="36">Yggdrasil</a>
+    <nav aria-label="Navigation principale">
+      <a href="#mondes">Les mondes</a>
+      <a href="#outils">Les outils</a>
+      <a href="notes.html">Nouveautés</a>
+      <a href="guide.html">Guide</a>
+      <a href="https://github.com/NaiSora/YggdrasilOS">GitHub</a>
+      <a class="bouton plein" href="#telecharger">Télécharger</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="heros">
+  <img class="embleme" src="img/logo.svg" fetchpriority="high" alt="L'arbre-monde d'or et de sauge dans son anneau, l'étoile en son cœur" width="230" height="230">
+  <h1>Yggdrasil</h1>
+  <p class="devise">L'arbre qui relie tes mondes.</p>
+  <p class="presentation">Une distribution Linux en français, fondée sur Debian 13. Un bureau KDE Plasma aux
+    couleurs de la nuit, de l'or et de la sauge, des mondes à installer à la carte, et des outils qui ne
+    font jamais rien sans ton accord.</p>
+  <div class="actions">
+    <a class="bouton plein" href="#telecharger" data-bouton-version>Télécharger Yggdrasil</a>
+    <a class="bouton" href="notes.html">Les nouveautés</a>
+  </div>
+  <p class="meta-version" data-meta-version>Debian 13 « trixie » · KDE Plasma 6.3 · gratuit</p>
+</section>
+
+<div class="vitrine">
+  <img src="img/captures/centre-1280.webp" srcset="img/captures/centre-720.webp 720w, img/captures/centre-1280.webp 1280w, img/captures/centre.webp 1920w" sizes="(min-width: 64rem) 62rem, calc(100vw - 2rem)" alt="Le bureau d'Yggdrasil : Hliðskjálf, le Centre, ouvert sur le trône" width="1920" height="1080">
+</div>
+
+<section class="section" id="pourquoi">
+  <h2>Un système qui te ressemble</h2>
+  <p class="chapeau">Dessous, c'est Debian, sans rien forker : <code>apt</code>, les dépôts et la documentation
+    Debian s'appliquent tels quels. Par-dessus, Yggdrasil ajoute ce qui manque d'habitude.</p>
+  <div class="grille">
+    <article class="carte"><span class="signe" aria-hidden="true">✦</span><h3>Tout en français</h3>
+      <p>Du menu de démarrage aux messages de la console, jusqu'à la phrase secrète du disque, tapée au clavier français.</p></article>
+    <article class="carte"><span class="signe" aria-hidden="true">✦</span><h3>Rien sans ton accord</h3>
+      <p>Chaque outil montre ce qu'il va faire avant de le faire. Ajoute <code>-n</code> à une commande : elle simule tout.</p></article>
+    <article class="carte"><span class="signe" aria-hidden="true">✦</span><h3>Le retour en arrière</h3>
+      <p>Un instantané avant chaque mise à jour ; sur btrfs, chacun apparaît au menu de démarrage.</p></article>
+    <article class="carte"><span class="signe" aria-hidden="true">✦</span><h3>Ton IA reste chez toi</h3>
+      <p>Mímir, l'oracle, tourne sur ta machine : il explique une erreur, lit les journaux, et rien ne part.</p></article>
+    <article class="carte"><span class="signe" aria-hidden="true">✦</span><h3>Des mondes à la carte</h3>
+      <p>Jeu, création, développement, serveurs… Chaque monde installé allume une feuille d'or sur le fond d'écran.</p></article>
+    <article class="carte"><span class="signe" aria-hidden="true">✦</span><h3>Dans ta poche</h3>
+      <p>Skíðblaðnir écrit Yggdrasil sur une clé USB qui garde tes fichiers d'un démarrage à l'autre, chiffrée si tu veux.</p></article>
+  </div>
+</section>
+
+<div class="separateur"></div>
+
+<section class="section" id="apercu">
+  <h2>Aperçu</h2>
+  <p class="chapeau">Captures prises dans une machine virtuelle, sur les images publiées.</p>
+  <div class="galerie">
+    <figure><button type="button" aria-label="Agrandir : un terminal"><img src="img/captures/terminal-1280.webp" srcset="img/captures/terminal-720.webp 720w, img/captures/terminal-1280.webp 1280w, img/captures/terminal.webp 1920w" sizes="(min-width: 72rem) 23rem, (min-width: 48rem) 50vw, 100vw" data-grand="img/captures/terminal.webp" alt="Un terminal : l'arbre-monde en ASCII et les infos du système" width="1920" height="1080" loading="lazy" decoding="async"></button>
+      <figcaption>Chaque terminal s'ouvre sur l'arbre-monde et l'état du système.</figcaption></figure>
+    <figure><button type="button" aria-label="Agrandir : l'assistant du premier démarrage"><img src="img/captures/bienvenue-1280.webp" srcset="img/captures/bienvenue-720.webp 720w, img/captures/bienvenue-1280.webp 1280w, img/captures/bienvenue.webp 1920w" sizes="(min-width: 72rem) 23rem, (min-width: 48rem) 50vw, 100vw" data-grand="img/captures/bienvenue.webp" alt="L'assistant du premier démarrage : Bienvenue, voyageur" width="1920" height="1080" loading="lazy" decoding="async"></button>
+      <figcaption>« Bienvenue, voyageur » : cinq questions pour choisir tes mondes et tes gardiens.</figcaption></figure>
+    <figure><button type="button" aria-label="Agrandir : l'arbre vivant"><img src="img/captures/arbre-vivant-1280.webp" srcset="img/captures/arbre-vivant-720.webp 720w, img/captures/arbre-vivant-1280.webp 1280w, img/captures/arbre-vivant.webp 1920w" sizes="(min-width: 72rem) 23rem, (min-width: 48rem) 50vw, 100vw" data-grand="img/captures/arbre-vivant.webp" alt="Le fond d'écran : une feuille d'or allumée par monde installé" width="1920" height="1080" loading="lazy" decoding="async"></button>
+      <figcaption>L'arbre vivant : chaque monde installé allume sa feuille.</figcaption></figure>
+    <figure><button type="button" aria-label="Agrandir : le menu de démarrage"><img src="img/captures/grub.webp" data-grand="img/captures/grub.webp" alt="Le menu de démarrage en français, avec le retour à un instantané" width="800" height="600" loading="lazy" decoding="async"></button>
+      <figcaption>Le menu de démarrage, en français, propose de revenir à un instantané.</figcaption></figure>
+    <figure><button type="button" aria-label="Agrandir : l'installateur"><img src="img/captures/calamares-1280.webp" srcset="img/captures/calamares-720.webp 720w, img/captures/calamares-1280.webp 1280w, img/captures/calamares.webp 1920w" sizes="(min-width: 72rem) 23rem, (min-width: 48rem) 50vw, 100vw" data-grand="img/captures/calamares.webp" alt="L'installateur Calamares : disque chiffré et btrfs" width="1920" height="1080" loading="lazy" decoding="async"></button>
+      <figcaption>L'installateur : btrfs, instantanés et chiffrement du disque.</figcaption></figure>
+    <figure><button type="button" aria-label="Agrandir : la phrase secrète"><img src="img/captures/phrase-secrete-1280.webp" srcset="img/captures/phrase-secrete-720.webp 720w, img/captures/phrase-secrete-1280.webp 1280w, img/captures/phrase-secrete.webp 1920w" sizes="(min-width: 72rem) 23rem, (min-width: 48rem) 50vw, 100vw" data-grand="img/captures/phrase-secrete.webp" alt="L'arbre au démarrage, et la phrase secrète du disque chiffré" width="1920" height="1080" loading="lazy" decoding="async"></button>
+      <figcaption>Au démarrage, l'arbre pousse ; la phrase secrète se tape au clavier français.</figcaption></figure>
+    <figure><button type="button" aria-label="Agrandir : l'édition serveur"><img src="img/captures/serveur-1280.webp" srcset="img/captures/serveur-720.webp 720w, img/captures/serveur-1280.webp 1280w, img/captures/serveur.webp 1920w" sizes="(min-width: 72rem) 23rem, (min-width: 48rem) 50vw, 100vw" data-grand="img/captures/serveur.webp" alt="L'édition serveur : l'arbre et l'adresse de la machine à la console" width="1920" height="1080" loading="lazy" decoding="async"></button>
+      <figcaption>L'édition serveur : l'adresse de la machine et la commande SSH, avant même la connexion.</figcaption></figure>
+    <figure><button type="button" aria-label="Agrandir : Bifröst"><img src="img/captures/bifrost-1280.webp" srcset="img/captures/bifrost-720.webp 720w, img/captures/bifrost-1280.webp 1280w, img/captures/bifrost.webp 1920w" sizes="(min-width: 72rem) 23rem, (min-width: 48rem) 50vw, 100vw" data-grand="img/captures/bifrost.webp" alt="Bifröst : les services prêts à installer en une commande" width="1920" height="1080" loading="lazy" decoding="async"></button>
+      <figcaption>Bifröst : serveurs de jeu, IA locale, partage… chacun en une commande.</figcaption></figure>
+  </div>
+</section>
+
+<div class="separateur"></div>
+
+<section class="section" id="mondes">
+  <h2>Les neuf mondes</h2>
+  <p class="chapeau">Chaque monde est un ensemble de logiciels choisis, qui s'installe ou se retire d'un coup.
+    Au premier démarrage, l'assistant te propose ceux qui te ressemblent : joueur, créateur, développeur ou gardien de serveurs.</p>
+  <div class="mondes">
+    <article class="carte monde"><span class="rune" aria-hidden="true">ᛉ</span><h3>Ásgard</h3><span class="surnom">la Citadelle</span>
+      <p>Sécurité et vie privée : KeePassXC, OpenSnitch, Tor Browser, ClamAV, Kleopatra.</p></article>
+    <article class="carte monde"><span class="rune" aria-hidden="true">ᛗ</span><h3>Midgard</h3><span class="surnom">le Quotidien</span>
+      <p>Bureautique, messageries, musique : LibreOffice, Thunderbird, Obsidian, Discord, Signal, Spotify.</p></article>
+    <article class="carte monde"><span class="rune" aria-hidden="true">ᚲ</span><h3>Nidavellir</h3><span class="surnom">la Forge des nains</span>
+      <p>Développement : VSCodium, git et GitHub CLI, Python, Java, Node.js, Android Studio.</p></article>
+    <article class="carte monde"><span class="rune" aria-hidden="true">ᛈ</span><h3>Muspelheim</h3><span class="surnom">le Feu</span>
+      <p>Jeu vidéo : Steam et Proton, Prism Launcher, Lutris, Heroic, GameMode, manettes.</p></article>
+    <article class="carte monde"><span class="rune" aria-hidden="true">ᛊ</span><h3>Alfheim</h3><span class="surnom">la Lumière</span>
+      <p>Création et streaming : OBS Studio, Kdenlive, GIMP, Krita, Inkscape, Blender, Audacity.</p></article>
+    <article class="carte monde"><span class="rune" aria-hidden="true">ᚨ</span><h3>Vanaheim</h3><span class="surnom">la Prescience</span>
+      <p>IA locale : Ollama et le modèle de Mímir, Alpaca, Jupyter, Buzz pour transcrire l'audio.</p></article>
+    <article class="carte monde"><span class="rune" aria-hidden="true">ᚦ</span><h3>Jötunheim</h3><span class="surnom">les Géants</span>
+      <p>Serveurs : Docker, Cockpit, serveur SSH, btop, WireGuard.</p></article>
+    <article class="carte monde"><span class="rune" aria-hidden="true">ᛁ</span><h3>Niflheim</h3><span class="surnom">la Brume</span>
+      <p>Mondes isolés : machines virtuelles, Distrobox, Bottles pour les applications Windows.</p></article>
+    <article class="carte monde"><span class="rune" aria-hidden="true">ᛇ</span><h3>Helheim</h3><span class="surnom">le Royaume des morts</span>
+      <p>Récupération et sauvetage : TestDisk et PhotoRec, ddrescue, GParted, Clonezilla.</p></article>
+  </div>
+</section>
+
+<div class="separateur"></div>
+
+<section class="section" id="outils">
+  <h2>Les outils de l'arbre</h2>
+  <p class="chapeau">Le Centre, Hliðskjálf, les rassemble en un clic, et chaque action s'ouvre dans un terminal
+    pour que tu voies ce qui se passe. Tout existe aussi en ligne de commande.</p>
+  <div class="outils">
+    <div class="outil"><code>ygg</code><p>Le gestionnaire système : mises à jour avec instantané, diagnostic, réparations, annulation de la dernière action, pilotes, partages visibles depuis Windows, accès à distance.</p></div>
+    <div class="outil"><code>mimir</code><p>L'oracle, une IA 100 % locale : il explique une erreur, lit les journaux, guide pas à pas ; chaque commande proposée attend ton accord.</p></div>
+    <div class="outil"><code>heimdall</code><p>Le pare-feu, actif par défaut, qui suit le réseau (maison ou Wi-Fi public) ; LAN party temporaire, « qui est sur mon réseau ? ».</p></div>
+    <div class="outil"><code>norns</code><p>Instantanés du système, sauvegardes de ton dossier, copie chiffrée distante, versions précédentes d'un fichier dans Dolphin.</p></div>
+    <div class="outil"><code>bifrost</code><p>Le pont arc-en-ciel : 23 services en conteneurs, chacun en une commande, dont Minecraft dans toutes ses saveurs.</p></div>
+    <div class="outil"><code>brokkr</code><p>Le forgeron : des projets prêts à coder (bot Discord, site web, jeu 2D…), puis hébergés ou empaquetés.</p></div>
+    <div class="outil"><code>ratatoskr</code><p>L'écureuil messager : notifications à boutons, silencieux pendant un jeu, aussi sur ton téléphone.</p></div>
+    <div class="outil"><code>huginn · muninn</code><p>Les corbeaux d'Odin : tes machines en direct, et ce qui a changé depuis hier.</p></div>
+    <div class="outil"><code>gleipnir</code><p>Qui a accès à quoi : comptes, pouvoirs, SSH, ports ouverts, partages, permissions Flatpak.</p></div>
+    <div class="outil"><code>draupnir</code><p>La graine de ta machine, à replanter ailleurs : mondes, logiciels, réglages ; chiffrée si tu veux.</p></div>
+    <div class="outil"><code>skidbladnir</code><p>Le navire qui tient dans la poche : Yggdrasil sur une clé USB persistante.</p></div>
+  </div>
+</section>
+
+<div class="separateur"></div>
+
+<section class="section" id="telecharger">
+  <h2>Télécharger</h2>
+  <p class="chapeau" data-chapeau-telecharger>Les images sont publiées dans les releases GitHub du projet.</p>
+
+  <div class="editions">
+    <article class="carte edition">
+      <div class="entete-edition"><h3>Bureau</h3><span class="taille" data-taille="bureau"></span></div>
+      <p>Pour un PC de tous les jours : bureau Plasma, session live pour essayer, installateur graphique.</p>
+      <ul class="fichiers" data-fichiers="bureau">
+        <li class="fichier"><span class="nom">Les fichiers de la dernière version sont sur GitHub.</span>
+          <a class="bouton petit" href="https://github.com/NaiSora/YggdrasilOS/releases/latest">Ouvrir</a></li>
+      </ul>
+    </article>
+    <article class="carte edition">
+      <div class="entete-edition"><h3>Serveur</h3><span class="taille" data-taille="serveur"></span></div>
+      <p>Pour une machine sans écran : console, SSH, Docker pour les services de Bifröst, installateur en mode texte.</p>
+      <ul class="fichiers" data-fichiers="serveur">
+        <li class="fichier"><span class="nom">Les fichiers de la dernière version sont sur GitHub.</span>
+          <a class="bouton petit" href="https://github.com/NaiSora/YggdrasilOS/releases/latest">Ouvrir</a></li>
+      </ul>
+    </article>
+  </div>
+
+  <h3 class="titre-section" style="font-size:1.7rem;margin-top:2.6rem">Recoller l'ISO bureau</h3>
+  <p class="muet">GitHub refuse les fichiers de plus de 2 Go : l'ISO bureau est livrée en deux morceaux. Une fois
+    téléchargés, dans le même dossier :</p>
+  <div class="onglets" role="tablist" aria-label="Système">
+    <button type="button" role="tab" id="onglet-windows" aria-controls="recoller-windows" aria-selected="true">Windows</button>
+    <button type="button" role="tab" id="onglet-linux" aria-controls="recoller-linux" aria-selected="false" tabindex="-1">Linux et macOS</button>
+  </div>
+  <div role="tabpanel" id="recoller-windows" aria-labelledby="onglet-windows">
+<pre><code data-recoller="windows">cmd /c copy /b yggdrasil-VERSION-amd64.iso.001 + yggdrasil-VERSION-amd64.iso.002 yggdrasil-VERSION-amd64.iso
+Get-FileHash yggdrasil-VERSION-amd64.iso</code></pre>
+  </div>
+  <div role="tabpanel" id="recoller-linux" aria-labelledby="onglet-linux" hidden>
+<pre><code data-recoller="linux">cat yggdrasil-VERSION-amd64.iso.001 yggdrasil-VERSION-amd64.iso.002 &gt; yggdrasil-VERSION-amd64.iso
+sha256sum -c SHA256SUMS --ignore-missing</code></pre>
+  </div>
+  <p class="encadre">La somme obtenue doit être celle de l'ISO recollée dans <a href="https://github.com/NaiSora/YggdrasilOS/releases/latest" data-lien-sommes>SHA256SUMS</a>.
+    Sous chaque fichier ci-dessus, son empreinte SHA-256 telle que GitHub l'a calculée.</p>
+
+  <div class="grille" style="margin-top:2.4rem">
+    <div>
+      <h3 class="titre-section" style="font-size:1.5rem">Configuration conseillée</h3>
+      <table class="besoins">
+        <thead><tr><td></td><th scope="col">Bureau</th><th scope="col">Serveur</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Processeur</th><td colspan="2">PC 64 bits (x86-64), UEFI (Secure Boot compris) ou BIOS</td></tr>
+          <tr><th scope="row">Mémoire</th><td>4 Go (8 Go pour Mímir)</td><td>2 Go</td></tr>
+          <tr><th scope="row">Disque</th><td>30 Go</td><td>16 Go</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <h3 class="titre-section" style="font-size:1.5rem">Les sources</h3>
+      <p class="muet">Les images contiennent des milliers de paquets Debian, chacun sous sa propre licence. Leurs
+        sources, aux versions exactes, sont publiées à part, dans
+        <a href="https://github.com/NaiSora/YggdrasilOS-sources/releases" data-lien-sources>YggdrasilOS-sources</a>,
+        et le code d'Yggdrasil est sur <a href="https://github.com/NaiSora/YggdrasilOS">GitHub</a>.</p>
+      <p class="muet"><a href="notes.html">Toutes les versions et leurs notes →</a></p>
+    </div>
+  </div>
+</section>
+
+<div class="separateur"></div>
+
+<section class="section" id="installer">
+  <h2>Installer</h2>
+  <p class="chapeau">Une clé USB de 8 Go ou plus, une dizaine de minutes, et l'arbre prend racine.</p>
+  <ol class="etapes">
+    <li><h3>Écris l'ISO sur une clé USB</h3>
+      <p>Sous Windows, <a href="https://rufus.ie">Rufus</a> en mode DD ou <a href="https://etcher.balena.io">balenaEtcher</a> ;
+        sous Linux, <code>dd</code> ; depuis Yggdrasil, <code>skidbladnir ecrire sdX</code>, qui sait aussi garder tes fichiers sur la clé.</p></li>
+    <li><h3>Démarre sur la clé</h3>
+      <p>Avec la touche du menu de démarrage, au lancement du PC : souvent F12, F8, F11 ou Échap.</p></li>
+    <li><h3>Essaie sans rien installer</h3>
+      <p>La session live s'ouvre d'elle-même (utilisateur <code>ygg</code>, mot de passe <code>live</code>) : le Centre,
+        les outils et les applications sont là.</p></li>
+    <li><h3>Installe</h3>
+      <p>Avec l'icône <em>Installer Yggdrasil</em> du bureau. Par défaut, btrfs et ses instantanés ; coche <em>Chiffrer le
+        système</em> pour protéger le disque par une phrase secrète. Yggdrasil s'installe aussi à côté de Windows.</p></li>
+    <li><h3>Choisis tes mondes</h3>
+      <p>Au premier démarrage, l'assistant <em>Bienvenue, voyageur</em> te demande comment Mímir doit t'appeler, puis
+        quels mondes faire pousser et quels gardiens activer. Rien ne s'installe sans ton accord.</p></li>
+  </ol>
+  <p class="encadre" style="margin-top:1.6rem">L'édition serveur s'installe avec l'installateur Debian en mode texte, en
+    français. Au démarrage, la console affiche l'adresse de la machine et la commande pour s'y connecter :
+    <code>ssh ygg@192.168.1.42</code>.</p>
+</section>
+
+<div class="separateur"></div>
+
+<section class="section" id="mises-a-jour">
+  <h2>Les mises à jour</h2>
+  <p class="chapeau"><code>ygg update</code> met à jour Debian, les Flatpak et les outils d'Yggdrasil, après un
+    instantané du système. Les outils viennent du <a href="depot/">dépôt APT d'Yggdrasil</a>, hébergé ici et signé :
+    APT refuse tout paquet que la clé d'Yggdrasil n'a pas signé.</p>
+  <p class="encadre">Installé avec la version 1.0.0 ? Son dépôt était désactivé ; une commande suffit pour le rejoindre :</p>
+<pre><code>sudo sed -i -e 's|^URIs:.*|URIs: https://naisora.github.io/YggdrasilOS/depot|' -e 's|^Enabled:.*|Enabled: yes|' /etc/apt/sources.list.d/yggdrasil.sources
+ygg update</code></pre>
+</section>
+</main>
+
+<footer class="pied">
+  <div class="barre">
+    <div>
+      <a class="marque" href="./"><img src="img/logo.svg" alt="" width="36" height="36">Yggdrasil</a>
+      <p>Fondé sur Debian GNU/Linux et KDE Plasma, sans être un projet officiel de l'un ni de l'autre. Chaque
+        paquet Debian garde sa licence ; le code d'Yggdrasil n'est pas encore placé sous licence.</p>
+      <p>Ce site ne pose aucun cookie et ne mesure pas son audience (<a href="confidentialite.html">confidentialité</a>).</p>
+    </div>
+    <nav aria-label="Liens du pied de page">
+      <a href="#telecharger">Télécharger</a>
+      <a href="notes.html">Nouveautés</a>
+      <a href="guide.html">Guide</a>
+      <a href="depot/">Dépôt APT</a>
+      <a href="https://github.com/NaiSora/YggdrasilOS">Code source</a>
+      <a href="https://github.com/NaiSora/YggdrasilOS/issues">Signaler un problème</a>
+      <a href="confidentialite.html">Confidentialité</a>
+      <a href="conditions.html">Conditions d'utilisation</a>
+    </nav>
+  </div>
+</footer>
+
+<dialog class="visionneuse" aria-label="Capture agrandie">
+  <button type="button" class="bouton petit fermer">Fermer</button>
+  <img alt="">
+  <p></p>
+</dialog>
+</body>
+</html>

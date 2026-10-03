@@ -1,0 +1,51 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Architectures: amd64 all
+Codename: trixie
+Components: main
+Date: Sat, 03 Oct 2026 00:59:30 +0000
+Description: Yggdrasil 1.0.1 — les outils de l'arbre
+Label: Yggdrasil
+Origin: Yggdrasil
+Suite: trixie
+Version: 1.0.1
+MD5Sum:
+ c067ddb18d176f34fb88e5e40b09339a              216 Release
+ 7f958762a4fc97c467b0ec35da9b5526             6766 main/binary-all/Packages
+ 0e37aafb38d2f2d983cb5d1139a61a75             3224 main/binary-all/Packages.gz
+ 216c72d1e0bf31d7f5f21524719545db             3200 main/binary-all/Packages.xz
+ 7f958762a4fc97c467b0ec35da9b5526             6766 main/binary-amd64/Packages
+ 0e37aafb38d2f2d983cb5d1139a61a75             3224 main/binary-amd64/Packages.gz
+ 216c72d1e0bf31d7f5f21524719545db             3200 main/binary-amd64/Packages.xz
+SHA1:
+ 6db9f37a28ed22505a0fda5e0318e9f4aeff459e              216 Release
+ 83895b62519100847677943e22bb0d6a4977d21c             6766 main/binary-all/Packages
+ 7a55c8c5f8ec7523f607c9486af8ed102e05509e             3224 main/binary-all/Packages.gz
+ 1ee75bd1d374d41aab715f6acf342a5605a4cdaa             3200 main/binary-all/Packages.xz
+ 83895b62519100847677943e22bb0d6a4977d21c             6766 main/binary-amd64/Packages
+ 7a55c8c5f8ec7523f607c9486af8ed102e05509e             3224 main/binary-amd64/Packages.gz
+ 1ee75bd1d374d41aab715f6acf342a5605a4cdaa             3200 main/binary-amd64/Packages.xz
+SHA256:
+ 7c35a914a432e473297ad41e1c690210ccac0826cde12284173cc5d214c37aa7              216 Release
+ 4438eeaa0fb7e93814f88a3bb1c21375a54e277755d694bd7807637709def339             6766 main/binary-all/Packages
+ e62b4d1666b69cff4a691610bd19f3e31c78fe1010349b3f9a686ff2dfc13cdf             3224 main/binary-all/Packages.gz
+ 62f9b5a0655b5995d34f6fec85103533f99829c4c931f08408dceb12ad3d401e             3200 main/binary-all/Packages.xz
+ 4438eeaa0fb7e93814f88a3bb1c21375a54e277755d694bd7807637709def339             6766 main/binary-amd64/Packages
+ e62b4d1666b69cff4a691610bd19f3e31c78fe1010349b3f9a686ff2dfc13cdf             3224 main/binary-amd64/Packages.gz
+ 62f9b5a0655b5995d34f6fec85103533f99829c4c931f08408dceb12ad3d401e             3200 main/binary-amd64/Packages.xz
+SHA512:
+ 8157e966b6d6093ee592af9289b3ad443795019bfb0a07f50070945cb0698ca5d1306961936048a33d17cfaef40f390f8863c59b9fc43b3633870ce35af9f3c9              216 Release
+ 1932b08d51a733dc6765fee6bb876b2b240b2a7908a906ea71ff6dbfe11dd4102efaa418d87873c090dd6f959fbecd8b7c09be654445ebbcf7260ad3b116171c             6766 main/binary-all/Packages
+ 24ab132a4020d6d07086b9580a5c49b511d74fb524ef2a973fa019e197364324fc959bfc7dca9e5b022b81cca6abbff6df6267e57c7bb9948ef11e70bfb67779             3224 main/binary-all/Packages.gz
+ eca34ecf5a68af3f7d759d6370f02401e75b11fcb9f9ed6253b5b77e9714cc385d7e7f5c7c556b21d53882baaab3bd5fca8a268ca8b72d403bd8d31dff984029             3200 main/binary-all/Packages.xz
+ 1932b08d51a733dc6765fee6bb876b2b240b2a7908a906ea71ff6dbfe11dd4102efaa418d87873c090dd6f959fbecd8b7c09be654445ebbcf7260ad3b116171c             6766 main/binary-amd64/Packages
+ 24ab132a4020d6d07086b9580a5c49b511d74fb524ef2a973fa019e197364324fc959bfc7dca9e5b022b81cca6abbff6df6267e57c7bb9948ef11e70bfb67779             3224 main/binary-amd64/Packages.gz
+ eca34ecf5a68af3f7d759d6370f02401e75b11fcb9f9ed6253b5b77e9714cc385d7e7f5c7c556b21d53882baaab3bd5fca8a268ca8b72d403bd8d31dff984029             3200 main/binary-amd64/Packages.xz
+-----BEGIN PGP SIGNATURE-----
+
+iI4EARYKADYWIQTZ5o5JjmnEqlzlGrtjkFYHMGUt5gUCasBTchgcZGVwb3RAeWdn
+ZHJhc2lsLmludmFsaWQACgkQY5BWBzBlLeb0OAEA/LcSPZMMgZH9/dSARPEzI5vN
+9dUmjIaal5fZFFBNrrEA/0tHa1OgIcCmAsiWV1+l6XSrQx17/y81v6m3Dr+Jv+wO
+=rsaJ
+-----END PGP SIGNATURE-----

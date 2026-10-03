@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dépôt APT — Yggdrasil</title><meta name="theme-color" content="#091c30">
+<link rel="stylesheet" href="../style.css"><meta name="description" content="Le dépôt APT signé d'Yggdrasil : les outils de l'arbre pour Debian 13, sa clé, son empreinte, et comment l'ajouter à une autre Debian.">
+<link rel="canonical" href="https://naisora.github.io/YggdrasilOS/depot/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Yggdrasil">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:url" content="https://naisora.github.io/YggdrasilOS/depot/">
+<meta property="og:title" content="Dépôt APT — Yggdrasil">
+<meta property="og:description" content="Le dépôt APT signé d'Yggdrasil : les outils de l'arbre pour Debian 13, sa clé, son empreinte, et comment l'ajouter à une autre Debian.">
+<meta property="og:image" content="https://naisora.github.io/YggdrasilOS/img/partage.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta property="og:image:alt" content="Le logo d'Yggdrasil, l'arbre-monde d'or dans son anneau, et sa devise : l'arbre qui relie tes mondes">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../favicon.ico" sizes="32x32">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+</head>
+<body><main><section class="section">
+<p><a href="../">← Le site d'Yggdrasil</a></p>
+<h1 class="titre-section">Le dépôt APT d'Yggdrasil 1.0.1</h1>
+<p class="chapeau">Les machines Yggdrasil l'utilisent d'elles-mêmes (paquet <code>yggdrasil-archive-keyring</code>) :
+<code>ygg update</code> y prend les nouvelles versions des outils. Il est signé : APT refuse tout paquet que
+cette clé n'a pas signé. Sur une autre Debian 13 :</p>
+<pre><code>sudo curl -fsSLo /usr/share/keyrings/yggdrasil-archive-keyring.gpg https://naisora.github.io/YggdrasilOS/depot/yggdrasil-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/yggdrasil-archive-keyring.gpg] https://naisora.github.io/YggdrasilOS/depot trixie main" \
+  | sudo tee /etc/apt/sources.list.d/yggdrasil.list
+sudo apt update</code></pre>
+<p>Empreinte de la clé : <code>D9E68E498E69C4AA5CE51ABB6390560730652DE6</code></p>
+<p class="muet">Paquets : yggdrasil-archive-keyring, yggdrasil-base, yggdrasil-calamares, yggdrasil-desktop, yggdrasil-serveur, yggdrasil-tools.</p>
+</section></main></body></html>

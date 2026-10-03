@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Confidentialité — Yggdrasil</title>
+<meta name="description" content="Ce que le site d'Yggdrasil et le système lui-même font de tes données : pas de cookie, pas de mesure d'audience, pas de télémétrie.">
+<meta name="theme-color" content="#091c30">
+<!-- build-site.sh ajoute l'adresse canonique, l'aperçu de partage et les icônes -->
+<link rel="stylesheet" href="style.css">
+<link rel="canonical" href="https://naisora.github.io/YggdrasilOS/confidentialite.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Yggdrasil">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:url" content="https://naisora.github.io/YggdrasilOS/confidentialite.html">
+<meta property="og:title" content="Confidentialité — Yggdrasil">
+<meta property="og:description" content="Ce que le site d'Yggdrasil et le système lui-même font de tes données : pas de cookie, pas de mesure d'audience, pas de télémétrie.">
+<meta property="og:image" content="https://naisora.github.io/YggdrasilOS/img/partage.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta property="og:image:alt" content="Le logo d'Yggdrasil, l'arbre-monde d'or dans son anneau, et sa devise : l'arbre qui relie tes mondes">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+</head>
+<body>
+<header class="entete">
+  <div class="barre">
+    <a class="marque" href="./"><img src="img/logo.svg" alt="" width="36" height="36">Yggdrasil</a>
+    <nav aria-label="Navigation principale">
+      <a href="./#mondes">Les mondes</a>
+      <a href="./#outils">Les outils</a>
+      <a href="notes.html">Nouveautés</a>
+      <a href="guide.html">Guide</a>
+      <a href="https://github.com/NaiSora/YggdrasilOS">GitHub</a>
+      <a class="bouton plein" href="./#telecharger">Télécharger</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<article class="section texte">
+  <h1 class="titre-section">Confidentialité</h1>
+  <p class="chapeau">En bref : ni ce site ni Yggdrasil ne recueillent de données sur toi. Pas de cookie, pas de
+    mesure d'audience, pas de publicité, pas de télémétrie.</p>
+
+  <h2 id="site">Ce site</h2>
+  <ul>
+    <li><strong>Aucun cookie</strong>, rien d'enregistré dans ton navigateur, aucune mesure d'audience, aucun
+      pixel de suivi. Les polices sont servies par le site lui-même, aucune n'est demandée ailleurs. Il n'y a donc
+      pas de bandeau de cookies : il n'y aurait rien à accepter ni à refuser.</li>
+    <li>Le site est hébergé par <strong>GitHub Pages</strong>. Comme tout hébergeur, GitHub reçoit l'adresse IP
+      des visiteurs et la garde pour la sécurité de son service,
+      <a href="https://docs.github.com/fr/pages/getting-started-with-github-pages/what-is-github-pages#data-collection">comme
+      il l'explique</a> ; cela relève de GitHub et de sa
+      <a href="https://docs.github.com/fr/site-policy/privacy-policies/github-general-privacy-statement">déclaration
+      de confidentialité</a>.</li>
+    <li>Pour afficher les versions et leurs fichiers, l'accueil et la page des nouveautés demandent la liste des
+      versions à l'API de GitHub (<code>api.github.com</code>), depuis ton navigateur, sans cookie ni identifiant :
+      GitHub voit passer ton adresse IP, comme pour la page elle-même.</li>
+    <li>Les téléchargements se font chez GitHub (<code>github.com</code> et ses serveurs de fichiers), avec les
+      mêmes règles.</li>
+  </ul>
+
+  <h2 id="systeme">Yggdrasil, le système</h2>
+  <ul>
+    <li><strong>Pas de télémétrie</strong> : Yggdrasil n'envoie ni statistiques d'utilisation, ni rapports de
+      plantage, ni identifiant de ta machine. Mímir, l'IA, tourne sur ta machine : tes questions et tes journaux
+      n'en sortent pas.</li>
+    <li>De lui-même, en arrière-plan, le système ne contacte que des serveurs de mises à jour : les miroirs de
+      Debian et le dépôt d'Yggdrasil (hébergé par GitHub, avec ce site), chaque jour, pour installer les
+      correctifs de sécurité ; Flathub, pour les applications Flatpak ; le service de micrologiciels de Linux
+      (LVFS), pour les mises à jour de firmware. Comme tout serveur, ils voient passer ton adresse IP.</li>
+    <li>Le reste n'arrive que si tu le demandes : le modèle de Mímir se télécharge chez Ollama quand tu fais
+      pousser Vanaheim ; les notifications de Ratatoskr ne vont sur ton téléphone que si tu le relies
+      (<code>ratatoskr telephone</code>), par ntfy.sh sur un canal au nom aléatoire, ou par ton propre serveur ntfy ;
+      Bifröst télécharge les images de ses services, et les mods Minecraft sur Modrinth ; chaque monde installe
+      ses logiciels depuis leurs propres dépôts.</li>
+    <li>Les applications que tu ouvres (Firefox, Discover, Steam, Discord, Spotify…) parlent à leurs propres
+      services, selon leurs propres règles de confidentialité.</li>
+  </ul>
+
+  <h2 id="droits">Tes droits</h2>
+  <p>Le projet ne recueille ni ne conserve aucune donnée personnelle : il n'y a rien à consulter, rectifier ou
+    effacer chez lui. Pour ce que GitHub traite (adresse IP, ton compte GitHub si tu ouvres une issue),
+    adresse-toi à GitHub, selon sa déclaration de confidentialité. En France, tu peux aussi saisir la
+    <a href="https://www.cnil.fr/fr/plaintes">CNIL</a>.</p>
+  <p>Une question ? Ouvre une <a href="https://github.com/NaiSora/YggdrasilOS/issues">issue sur GitHub</a>. Les
+    issues sont publiques : n'y mets rien de personnel, et relis les journaux avant de les coller (ils contiennent
+    parfois des noms de machine ou d'utilisateur).</p>
+
+  <p class="muet">Dernière mise à jour : 3 octobre 2026.</p>
+</article>
+</main>
+
+<footer class="pied">
+  <div class="barre">
+    <div>
+      <a class="marque" href="./"><img src="img/logo.svg" alt="" width="36" height="36">Yggdrasil</a>
+      <p>Ce site ne pose aucun cookie et ne mesure pas son audience.</p>
+    </div>
+    <nav aria-label="Liens du pied de page">
+      <a href="./#telecharger">Télécharger</a>
+      <a href="notes.html">Nouveautés</a>
+      <a href="guide.html">Guide</a>
+      <a href="depot/">Dépôt APT</a>
+      <a href="https://github.com/NaiSora/YggdrasilOS">Code source</a>
+      <a href="https://github.com/NaiSora/YggdrasilOS/issues">Signaler un problème</a>
+      <a href="confidentialite.html" aria-current="page">Confidentialité</a>
+      <a href="conditions.html">Conditions d'utilisation</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

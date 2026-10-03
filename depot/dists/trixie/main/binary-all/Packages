@@ -1,0 +1,135 @@
+Package: yggdrasil-archive-keyring
+Architecture: all
+Version: 1.0.1
+Priority: important
+Section: admin
+Maintainer: Projet Yggdrasil <yggdrasil@localhost>
+Installed-Size: 48
+Depends: ca-certificates
+Filename: pool/main/yggdrasil-archive-keyring_1.0.1_all.deb
+Size: 1976
+MD5sum: 5a78ecbc0c754abf4957c1cb3792e3bb
+SHA1: 6513c7c1d6839b1f2402d120003b162013d1c48a
+SHA256: ac86e0750c1c06439cdcc886e11b1d571649871d51d348586b52042e7655a862
+SHA512: 40f40d244a83229ac998e51d6e558199aefe5fb206ebd278e56f0d49395d9f918db05ea40e86fb9df792a0d0a927cd0693ab8787ec571a2cd3a66982b195c0ef
+Description: clé de signature et adresse du dépôt APT d'Yggdrasil
+ La clé publique qui signe le dépôt d'Yggdrasil, et la source APT qui
+ l'utilise : ygg update apporte ainsi les nouvelles versions des outils
+ de l'arbre (ygg, mimir, heimdall…) comme celles de Debian.
+
+Package: yggdrasil-base
+Architecture: all
+Version: 1.0.1
+Priority: optional
+Section: misc
+Maintainer: Projet Yggdrasil <yggdrasil@localhost>
+Installed-Size: 4480
+Depends: base-files, dpkg (>= 1.19)
+Recommends: plymouth, desktop-base, fastfetch, grub-common
+Filename: pool/main/yggdrasil-base_1.0.1_all.deb
+Size: 2522880
+MD5sum: 2e9ac15b09656fefb3511914136c792e
+SHA1: bab56f0cded72ba608f80723119ba6ead300500e
+SHA256: 0c3048609e57ae6bacbfb41070e69969f4ab30279bf365695755ae93ffe99517
+SHA512: b1ee9ab90c785de28bdbd718c21fbe51364427061dc85c5077c104ae82b1bdd97fa2c539843b3dc07a45ee650ba6cd400d3654b4b24760448560997419ecf35b
+Description: identité et réglages de base d'Yggdrasil
+ Nom du système (os-release), thèmes de démarrage GRUB et Plymouth, fonds
+ d'écran, bannière de connexion, logo pour fastfetch et réglages du shell
+ d'Yggdrasil, distribution dérivée de Debian.
+
+Package: yggdrasil-calamares
+Architecture: all
+Version: 1.0.1
+Priority: optional
+Section: admin
+Maintainer: Projet Yggdrasil <yggdrasil@localhost>
+Installed-Size: 152
+Depends: calamares, calamares-settings-debian
+Filename: pool/main/yggdrasil-calamares_1.0.1_all.deb
+Size: 88928
+MD5sum: 42716b8bbfed712aa4445f0d3073ca03
+SHA1: f8dd1d62275cafcf18faf53a0c59719c6b01ffea
+SHA256: d3107e108068af2284df57ef83d0f51a05f51912b66af94842bd2d6a2c78961a
+SHA512: 2eeb4250da59c25619347a101b33aecd10602080478cc91edba14cb46902de520db80fdb0f13538289d5ffad08bdf3dbb3d7c6fac0c85b78a7efb31cde754ba9
+Description: habillage de l'installateur Calamares pour Yggdrasil
+ Logo, diaporama et réglages régionaux (français, Europe/Paris) de
+ l'installateur graphique utilisé depuis la clé USB live d'Yggdrasil.
+
+Package: yggdrasil-desktop
+Architecture: all
+Version: 1.0.1
+Priority: optional
+Section: kde
+Maintainer: Projet Yggdrasil <yggdrasil@localhost>
+Installed-Size: 8200
+Depends: yggdrasil-base (= 1.0.1), yggdrasil-tools (= 1.0.1),
+ python3-pyside6.qtcore, python3-pyside6.qtgui, python3-pyside6.qtqml, python3-pyside6.qtquick,
+ python3-pyside6.qtwidgets, qml6-module-org-kde-kirigami, qml6-module-qtquick-controls,
+ qml6-module-qtquick-layouts, qml6-module-qtquick-templates, qml6-module-qtquick-window,
+ qml6-module-qtqml-workerscript, qml6-module-qtquick-effects, qt6-svg-plugins, librsvg2-bin,
+ papirus-icon-theme, fonts-noto-core, fonts-jetbrains-mono, fonts-ebgaramond
+Recommends: plasma-desktop, sddm, konsole, breeze, breeze-cursor-theme, libkf6config-bin, qdbus-qt6, wl-clipboard, xclip,
+ qml6-module-org-kde-desktop
+Filename: pool/main/yggdrasil-desktop_1.0.1_all.deb
+Size: 3180920
+MD5sum: 361c9e8ab4f2d099382db5263787e58c
+SHA1: 396eef6129527a94c0cf429e56a5038d40285157
+SHA256: be7acac08f8c41cd33d8231210745356ba0e80ea3633948f4e112b718ee155c5
+SHA512: 13ad345efe51b2e8178c4575328b006d89526bd8f42f9b5eb1767aa715e43c7ef885293e889b9b4e5bd09f3ec61eb07d13a469b8ee62dadfde572c6632f1700e
+Description: bureau KDE Plasma d'Yggdrasil et Hliðskjálf, le Centre
+ Thème complet du bureau Plasma aux couleurs du logo (nuit, or et sauge) :
+ apparence globale, jeu de couleurs, écran de démarrage de session animé
+ (l'arbre-monde pousse), écran de connexion SDDM, terminal Konsole, icônes
+ Papirus aux dossiers dorés et fonds d'écran. Fournit aussi l'application
+ « Centre Yggdrasil » qui donne accès en un clic aux royaumes, à l'entretien
+ du système, à l'IA locale, au homelab et aux modèles de projets.
+
+Package: yggdrasil-serveur
+Architecture: all
+Version: 1.0.1
+Priority: optional
+Section: admin
+Maintainer: Projet Yggdrasil <yggdrasil@localhost>
+Installed-Size: 36
+Depends: yggdrasil-base, yggdrasil-tools, openssh-server, docker.io, docker-compose, python3
+Recommends: needrestart, unattended-upgrades
+Filename: pool/main/yggdrasil-serveur_1.0.1_all.deb
+Size: 2328
+MD5sum: 3573480e1bb0365451622f7019ebe448
+SHA1: bf12da4957b9dd68effd2b3ba63f88362bb6c7a3
+SHA256: 227f6fbd75fec114f582dfa2b25e8c8b394dfd3184ac8dec84ef442fd5ea045d
+SHA512: b8c86fbbf4f6484b3d1fa7bf910cafd4b24b843fa179eef60f65842315dc4bc5286f2d80cba663405d4ad8862bcb38eb9f3c91f01504e42a4160b66c2c80324c
+Description: édition serveur d'Yggdrasil
+ Yggdrasil sans bureau, pour héberger : SSH, Docker pour les services
+ Bifröst (serveurs Minecraft, open-webui, partage de fichiers…), Heimdall
+ en profil serveur (SSH ouvert, le reste fermé) et l'arbre-monde à la
+ console avant la connexion, avec l'adresse de la machine.
+
+Package: yggdrasil-tools
+Architecture: all
+Version: 1.0.1
+Priority: optional
+Section: admin
+Maintainer: Projet Yggdrasil <yggdrasil@localhost>
+Installed-Size: 2232
+Depends: python3 (>= 3.11), nftables, rsync, util-linux, iproute2, procps, sudo
+Recommends: timeshift, flatpak, libnotify-bin, curl, zstd, git, fastfetch, pciutils, smartmontools, lm-sensors, ieee-data,
+ power-profiles-daemon
+Suggests: docker.io, docker-compose, fail2ban, samba, wsdd2, openssh-server, wireguard-tools, qrencode
+Filename: pool/main/yggdrasil-tools_1.0.1_all.deb
+Size: 193264
+MD5sum: 3fd5518ef58e3d8e2944e131834d909b
+SHA1: eb9c1ca777f3a6395ce20dc7618af216fcaba180
+SHA256: 7b43a196d24c0f67eebed5a2aa0f93e6eba75b1fc976e3254660bee6fe944c05
+SHA512: c0d23a09ea397422153e59c4a663d57ffea78bba8bdeea2cc863ad91f5812416115aabfdc9c60bd4115f84f095e41f702c3f1441bea76043b6b4dba26c296245
+Description: outils système d'Yggdrasil (ygg, mimir, heimdall, norns, bifrost, brokkr, ratatoskr)
+ ygg       : mises à jour, diagnostic, réparation, annulation, nettoyage (Níðhöggr),
+             matériel et pilotes, partage visible depuis Windows, accès à distance
+             (SSH, WireGuard), tâches planifiées, thème, comptes, « royaumes » ;
+ mimir     : assistant IA 100 % local (Ollama) ;
+ heimdall  : pare-feu nftables simple ;
+ norns     : instantanés système et sauvegardes du dossier personnel ;
+ bifrost   : services homelab Docker en une commande ;
+ brokkr    : modèles de projets (bots, plugins Minecraft, API…) ;
+ ratatoskr : notifications de mises à jour et de problèmes.
+
