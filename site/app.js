@@ -5,6 +5,8 @@
 const PROJET = "NaiSora/YggdrasilOS";
 const API = `https://api.github.com/repos/${PROJET}/releases?per_page=30`;
 const RELEASES = `https://github.com/${PROJET}/releases`;
+// Les releases ne portent que les images : les sources de chaque version sont publiées à part
+const SOURCES = `https://github.com/${PROJET}-sources/releases`;
 
 const nombre = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 1 });
 const jour = new Intl.DateTimeFormat("fr-FR", { dateStyle: "long" });
@@ -38,16 +40,15 @@ function versions() {
     return demande;
 }
 
-// Les fichiers d'une version : ISO bureau (en morceaux), ISO serveur, sources, sommes
+// Les fichiers d'une version : ISO bureau (en morceaux), ISO serveur, sommes
 function classer(fichiers) {
-    const c = { bureau: [], serveur: [], sources: [], sommes: null };
+    const c = { bureau: [], serveur: [], sommes: null };
     for (const f of fichiers) {
         if (/^yggdrasil-[\d.]+-amd64\.iso(\.\d{3})?$/.test(f.name)) c.bureau.push(f);
         else if (/^yggdrasil-serveur-[\d.]+-amd64\.iso(\.\d{3})?$/.test(f.name)) c.serveur.push(f);
-        else if (/sources\.tar(\.\d{3})?$/.test(f.name)) c.sources.push(f);
         else if (f.name === "SHA256SUMS") c.sommes = f;
     }
-    for (const liste of [c.bureau, c.serveur, c.sources]) liste.sort((a, b) => a.name.localeCompare(b.name));
+    for (const liste of [c.bureau, c.serveur]) liste.sort((a, b) => a.name.localeCompare(b.name));
     return c;
 }
 
@@ -108,11 +109,7 @@ function remplirTelechargements(v) {
             `cat ${parties.join(" ")} > ${iso}\nsha256sum -c SHA256SUMS --ignore-missing`;
     }
     if (c.sommes) document.querySelector("[data-lien-sommes]")?.setAttribute("href", c.sommes.browser_download_url);
-    const sources = document.querySelector("[data-sources]");
-    if (sources && c.sources.length) {
-        sources.replaceChildren(`${c.sources.length} archives de sources, ${taille(c.sources.reduce((s, f) => s + f.size, 0))} : `,
-            element("a", { href: v.html_url, texte: "dans la release" }));
-    }
+    document.querySelector("[data-lien-sources]")?.setAttribute("href", `${SOURCES}/tag/${v.tag_name}`);
 }
 
 function remplirNotes(liste, conteneur) {

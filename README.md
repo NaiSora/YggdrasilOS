@@ -105,10 +105,11 @@ cat yggdrasil-1.0.1-amd64.iso.001 yggdrasil-1.0.1-amd64.iso.002 > yggdrasil-1.0.
 sha256sum -c SHA256SUMS --ignore-missing
 ```
 
-Chaque release joint aussi les **sources** de tout ce que contiennent les images, aux versions exactes,
-comme le demande la GPL : les paquets Debian du système (archives `…-sources.tar.001`, `.002`…), et un
-complément par édition (`…-complement-sources.tar`) pour l'installateur Debian, les chargeurs d'amorçage
-signés et le code que d'autres paquets embarquent.
+Les releases ne portent que les images. Les **sources** de tout ce qu'elles contiennent, aux versions exactes,
+comme le demande la GPL, sont publiées à part, dans
+[**YggdrasilOS-sources**](https://github.com/NaiSora/YggdrasilOS-sources/releases) : une release par version,
+au même numéro, avec les paquets Debian du système et ce que l'image contient en plus (l'installateur
+Debian, les chargeurs d'amorçage signés, le code que d'autres paquets embarquent).
 
 **Configuration conseillée** : un PC 64 bits (x86-64), UEFI (Secure Boot compris) ou BIOS.
 
@@ -245,7 +246,9 @@ Sous Linux : `./build.sh`, `./build.sh serveur`, `./build.sh test`, `./build.sh 
 Pour une publication, `YGG_SOURCES=true ./build.sh` (ou `.\build.ps1 -Sources`) joint les sources des
 paquets Debian de l'image, en morceaux de moins de 2 Gio, et une archive complémentaire
 (`scripts/sources-completes.py`) : `lb source` ne prend que le système live, il y manquerait l'installateur
-Debian, les chargeurs d'amorçage signés et le code que d'autres paquets embarquent (`Built-Using`).
+Debian, les chargeurs d'amorçage signés et le code que d'autres paquets embarquent (`Built-Using`). Ces
+archives se publient dans le dépôt [YggdrasilOS-sources](https://github.com/NaiSora/YggdrasilOS-sources),
+pas dans les releases des images.
 
 **Le site et le dépôt APT.** `site/` contient les pages du site ; `./build.sh site` l'assemble dans
 `out/site/` avec le guide, le dépôt APT signé (`out/depot/`, fait par chaque construction) et ses images,
