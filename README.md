@@ -104,8 +104,10 @@ cat yggdrasil-1.0.1-amd64.iso.001 yggdrasil-1.0.1-amd64.iso.002 > yggdrasil-1.0.
 sha256sum -c SHA256SUMS --ignore-missing
 ```
 
-Chaque release joint aussi les **sources** des paquets Debian contenus dans les images (archives
-`…-sources.tar.001`, `.002`…), aux versions exactes, comme le demande la GPL.
+Chaque release joint aussi les **sources** de tout ce que contiennent les images, aux versions exactes,
+comme le demande la GPL : les paquets Debian du système (archives `…-sources.tar.001`, `.002`…), et un
+complément par édition (`…-complement-sources.tar`) pour l'installateur Debian, les chargeurs d'amorçage
+signés et le code que d'autres paquets embarquent.
 
 **Configuration conseillée** : un PC 64 bits (x86-64), UEFI (Secure Boot compris) ou BIOS.
 
