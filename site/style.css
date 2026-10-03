@@ -236,6 +236,8 @@ table.besoins th[scope="row"] { color: var(--parchemin); font-weight: 400; }
 /* -------- Notes de version -------- */
 /* minmax(0, 1fr) : une longue ligne de code (dans un <pre>, qui défile) n'élargit pas la carte */
 .versions { display: grid; gap: 2rem; grid-template-columns: minmax(0, 1fr); }
+/* Les notes arrivent de GitHub après l'affichage : la place est réservée, le pied de page ne saute pas */
+[data-notes] { min-height: 80vh; align-content: start; }
 .version-notes { padding: 1.6rem 1.8rem; }
 .version-notes > header { display: flex; flex-wrap: wrap; gap: .4rem 1rem; align-items: baseline; margin-bottom: 1rem; }
 .version-notes h2 { margin: 0; font: 400 2rem/1.15 var(--titre); color: var(--or); }
