@@ -240,7 +240,9 @@ Sous Linux : `./build.sh`, `./build.sh serveur`, `./build.sh test`, `./build.sh 
 `./build.sh boot bureau-install`… L'ISO sort dans `out/`, avec sa somme SHA-256 et la liste de ses paquets.
 
 Pour une publication, `YGG_SOURCES=true ./build.sh` (ou `.\build.ps1 -Sources`) joint les sources des
-paquets Debian de l'image, en morceaux de moins de 2 Gio.
+paquets Debian de l'image, en morceaux de moins de 2 Gio, et une archive complémentaire
+(`scripts/sources-completes.py`) : `lb source` ne prend que le système live, il y manquerait l'installateur
+Debian, les chargeurs d'amorçage signés et le code que d'autres paquets embarquent (`Built-Using`).
 
 **Le site et le dépôt APT.** `site/` contient les pages du site ; `./build.sh site` l'assemble dans
 `out/site/` avec le guide, le dépôt APT signé (`out/depot/`, fait par chaque construction) et ses images,

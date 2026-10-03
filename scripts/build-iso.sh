@@ -8,7 +8,8 @@
 #             YGG_RESUME=1 (reprendre une construction interrompue sans tout refaire),
 #             YGG_EDITION=bureau (défaut : Plasma, Calamares) ou serveur (sans bureau),
 #             YGG_SOURCES=true (les sources des paquets Debian de l'image, pour une publication :
-#             la GPL les demande ; plusieurs Go, découpés en morceaux de moins de 2 Gio)
+#             la GPL les demande ; plusieurs Go, découpés en morceaux de moins de 2 Gio, et une
+#             archive complémentaire faite par scripts/sources-completes.py)
 set -euo pipefail
 
 # YGG_SRC : le dépôt, quand ce script tourne depuis une copie (build.sh)
@@ -200,12 +201,22 @@ if [ -f "$LIVE/chroot.packages.live" ]; then
 fi
 # Les sources des paquets Debian de l'image, aux versions exactes (lb source) : en morceaux
 # de moins de 2 Gio, la taille maximale d'un fichier de release GitHub
-rm -f "$OUT/$NAME-sources.tar."*
+rm -f "$OUT/$NAME-sources.tar."* "$OUT/$NAME-complement-sources.tar"*
 if [ "${YGG_SOURCES:-false}" = true ]; then
     SOURCES=$(find "$LIVE" -maxdepth 1 -name '*-source.debian.tar' -print -quit)
     [ -n "$SOURCES" ] || die "sources demandées, mais aucune archive : voir $JOURNAL"
     split -b 1900M -d -a 3 --numeric-suffixes=1 "$SOURCES" "$OUT/$NAME-sources.tar."
     log "Sources : $(du -h "$SOURCES" | cut -f1) en $(find "$OUT" -maxdepth 1 -name "$NAME-sources.tar.*" | wc -l) morceaux"
+    # lb source ne prend que le système live : l'installateur Debian, les chargeurs d'amorçage et le
+    # code que d'autres paquets embarquent (Built-Using, noyaux signés) suivent dans une archive à part
+    COMPLEMENT=$OUT/$NAME-complement-sources.tar
+    MIRROR=$MIRROR SECURITY_MIRROR=$SECURITY_MIRROR python3 "$SRC/scripts/sources-completes.py" \
+        "$ISO" "$LIVE" "$SOURCES" "$COMPLEMENT" --cache "$WORK/sources-complement" \
+        || die "sources complémentaires incomplètes : voir ci-dessus"
+    if [ "$(stat -c%s "$COMPLEMENT")" -gt $((1900 * 1024 * 1024)) ]; then
+        split -b 1900M -d -a 3 --numeric-suffixes=1 "$COMPLEMENT" "$COMPLEMENT." && rm "$COMPLEMENT"
+    fi
+    log "Sources complémentaires : $(du -ch "$COMPLEMENT"* | tail -n 1 | cut -f1)"
 fi
 
 # Le dépôt APT signé qui va avec (à publier à l'adresse de depot.conf)
