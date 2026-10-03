@@ -83,9 +83,13 @@ function remplirTelechargements(v) {
     if (meta) meta.textContent = `Version ${v.tag_name.replace(/^v/, "")} · publiée le ${date} · Debian 13 · KDE Plasma 6.3`;
     const chapeau = document.querySelector("[data-chapeau-telecharger]");
     if (chapeau) {
+        // La dernière version ici ; les précédentes restent téléchargeables dans leurs releases
         chapeau.replaceChildren(`${v.name || v.tag_name}, publiée le ${date}. `,
-            element("a", { href: "notes.html", texte: "Ce qui a changé" }), ".");
+            element("a", { href: "notes.html", texte: "Ce qui a changé" }), ". Les versions précédentes : ",
+            element("a", { href: RELEASES, texte: "toutes les releases" }), ".");
     }
+    const bouton = document.querySelector("[data-bouton-version]");
+    if (bouton) bouton.textContent = `Télécharger Yggdrasil ${v.tag_name.replace(/^v/, "")}`;
     for (const edition of ["bureau", "serveur"]) {
         const liste = document.querySelector(`[data-fichiers="${edition}"]`);
         if (!liste || c[edition].length === 0) continue;

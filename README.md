@@ -9,7 +9,7 @@
 Une distribution Linux en français, construite sur Debian 13, avec un bureau KDE Plasma aux couleurs
 de la nuit, de l'or et de la sauge, et une famille d'outils qui ne font jamais rien sans ton accord.
 
-[![Version](https://img.shields.io/badge/version-1.0_%C2%AB%C2%A0Midgard%C2%A0%C2%BB-E8CC8C?labelColor=091C30)](https://github.com/NaiSora/YggdrasilOS/releases/latest)
+[![Dernière version](https://img.shields.io/github/v/release/NaiSora/YggdrasilOS?label=derni%C3%A8re%20version&color=E8CC8C&labelColor=091C30)](https://github.com/NaiSora/YggdrasilOS/releases/latest)
 [![Debian 13](https://img.shields.io/badge/Debian-13_%C2%AB%C2%A0trixie%C2%A0%C2%BB-A81D33?logo=debian&logoColor=white&labelColor=091C30)](https://www.debian.org/releases/trixie/)
 [![KDE Plasma 6.3](https://img.shields.io/badge/KDE_Plasma-6.3-79AC99?logo=kdeplasma&logoColor=white&labelColor=091C30)](https://kde.org/plasma-desktop/)
 [![Français](https://img.shields.io/badge/langue-fran%C3%A7ais-5B8B7B?labelColor=091C30)](#)
@@ -80,9 +80,10 @@ documentation Debian s'appliquent tels quels. Par-dessus, Yggdrasil ajoute ce qu
 
 ## Télécharger
 
-Les images sont sur [**le site**](https://naisora.github.io/YggdrasilOS/#telecharger), qui les prend dans les
-[releases](https://github.com/NaiSora/YggdrasilOS/releases/latest) ; ses [nouveautés](https://naisora.github.io/YggdrasilOS/notes.html)
-racontent chaque version.
+Les images sont sur [**le site**](https://naisora.github.io/YggdrasilOS/#telecharger), qui propose la
+[dernière release](https://github.com/NaiSora/YggdrasilOS/releases/latest) ; ses [nouveautés](https://naisora.github.io/YggdrasilOS/notes.html)
+racontent chaque version, et [toutes les releases](https://github.com/NaiSora/YggdrasilOS/releases) restent
+téléchargeables.
 
 | Édition | Pour qui | Fichiers |
 |---|---|---|
