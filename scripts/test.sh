@@ -265,12 +265,24 @@ fi
 ok "les $(find "$WORK/centre" -name '*.png' | wc -l) écrans du Centre et de l'assistant se chargent sans erreur QML"
 
 step "10. Le site (GitHub Pages)"
-# Assemblé avec le dépôt signé de l'étape 6 : liens, images, polices, syntaxe d'app.js
+# Assemblé avec le dépôt signé de l'étape 6 : liens et ancres, images (WebP, icônes, image de
+# partage), polices, en-têtes de chaque page, plan du site, syntaxe d'app.js
 YGG_DEPOT="$WORK/depot" bash scripts/build-site.sh "$WORK/site" > /dev/null
 QT_QPA_PLATFORM=offscreen python3 scripts/verifier-site.py "$WORK/site"
-[ -f "$WORK/site/.nojekyll" ] && [ -f "$WORK/site/depot/dists/trixie/InRelease" ]
+for f in .nojekyll depot/dists/trixie/InRelease favicon.ico favicon.svg img/apple-touch-icon.png \
+         img/partage.png sitemap.xml; do
+    [ -e "$WORK/site/$f" ] || { echo "site : $f manque" >&2; exit 1; }
+done
+[ "$(magick identify -format '%wx%h' "$WORK/site/img/partage.png")" = 1280x640 ] \
+    || { echo "site : l'image de partage doit faire 1280 × 640" >&2; exit 1; }
+[ "$(magick identify "$WORK/site/favicon.ico" | wc -l)" -eq 3 ] \
+    || { echo "site : favicon.ico doit contenir 16, 32 et 48 px" >&2; exit 1; }
+for png in docs/captures/*.png; do
+    [ -s "$WORK/site/img/captures/$(basename "$png" .png).webp" ] \
+        || { echo "site : pas de WebP pour $png" >&2; exit 1; }
+done
 DEPOT_URL=$(sed -n 's/^DEPOT_URL=//p' depot.conf | tr -d ' \r"')
 if [ -n "$DEPOT_URL" ]; then grep -q "$DEPOT_URL" "$WORK/site/depot/index.html"; fi
-ok "site assemblé : pages, guide, captures, polices et dépôt APT signé"
+ok "site assemblé : pages, en-têtes, guide, captures WebP, icônes, plan du site et dépôt APT signé"
 
 step "Tous les tests sont passés"

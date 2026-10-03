@@ -22,6 +22,9 @@ Produit des SVG, rendus en PNG par scripts/build-packages.sh (rsvg-convert) :
   arbre/arbre-N.svg       animation : l'arbre pousse (Plymouth, écran de session)
   halo.svg                halo de l'étoile seul (respiration en fin d'animation)
   arbre-vivant.svg        fond d'écran dont neuf feuilles (une par royaume) s'allument en or
+  favicon.svg             icône d'onglet du site : l'arbre agrandi, cerclé d'or (lisible à 16 px)
+  icone-apple.svg         icône d'écran d'accueil du site (iOS arrondit lui-même les coins)
+  partage.svg             image de partage du site (réseaux sociaux, aperçu GitHub), 1280 × 640
 
 Tout est déterministe : même logo, mêmes images.
 """
@@ -154,11 +157,17 @@ def icon(logo: Logo) -> str:
     return svg(1000, 1000, f'<circle cx="500" cy="500" r="498" fill="{NIGHT}"/>' + logo.place(500, 500, 1000, "i"))
 
 
-def icon_qt(logo: Logo) -> str:
-    """Variante pour Qt (icônes, SDDM) : ni masque, ni dégradé en boîte englobante."""
-    body = logo.body().replace('mask="url(#ygg-fondu)"', "").replace('fill="url(#ygg-or)"', f'fill="{GOLD}"')
+def flat(logo: Logo, *names: str) -> tuple[str, str]:
+    """Couches (et defs) sans masque ni dégradé en boîte englobante : Qt, très petites tailles."""
+    body = logo.body(*names).replace('mask="url(#ygg-fondu)"', "").replace('fill="url(#ygg-or)"', f'fill="{GOLD}"')
     defs = re.sub(r'<linearGradient id="ygg-or".*?</linearGradient>', "", logo.defs, flags=re.S)
     defs = re.sub(r"<mask .*?</mask>", "", defs, flags=re.S)
+    return body, defs
+
+
+def icon_qt(logo: Logo) -> str:
+    """Variante pour Qt (icônes, SDDM) : ni masque, ni dégradé en boîte englobante."""
+    body, defs = flat(logo)
     disc = f'<circle cx="500" cy="500" r="498" fill="{NIGHT}"/>'
     return svg(1000, 1000, disc + logo.place(500, 500, 1000, "q", body=body, defs=defs))
 
@@ -167,6 +176,44 @@ def icon_alert(logo: Logo) -> str:
     """L'icône de la barre système quand quelque chose demande attention : une braise."""
     ember = f'<circle cx="790" cy="790" r="190" fill="{NIGHT}"/><circle cx="790" cy="790" r="150" fill="#E2774E"/>'
     return icon_qt(logo).replace("</svg>", ember + "</svg>")
+
+
+def favicon(logo: Logo) -> str:
+    """Icône d'onglet : l'anneau fin et les points disparaîtraient à 16 px. L'arbre est agrandi
+    dans un disque nuit cerclé d'or, qui se détache sur une barre d'onglets claire comme sombre."""
+    body, defs = flat(logo, "arbre", "feuilles", "etoile")
+    return svg(1000, 1000,
+               '<defs><clipPath id="disque"><circle cx="500" cy="500" r="470"/></clipPath></defs>'
+               f'<circle cx="500" cy="500" r="500" fill="{NIGHT}"/>'
+               f'<circle cx="500" cy="500" r="470" fill="none" stroke="{GOLD}" stroke-width="44"/>'
+               '<g clip-path="url(#disque)">' + logo.place(500, 530, 1200, "f", body=body, defs=defs) + "</g>")
+
+
+def apple_icon(logo: Logo) -> str:
+    """Icône d'écran d'accueil (iOS arrondit lui-même les coins et noircit la transparence)."""
+    return svg(180, 180, f'<rect width="180" height="180" fill="{NIGHT}"/>' + logo.place(90, 90, 168, "a"))
+
+
+def share_card(logo: Logo, w: int = 1280, h: int = 640) -> str:
+    """Image de partage du site : le logo, le nom, la devise. Facebook rogne en 1,91:1 : rien
+    d'important à moins de 40 px des bords gauche et droit."""
+    cx, cy, size = 330, h / 2, 500
+    body = (f'<defs><radialGradient id="lueur"><stop offset="0" stop-color="{GOLD}" stop-opacity="0.16"/>'
+            f'<stop offset="1" stop-color="{GOLD}" stop-opacity="0"/></radialGradient></defs>')
+    body += f'<rect width="{w}" height="{h}" fill="{NIGHT}"/>'
+    body += f'<circle cx="{cx}" cy="{fmt(cy)}" r="{fmt(size * 0.62)}" fill="url(#lueur)"/>'
+    body += stars(w, h, seed=17, count=70, avoid=(cx, cy, size * 0.52))
+    body += logo.place(cx, cy, size, "s")
+    x = 620
+    body += text(x, 262, "Yggdrasil", 118, GOLD, font=TITLE_FONT, spacing=6, anchor="start")
+    body += (f'<text x="{x}" y="330" font-family="{TITLE_FONT}" font-style="italic" font-size="44" '
+             f'fill="{PARCHMENT}">L’arbre qui relie tes mondes.</text>')
+    body += f'<rect x="{x}" y="372" width="520" height="2" fill="{GOLD}" opacity="0.45"/>'
+    body += text(x, 428, "La distribution Linux en français,", 28, MIST, font="Noto Sans", anchor="start")
+    body += text(x, 468, "fondée sur Debian 13 et KDE Plasma.", 28, MIST, font="Noto Sans", anchor="start")
+    body += text(x, 548, "naisora.github.io/YggdrasilOS", 26, SAGE_LIGHT, font="Noto Sans", anchor="start",
+                 spacing=0.5)
+    return svg(w, h, body)
 
 
 def wallpaper(logo: Logo, w: int, h: int) -> str:
@@ -461,6 +508,9 @@ def main(out_dir: str) -> None:
         "preview.svg": preview(logo),
         "halo.svg": halo_only(logo),
         "arbre-vivant.svg": living_tree(logo),
+        "favicon.svg": favicon(logo),
+        "icone-apple.svg": apple_icon(logo),
+        "partage.svg": share_card(logo),
     }
     for w, h in WALLPAPERS:
         files[f"wallpaper-{w}x{h}.svg"] = wallpaper(logo, w, h)

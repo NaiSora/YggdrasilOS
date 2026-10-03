@@ -5,12 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Guide d'Yggdrasil</title>
 <style>
+  /* --lien : 4,5:1 au moins sur le fond, le code et les encadrés (WCAG AA), dans les deux thèmes */
   :root {
-    --bg: #f6f3ea; --fg: #1d2a24; --muted: #5c6b63; --accent: #9c7128; --card: #fff;
+    --bg: #f6f3ea; --fg: #1d2a24; --muted: #5c6b63; --accent: #9c7128; --lien: #7d5a1e; --card: #fff;
     --border: #e3ddcf; --code: #efe9da;
+    color-scheme: light dark;
   }
   @media (prefers-color-scheme: dark) {
-    :root { --bg: #0b1512; --fg: #e8e3d3; --muted: #9fb0a6; --accent: #f2cf73; --card: #12201b;
+    :root { --bg: #0b1512; --fg: #e8e3d3; --muted: #9fb0a6; --accent: #f2cf73; --lien: #f2cf73; --card: #12201b;
             --border: #24372f; --code: #17271f; }
   }
   * { box-sizing: border-box; }
@@ -20,6 +22,7 @@
   header img { width: 120px; height: 120px; }
   header h1 { margin: .5rem 0 .2rem; letter-spacing: .15em; color: var(--accent); }
   header p { margin: 0; color: var(--muted); }
+  a { color: var(--lien); text-underline-offset: .15em; }
   nav { display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; justify-content: center; padding: 1rem;
         border-bottom: 1px solid var(--border); position: sticky; top: 0; background: var(--bg); }
   nav a { color: var(--muted); text-decoration: none; font-size: .95rem; }
@@ -35,6 +38,13 @@
   .note { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--accent);
           padding: .8rem 1rem; border-radius: .4rem; }
   footer { text-align: center; color: var(--muted); padding: 2rem; border-top: 1px solid var(--border); }
+  /* Téléphone : marges réduites ; le tableau à quatre colonnes défile dans son cadre */
+  .defile { overflow-x: auto; }
+  .defile:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  @media (max-width: 40rem) {
+    th, td { padding: .4rem .35rem; }
+    .defile table { min-width: 34rem; }
+  }
 </style>
 </head>
 <body>
@@ -115,6 +125,7 @@ Les commandes ont aussi leur nom anglais (<code>repair</code>, <code>undo</code>
 logiciels <strong>à la carte</strong> : <code>ygg realm show nom</code> montre ce qui est coché par défaut (●)
 et ce qui est en option (○) ; un royaume configure aussi la machine quand il le faut (clé SSH, groupes,
 bibliothèques 32 bits). <code>ygg realm remove nom</code> ne retire que ce que le royaume avait lui-même ajouté.</p>
+<div class="defile" role="region" aria-label="Les neuf royaumes" tabindex="0">
 <table>
   <tr><th></th><th>Monde</th><th>Domaine</th><th>Contenu</th></tr>
   <tr><td>ᛉ</td><td><code>asgard</code> — la Citadelle</td><td>Sécurité et vie privée</td><td>KeePassXC, OpenSnitch, Tor Browser, ClamAV, Flatseal ; en option Kleopatra, Wireshark et nmap</td></tr>
@@ -127,6 +138,7 @@ bibliothèques 32 bits). <code>ygg realm remove nom</code> ne retire que ce que 
   <tr><td>ᛁ</td><td><code>niflheim</code> — la Brume</td><td>Mondes isolés</td><td>Machines virtuelles (QEMU/KVM), Distrobox, Bottles (applications Windows)</td></tr>
   <tr><td>ᛇ</td><td><code>helheim</code> — le Royaume des morts</td><td>Récupération</td><td>TestDisk et PhotoRec, ddrescue, GParted, smartmontools ; en option Clonezilla</td></tr>
 </table>
+</div>
 <table>
   <tr><td><code>ygg realm add muspelheim --sans heroic,lutris</code></td><td>sans certains logiciels (<code>--avec</code> pour ajouter une option, <code>--seulement</code>, ou <code>--choisir</code> pour cocher un par un)</td></tr>
   <tr><td><code>ygg realm voyageur</code></td><td>« Quel voyageur es-tu ? » : joueur, créateur, développeur, gardien de serveurs → les mondes qui te correspondent</td></tr>

@@ -29,6 +29,7 @@
     --etoile: #fbe39b;
     --sauge: #79ac99;
     --sauge-fonce: #5b8b7b;
+    --sauge-clair: #8fc1ae;
     --parchemin: #f2ead7;
     --brume: #a9b8c6;
     --titre: "EB Garamond", Garamond, "Times New Roman", serif;
@@ -199,7 +200,11 @@ dialog.visionneuse .fermer { position: fixed; top: 1rem; right: 1rem; }
     grid-column: 1 / -1; display: flex; gap: .5rem; align-items: center; color: var(--brume);
     font: .75rem/1.3 var(--code); overflow-wrap: anywhere;
 }
-.copier { all: unset; cursor: pointer; color: var(--or); font: .75rem var(--texte); white-space: nowrap; }
+/* Assez grand pour le doigt : 24 px de haut au moins (WCAG 2.2, taille des cibles) */
+.copier {
+    all: unset; cursor: pointer; color: var(--or); font: .75rem var(--texte); white-space: nowrap;
+    display: inline-flex; align-items: center; min-height: 24px; padding: 0 .4rem; margin: 0 -.4rem;
+}
 .copier:focus-visible { outline: 2px solid var(--etoile); outline-offset: 2px; }
 .onglets { display: flex; gap: .4rem; margin: 1rem 0 .6rem; flex-wrap: wrap; }
 .onglets button {
@@ -212,6 +217,7 @@ dialog.visionneuse .fermer { position: fixed; top: 1rem; right: 1rem; }
 table.besoins { border-collapse: collapse; width: 100%; max-width: 34rem; }
 table.besoins th, table.besoins td { text-align: left; padding: .5rem .8rem; border-bottom: 1px solid var(--trait); }
 table.besoins th { color: var(--or); font-weight: 600; }
+table.besoins th[scope="row"] { color: var(--parchemin); font-weight: 400; }
 
 /* -------- Installer -------- */
 .etapes { list-style: none; counter-reset: etape; padding: 0; margin: 0; display: grid; gap: 1rem; }
@@ -228,13 +234,14 @@ table.besoins th { color: var(--or); font-weight: 600; }
 .etapes p { margin: 0; color: var(--brume); }
 
 /* -------- Notes de version -------- */
-.versions { display: grid; gap: 2rem; }
+/* minmax(0, 1fr) : une longue ligne de code (dans un <pre>, qui défile) n'élargit pas la carte */
+.versions { display: grid; gap: 2rem; grid-template-columns: minmax(0, 1fr); }
 .version-notes { padding: 1.6rem 1.8rem; }
 .version-notes > header { display: flex; flex-wrap: wrap; gap: .4rem 1rem; align-items: baseline; margin-bottom: 1rem; }
 .version-notes h2 { margin: 0; font: 400 2rem/1.15 var(--titre); color: var(--or); }
 .badge {
     font-size: .78rem; text-transform: uppercase; letter-spacing: .08em; padding: .15rem .6rem;
-    border-radius: 999px; background: rgba(121, 172, 153, .18); color: var(--sauge); border: 1px solid var(--sauge-fonce);
+    border-radius: 999px; background: rgba(121, 172, 153, .18); color: var(--sauge-clair); border: 1px solid var(--sauge-fonce);
 }
 .corps-notes { color: var(--parchemin); }
 .corps-notes h2, .corps-notes h3 { font: 400 1.5rem/1.2 var(--titre); color: var(--etoile); margin: 1.6rem 0 .5rem; }
@@ -242,6 +249,17 @@ table.besoins th { color: var(--or); font-weight: 600; }
 .corps-notes th, .corps-notes td { border-bottom: 1px solid var(--trait); padding: .45rem .7rem; text-align: left; vertical-align: top; }
 .corps-notes li { margin: .25rem 0; }
 .corps-notes .highlight, .corps-notes .snippet-clipboard-content { margin: .8rem 0; }
+
+/* -------- Pages de texte (confidentialité, conditions) -------- */
+.section.texte { max-width: 48rem; }
+.texte h2 { font: 400 1.75rem/1.2 var(--titre); color: var(--or); margin: 2.4rem 0 .7rem; }
+.texte p, .texte li, .texte dd { color: var(--brume); }
+.texte strong { color: var(--parchemin); font-weight: 600; }
+.texte ul { padding-left: 1.2rem; margin: 0; }
+.texte li { margin: .6rem 0; }
+.texte li::marker { color: var(--sauge); }
+.mentions dt { color: var(--etoile); font: 400 1.25rem/1.3 var(--titre); margin-top: 1.2rem; }
+.mentions dd { margin: .2rem 0 0; }
 
 /* -------- Pied de page -------- */
 .pied { border-top: 1px solid var(--trait); margin-top: 2rem; }
@@ -251,6 +269,7 @@ table.besoins th { color: var(--or); font-weight: 600; }
 }
 .pied nav { display: flex; gap: .4rem 1.4rem; flex-wrap: wrap; }
 .pied nav a { color: var(--brume); }
+.pied nav a[aria-current="page"] { color: var(--parchemin); }
 .pied p { margin: .3rem 0; max-width: 34rem; }
 
 @media (max-width: 640px) {

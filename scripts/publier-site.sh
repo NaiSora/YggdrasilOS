@@ -7,7 +7,7 @@
 # seul commit (le site et le dépôt APT y sont reconstruits en entier), pour que les .deb
 # de chaque version ne s'y accumulent pas. L'historique du site reste sur main (site/).
 # Le dépôt APT vient de out/depot, signé avec la clé de out/cles : la clé ne quitte pas
-# cette machine.
+# cette machine. Le site est assemblé et vérifié dans le conteneur (./build.sh site).
 set -euo pipefail
 
 REPO=$(cd "$(dirname "$0")/.." && pwd)
@@ -15,14 +15,16 @@ VERSION=$(tr -d ' \r\n' < "$REPO/VERSION")
 TMP=$(mktemp -d)
 trap 'rm -rf "$TMP"' EXIT
 
-bash "$REPO/scripts/build-site.sh" "$TMP/site"
-[ -f "$TMP/site/depot/dists/trixie/InRelease" ] \
+bash "$REPO/build.sh" site
+SITE=$REPO/out/site
+[ -f "$SITE/depot/dists/trixie/InRelease" ] \
     || { echo "✘ le site doit porter le dépôt APT signé : ./build.sh depot d'abord" >&2; exit 1; }
-grep -q "^Version: $VERSION$" "$TMP/site/depot/dists/trixie/Release" \
+grep -q "^Version: $VERSION$" "$SITE/depot/dists/trixie/Release" \
     || { echo "✘ le dépôt APT n'est pas celui de la version $VERSION : ./build.sh depot" >&2; exit 1; }
 
 DISTANT=$(git -C "$REPO" remote get-url origin)
-cd "$TMP/site"
+cp -r "$SITE/." "$TMP/"
+cd "$TMP"
 git init -q -b gh-pages
 git add -A
 git -c user.name="$(git -C "$REPO" config user.name)" -c user.email="$(git -C "$REPO" config user.email)" \

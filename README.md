@@ -242,8 +242,11 @@ Sous Linux : `./build.sh`, `./build.sh serveur`, `./build.sh test`, `./build.sh 
 Pour une publication, `YGG_SOURCES=true ./build.sh` (ou `.\build.ps1 -Sources`) joint les sources des
 paquets Debian de l'image, en morceaux de moins de 2 Gio.
 
-**Le site et le dépôt APT.** `site/` contient les pages du site ; `scripts/build-site.sh` l'assemble avec
-le guide, les captures et le dépôt APT signé (`out/depot/`, fait par chaque construction), puis
+**Le site et le dépôt APT.** `site/` contient les pages du site ; `./build.sh site` l'assemble dans
+`out/site/` avec le guide, le dépôt APT signé (`out/depot/`, fait par chaque construction) et ses images,
+faites à chaque fois : captures en WebP en deux tailles, icônes et image de partage d'après le logo. Chaque
+page y reçoit son adresse canonique et son aperçu de partage, et le plan du site (`sitemap.xml`) suit ;
+`scripts/verifier-site.py` contrôle le tout (`--externes` pour les liens vers d'autres sites). Puis
 `scripts/publier-site.sh` le publie sur la branche `gh-pages`, servie par GitHub Pages. L'adresse du
 dépôt est dans `depot.conf` : les machines installées y prennent les mises à jour des outils.
 La clé qui le signe est créée au premier build dans `out/cles/` : garde-la précieusement, sans elle les
@@ -252,7 +255,7 @@ machines déjà installées refuseraient les paquets signés d'une autre clé.
 **Les tests.** `scripts/test.sh` lance 255 tests Python, shellcheck sur tous les scripts, les règles du
 pare-feu chargées pour de vrai, la construction et le contenu des paquets, le dépôt signé, les instantanés
 au menu de démarrage sur un vrai volume btrfs, le catalogue français de GRUB, le rendu du Centre et le
-site (liens, images, polices, syntaxe du script).
+site (liens et ancres, images et leur poids, textes de remplacement, en-têtes, plan du site, syntaxe du script).
 `scripts/test-packages.sh` installe les paquets dans un Debian vierge, exerce chaque commande puis les
 désinstalle. `scripts/test-iso.sh` démarre les ISO dans QEMU, captures d'écran à l'appui : sessions live,
 installation automatique du serveur, installation chiffrée par Calamares puis retour sur un instantané,
@@ -265,7 +268,7 @@ packages/        les paquets .deb : yggdrasil-base, -tools, -desktop, -calamares
 live/            la configuration live-build : listes de paquets, hooks, menus de démarrage
 assets/          le logo et l'identité visuelle, l'arbre ASCII, les traductions de GRUB
 docs/            le guide hors ligne et les captures d'écran
-site/            le site (GitHub Pages) : pages, style, script, polices
+site/            le site (GitHub Pages) : pages (confidentialité et conditions comprises), style, script, polices
 scripts/         construction et tests
 docker/          l'environnement de construction
 ```

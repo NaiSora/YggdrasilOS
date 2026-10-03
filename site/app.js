@@ -142,7 +142,8 @@ function galerie() {
     document.querySelectorAll(".galerie button").forEach((b) => {
         b.addEventListener("click", () => {
             const vignette = b.querySelector("img");
-            image.src = vignette.src;
+            // La vignette est souvent la petite variante (srcset) : la visionneuse prend la grande
+            image.src = vignette.dataset.grand || vignette.currentSrc || vignette.src;
             image.alt = vignette.alt;
             legende.textContent = b.closest("figure").querySelector("figcaption").textContent;
             visionneuse.showModal();

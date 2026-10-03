@@ -9,6 +9,7 @@
 #   ./build.sh boot [scénario…]  démarre les ISO dans QEMU, captures d'écran (live, serveur-live,
 #                         serveur-install, cle, pilote ; voir scripts/test-iso.sh)
 #   ./build.sh depot      dépôt APT signé dans ./out/depot (clé : ./out/cles, à garder)
+#   ./build.sh site       le site (GitHub Pages) dans ./out/site, vérifié ; scripts/publier-site.sh le publie
 #   ./build.sh cle        Skíðblaðnir : écrit l'ISO sur une clé virtuelle (loop) avec persistance
 #   YGG_CLEAN=1 ./build.sh   repart de zéro
 #   YGG_RESUME=1 ./build.sh  reprend une construction interrompue
@@ -46,6 +47,8 @@ main() {
                   bash -c "$COPIE" /src/scripts/test-iso.sh /out "${@:2}" ;;
         depot) docker run "${COMMON[@]}" "$IMAGE" bash -c "cp -r /src /tmp/src && bash /tmp/src/scripts/build-packages.sh /tmp/src /tmp/debs \
                   && bash /tmp/src/scripts/build-repo.sh /tmp/debs /out/depot" ;;
+        site) docker run "${COMMON[@]}" "$IMAGE" bash -c "bash /src/scripts/build-site.sh /out/site \
+                  && QT_QPA_PLATFORM=offscreen python3 /src/scripts/verifier-site.py /out/site" ;;
         cle)  docker run "${COMMON[@]}" --privileged -e "YGG_CLE_IMAGE=${YGG_CLE_IMAGE:-0}" "$IMAGE" \
                   bash /src/scripts/test-skidbladnir.sh /out ;;
         iso|serveur)
@@ -55,7 +58,7 @@ main() {
                   -e "YGG_CLEAN=${YGG_CLEAN:-0}" -e "YGG_RESUME=${YGG_RESUME:-0}" -e "YGG_EDITION=$EDITION" -e YGG_SRC=/src \
                   -e "YGG_SOURCES=${YGG_SOURCES:-false}" \
                   "$IMAGE" bash -c "$COPIE" /src/scripts/build-iso.sh /build /out ;;
-        *) echo "cible inconnue : $TARGET (iso, serveur, debs, paquets, test, boot, cle, depot)" >&2; exit 1 ;;
+        *) echo "cible inconnue : $TARGET (iso, serveur, debs, paquets, test, boot, cle, depot, site)" >&2; exit 1 ;;
     esac
 }
 

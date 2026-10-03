@@ -10,6 +10,7 @@
     .\build.ps1                 # paquets + ISO (édition bureau) dans .\out
     .\build.ps1 -Target serveur # ISO de l'édition serveur (sans bureau, installateur texte)
     .\build.ps1 -Target depot   # dépôt APT signé dans .\out\depot (clé : .\out\cles, à garder)
+    .\build.ps1 -Target site    # le site (GitHub Pages) dans .\out\site, vérifié
     .\build.ps1 -Target test    # tests automatiques seulement
     .\build.ps1 -Target debs    # paquets .deb seulement
     .\build.ps1 -Target paquets # paquets .deb, installés, exercés puis purgés dans un Debian 13 vierge
@@ -20,7 +21,7 @@
     .\build.ps1 -Sources        # joint les sources des paquets Debian (pour une publication)
 #>
 param(
-    [ValidateSet("iso", "serveur", "debs", "paquets", "test", "boot", "cle", "depot")]
+    [ValidateSet("iso", "serveur", "debs", "paquets", "test", "boot", "cle", "depot", "site")]
     [string]$Target = "iso",
     [switch]$Clean,
     [switch]$Resume,
@@ -78,6 +79,10 @@ switch ($Target) {
     "depot" {
         Step "Dépôt APT signé"
         docker run @common $Image bash -c "cp -r /src /tmp/src && bash /tmp/src/scripts/build-packages.sh /tmp/src /tmp/debs && bash /tmp/src/scripts/build-repo.sh /tmp/debs /out/depot"
+    }
+    "site" {
+        Step "Site (GitHub Pages)"
+        docker run @common $Image bash -c "bash /src/scripts/build-site.sh /out/site && QT_QPA_PLATFORM=offscreen python3 /src/scripts/verifier-site.py /out/site"
     }
     { $_ -in "iso", "serveur" } {
         $edition = if ($Target -eq "serveur") { "serveur" } else { "bureau" }
