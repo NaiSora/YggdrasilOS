@@ -62,5 +62,6 @@ main() {
     esac
 }
 
-main "$@"
-exit
+# Sur une seule ligne : bash la lit en entier avant d'appeler main, et sort ensuite sans relire le
+# fichier (modifié entre-temps, il reprendrait au milieu d'une ligne déplacée)
+main "$@"; exit
