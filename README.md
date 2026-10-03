@@ -244,7 +244,7 @@ paquets Debian de l'image, en morceaux de moins de 2 Gio.
 
 **Le site et le dépôt APT.** `site/` contient les pages du site ; `./build.sh site` l'assemble dans
 `out/site/` avec le guide, le dépôt APT signé (`out/depot/`, fait par chaque construction) et ses images,
-faites à chaque fois : captures en WebP en deux tailles, icônes et image de partage d'après le logo. Chaque
+faites à chaque fois : captures en WebP en trois tailles, icônes et image de partage d'après le logo. Chaque
 page y reçoit son adresse canonique et son aperçu de partage, et le plan du site (`sitemap.xml`) suit ;
 `scripts/verifier-site.py` contrôle le tout (`--externes` pour les liens vers d'autres sites). Puis
 `scripts/publier-site.sh` le publie sur la branche `gh-pages`, servie par GitHub Pages. L'adresse du

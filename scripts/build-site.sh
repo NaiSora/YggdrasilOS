@@ -41,7 +41,8 @@ magick "$TMP/partage.png" -strip -define png:compression-level=9 "$SORTIE/img/pa
 
 # Les captures d'écran (docs/captures, celles du README) en WebP : pour chacune, la plus légère
 # de deux compressions, avec pertes (qualité 82 : rien ne se voit) ou sans (imbattable sur une
-# console), et une variante de 1024 px de large pour les vignettes et les petits écrans
+# console), et des variantes de 720 et 1280 px de large : chaque écran prend la plus petite qui
+# lui suffit (srcset)
 webp() {  # webp SOURCE SORTIE [LARGEUR]
     local redim=()
     if [ -n "${3:-}" ]; then redim=(-resize "${3}x"); fi
@@ -56,9 +57,12 @@ webp() {  # webp SOURCE SORTIE [LARGEUR]
 for png in "$REPO"/docs/captures/*.png; do
     nom=$(basename "$png" .png)
     webp "$png" "$SORTIE/img/captures/$nom.webp"
-    if [ "$(magick identify -format %w "$png")" -gt 1024 ]; then
-        webp "$png" "$SORTIE/img/captures/$nom-1024.webp" 1024
-    fi
+    for largeur in 720 1280; do
+        # Une variante à peine plus petite que l'original ne servirait à rien (grub : 800 px)
+        if [ "$(magick identify -format %w "$png")" -gt $((largeur * 5 / 4)) ]; then
+            webp "$png" "$SORTIE/img/captures/$nom-$largeur.webp" "$largeur"
+        fi
+    done
 done
 
 # Le guide hors ligne (le même que dans /usr/share/doc/yggdrasil) et le dépôt APT

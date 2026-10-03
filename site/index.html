@@ -8,6 +8,7 @@
 <meta name="theme-color" content="#091c30">
 <!-- build-site.sh ajoute l'adresse canonique, l'aperçu de partage et les icônes -->
 <link rel="preconnect" href="https://api.github.com" crossorigin>
+<link rel="preload" href="img/logo.svg" as="image" fetchpriority="high">
 <link rel="stylesheet" href="style.css">
 <script src="app.js" defer></script>
 </head>
@@ -42,7 +43,7 @@
 </section>
 
 <div class="vitrine">
-  <img src="img/captures/centre-1024.webp" srcset="img/captures/centre-1024.webp 1024w, img/captures/centre.webp 1920w" sizes="(min-width: 64rem) 62rem, calc(100vw - 2rem)" alt="Le bureau d'Yggdrasil : Hliðskjálf, le Centre, ouvert sur le trône" width="1920" height="1080">
+  <img src="img/captures/centre-1280.webp" srcset="img/captures/centre-720.webp 720w, img/captures/centre-1280.webp 1280w, img/captures/centre.webp 1920w" sizes="(min-width: 64rem) 62rem, calc(100vw - 2rem)" alt="Le bureau d'Yggdrasil : Hliðskjálf, le Centre, ouvert sur le trône" width="1920" height="1080">
 </div>
 
 <section class="section" id="pourquoi">
@@ -71,21 +72,21 @@
   <h2>Aperçu</h2>
   <p class="chapeau">Captures prises dans une machine virtuelle, sur les images publiées.</p>
   <div class="galerie">
-    <figure><button type="button" aria-label="Agrandir : un terminal"><img src="img/captures/terminal-1024.webp" srcset="img/captures/terminal-1024.webp 1024w, img/captures/terminal.webp 1920w" sizes="(min-width: 72rem) 23rem, (min-width: 48rem) 50vw, 100vw" data-grand="img/captures/terminal.webp" alt="Un terminal : l'arbre-monde en ASCII et les infos du système" width="1920" height="1080" loading="lazy" decoding="async"></button>
+    <figure><button type="button" aria-label="Agrandir : un terminal"><img src="img/captures/terminal-1280.webp" srcset="img/captures/terminal-720.webp 720w, img/captures/terminal-1280.webp 1280w, img/captures/terminal.webp 1920w" sizes="(min-width: 72rem) 23rem, (min-width: 48rem) 50vw, 100vw" data-grand="img/captures/terminal.webp" alt="Un terminal : l'arbre-monde en ASCII et les infos du système" width="1920" height="1080" loading="lazy" decoding="async"></button>
       <figcaption>Chaque terminal s'ouvre sur l'arbre-monde et l'état du système.</figcaption></figure>
-    <figure><button type="button" aria-label="Agrandir : l'assistant du premier démarrage"><img src="img/captures/bienvenue-1024.webp" srcset="img/captures/bienvenue-1024.webp 1024w, img/captures/bienvenue.webp 1920w" sizes="(min-width: 72rem) 23rem, (min-width: 48rem) 50vw, 100vw" data-grand="img/captures/bienvenue.webp" alt="L'assistant du premier démarrage : Bienvenue, voyageur" width="1920" height="1080" loading="lazy" decoding="async"></button>
+    <figure><button type="button" aria-label="Agrandir : l'assistant du premier démarrage"><img src="img/captures/bienvenue-1280.webp" srcset="img/captures/bienvenue-720.webp 720w, img/captures/bienvenue-1280.webp 1280w, img/captures/bienvenue.webp 1920w" sizes="(min-width: 72rem) 23rem, (min-width: 48rem) 50vw, 100vw" data-grand="img/captures/bienvenue.webp" alt="L'assistant du premier démarrage : Bienvenue, voyageur" width="1920" height="1080" loading="lazy" decoding="async"></button>
       <figcaption>« Bienvenue, voyageur » : cinq questions pour choisir tes mondes et tes gardiens.</figcaption></figure>
-    <figure><button type="button" aria-label="Agrandir : l'arbre vivant"><img src="img/captures/arbre-vivant-1024.webp" srcset="img/captures/arbre-vivant-1024.webp 1024w, img/captures/arbre-vivant.webp 1920w" sizes="(min-width: 72rem) 23rem, (min-width: 48rem) 50vw, 100vw" data-grand="img/captures/arbre-vivant.webp" alt="Le fond d'écran : une feuille d'or allumée par monde installé" width="1920" height="1080" loading="lazy" decoding="async"></button>
+    <figure><button type="button" aria-label="Agrandir : l'arbre vivant"><img src="img/captures/arbre-vivant-1280.webp" srcset="img/captures/arbre-vivant-720.webp 720w, img/captures/arbre-vivant-1280.webp 1280w, img/captures/arbre-vivant.webp 1920w" sizes="(min-width: 72rem) 23rem, (min-width: 48rem) 50vw, 100vw" data-grand="img/captures/arbre-vivant.webp" alt="Le fond d'écran : une feuille d'or allumée par monde installé" width="1920" height="1080" loading="lazy" decoding="async"></button>
       <figcaption>L'arbre vivant : chaque monde installé allume sa feuille.</figcaption></figure>
     <figure><button type="button" aria-label="Agrandir : le menu de démarrage"><img src="img/captures/grub.webp" data-grand="img/captures/grub.webp" alt="Le menu de démarrage en français, avec le retour à un instantané" width="800" height="600" loading="lazy" decoding="async"></button>
       <figcaption>Le menu de démarrage, en français, propose de revenir à un instantané.</figcaption></figure>
-    <figure><button type="button" aria-label="Agrandir : l'installateur"><img src="img/captures/calamares-1024.webp" srcset="img/captures/calamares-1024.webp 1024w, img/captures/calamares.webp 1920w" sizes="(min-width: 72rem) 23rem, (min-width: 48rem) 50vw, 100vw" data-grand="img/captures/calamares.webp" alt="L'installateur Calamares : disque chiffré et btrfs" width="1920" height="1080" loading="lazy" decoding="async"></button>
+    <figure><button type="button" aria-label="Agrandir : l'installateur"><img src="img/captures/calamares-1280.webp" srcset="img/captures/calamares-720.webp 720w, img/captures/calamares-1280.webp 1280w, img/captures/calamares.webp 1920w" sizes="(min-width: 72rem) 23rem, (min-width: 48rem) 50vw, 100vw" data-grand="img/captures/calamares.webp" alt="L'installateur Calamares : disque chiffré et btrfs" width="1920" height="1080" loading="lazy" decoding="async"></button>
       <figcaption>L'installateur : btrfs, instantanés et chiffrement du disque.</figcaption></figure>
-    <figure><button type="button" aria-label="Agrandir : la phrase secrète"><img src="img/captures/phrase-secrete-1024.webp" srcset="img/captures/phrase-secrete-1024.webp 1024w, img/captures/phrase-secrete.webp 1920w" sizes="(min-width: 72rem) 23rem, (min-width: 48rem) 50vw, 100vw" data-grand="img/captures/phrase-secrete.webp" alt="L'arbre au démarrage, et la phrase secrète du disque chiffré" width="1920" height="1080" loading="lazy" decoding="async"></button>
+    <figure><button type="button" aria-label="Agrandir : la phrase secrète"><img src="img/captures/phrase-secrete-1280.webp" srcset="img/captures/phrase-secrete-720.webp 720w, img/captures/phrase-secrete-1280.webp 1280w, img/captures/phrase-secrete.webp 1920w" sizes="(min-width: 72rem) 23rem, (min-width: 48rem) 50vw, 100vw" data-grand="img/captures/phrase-secrete.webp" alt="L'arbre au démarrage, et la phrase secrète du disque chiffré" width="1920" height="1080" loading="lazy" decoding="async"></button>
       <figcaption>Au démarrage, l'arbre pousse ; la phrase secrète se tape au clavier français.</figcaption></figure>
-    <figure><button type="button" aria-label="Agrandir : l'édition serveur"><img src="img/captures/serveur-1024.webp" srcset="img/captures/serveur-1024.webp 1024w, img/captures/serveur.webp 1920w" sizes="(min-width: 72rem) 23rem, (min-width: 48rem) 50vw, 100vw" data-grand="img/captures/serveur.webp" alt="L'édition serveur : l'arbre et l'adresse de la machine à la console" width="1920" height="1080" loading="lazy" decoding="async"></button>
+    <figure><button type="button" aria-label="Agrandir : l'édition serveur"><img src="img/captures/serveur-1280.webp" srcset="img/captures/serveur-720.webp 720w, img/captures/serveur-1280.webp 1280w, img/captures/serveur.webp 1920w" sizes="(min-width: 72rem) 23rem, (min-width: 48rem) 50vw, 100vw" data-grand="img/captures/serveur.webp" alt="L'édition serveur : l'arbre et l'adresse de la machine à la console" width="1920" height="1080" loading="lazy" decoding="async"></button>
       <figcaption>L'édition serveur : l'adresse de la machine et la commande SSH, avant même la connexion.</figcaption></figure>
-    <figure><button type="button" aria-label="Agrandir : Bifröst"><img src="img/captures/bifrost-1024.webp" srcset="img/captures/bifrost-1024.webp 1024w, img/captures/bifrost.webp 1920w" sizes="(min-width: 72rem) 23rem, (min-width: 48rem) 50vw, 100vw" data-grand="img/captures/bifrost.webp" alt="Bifröst : les services prêts à installer en une commande" width="1920" height="1080" loading="lazy" decoding="async"></button>
+    <figure><button type="button" aria-label="Agrandir : Bifröst"><img src="img/captures/bifrost-1280.webp" srcset="img/captures/bifrost-720.webp 720w, img/captures/bifrost-1280.webp 1280w, img/captures/bifrost.webp 1920w" sizes="(min-width: 72rem) 23rem, (min-width: 48rem) 50vw, 100vw" data-grand="img/captures/bifrost.webp" alt="Bifröst : les services prêts à installer en une commande" width="1920" height="1080" loading="lazy" decoding="async"></button>
       <figcaption>Bifröst : serveurs de jeu, IA locale, partage… chacun en une commande.</figcaption></figure>
   </div>
 </section>
